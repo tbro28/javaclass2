@@ -6,7 +6,7 @@
     <property name="java.specification.version" value="11"/>
     <property name="sun.cpu.isalist" value="amd64"/>
     <property name="sun.jnu.encoding" value="Cp1252"/>
-    <property name="java.class.path" value="C:\Users\Tim\java\uwclass\class2\cp520\target\test-classes;C:\Users\Tim\java\uwclass\class2\cp520\target\classes;C:\Users\Tim\.m2\repository\edu\uw\ext\cp520-support\1.0\cp520-support-1.0.jar;C:\Users\Tim\.m2\repository\edu\uw\ext\cp520-stubs\1.0\cp520-stubs-1.0.jar;C:\Users\Tim\.m2\repository\org\apache\derby\derby\10.15.2.0\derby-10.15.2.0.jar;C:\Users\Tim\.m2\repository\org\apache\derby\derbyshared\10.15.2.0\derbyshared-10.15.2.0.jar;C:\Users\Tim\.m2\repository\org\apache\derby\derbyclient\10.15.2.0\derbyclient-10.15.2.0.jar;C:\Users\Tim\.m2\repository\org\apache\derby\derbynet\10.15.2.0\derbynet-10.15.2.0.jar;C:\Users\Tim\.m2\repository\org\apache\derby\derbytools\10.15.2.0\derbytools-10.15.2.0.jar;C:\Users\Tim\.m2\repository\org\slf4j\slf4j-api\1.7.30\slf4j-api-1.7.30.jar;C:\Users\Tim\.m2\repository\org\slf4j\slf4j-jdk14\1.7.30\slf4j-jdk14-1.7.30.jar;C:\Users\Tim\.m2\repository\org\junit\jupiter\junit-jupiter\5.7.0\junit-jupiter-5.7.0.jar;C:\Users\Tim\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.7.0\junit-jupiter-api-5.7.0.jar;C:\Users\Tim\.m2\repository\org\apiguardian\apiguardian-api\1.1.0\apiguardian-api-1.1.0.jar;C:\Users\Tim\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\Tim\.m2\repository\org\junit\platform\junit-platform-commons\1.7.0\junit-platform-commons-1.7.0.jar;C:\Users\Tim\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.7.0\junit-jupiter-params-5.7.0.jar;C:\Users\Tim\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.7.0\junit-jupiter-engine-5.7.0.jar;C:\Users\Tim\.m2\repository\org\junit\platform\junit-platform-engine\1.7.0\junit-platform-engine-1.7.0.jar;"/>
+    <property name="java.class.path" value="C:\Users\Tim\java\uwclass\class2\assignment1\target\test-classes;C:\Users\Tim\java\uwclass\class2\assignment1\target\classes;C:\Users\Tim\.m2\repository\edu\uw\ext\cp520-support\1.0\cp520-support-1.0.jar;C:\Users\Tim\.m2\repository\edu\uw\ext\cp520-stubs\1.0\cp520-stubs-1.0.jar;C:\Users\Tim\.m2\repository\org\apache\derby\derby\10.15.2.0\derby-10.15.2.0.jar;C:\Users\Tim\.m2\repository\org\apache\derby\derbyshared\10.15.2.0\derbyshared-10.15.2.0.jar;C:\Users\Tim\.m2\repository\org\apache\derby\derbyclient\10.15.2.0\derbyclient-10.15.2.0.jar;C:\Users\Tim\.m2\repository\org\apache\derby\derbynet\10.15.2.0\derbynet-10.15.2.0.jar;C:\Users\Tim\.m2\repository\org\apache\derby\derbytools\10.15.2.0\derbytools-10.15.2.0.jar;C:\Users\Tim\.m2\repository\org\slf4j\slf4j-api\1.7.30\slf4j-api-1.7.30.jar;C:\Users\Tim\.m2\repository\org\slf4j\slf4j-jdk14\1.7.30\slf4j-jdk14-1.7.30.jar;C:\Users\Tim\.m2\repository\org\junit\jupiter\junit-jupiter\5.7.0\junit-jupiter-5.7.0.jar;C:\Users\Tim\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.7.0\junit-jupiter-api-5.7.0.jar;C:\Users\Tim\.m2\repository\org\apiguardian\apiguardian-api\1.1.0\apiguardian-api-1.1.0.jar;C:\Users\Tim\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\Tim\.m2\repository\org\junit\platform\junit-platform-commons\1.7.0\junit-platform-commons-1.7.0.jar;C:\Users\Tim\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.7.0\junit-jupiter-params-5.7.0.jar;C:\Users\Tim\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.7.0\junit-jupiter-engine-5.7.0.jar;C:\Users\Tim\.m2\repository\org\junit\platform\junit-platform-engine\1.7.0\junit-platform-engine-1.7.0.jar;"/>
     <property name="java.vm.vendor" value="Oracle Corporation"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="user.variant" value=""/>
@@ -17,9 +17,9 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="US"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-11.0.8\bin"/>
-    <property name="sun.java.command" value="C:\Users\Tim\AppData\Local\Temp\surefire14310357146757571103\surefirebooter7971631734502503922.jar C:\Users\Tim\AppData\Local\Temp\surefire14310357146757571103 2021-01-08T12-39-34_085-jvmRun1 surefire15639839365920296998tmp surefire_015383548072712855422tmp"/>
+    <property name="sun.java.command" value="C:\Users\Tim\AppData\Local\Temp\surefire3933667613200556542\surefirebooter1786102247083141930.jar C:\Users\Tim\AppData\Local\Temp\surefire3933667613200556542 2021-01-08T12-48-35_387-jvmRun1 surefire10041102328616596514tmp surefire_09388717889347846371tmp"/>
     <property name="jdk.debug" value="release"/>
-    <property name="surefire.test.class.path" value="C:\Users\Tim\java\uwclass\class2\cp520\target\test-classes;C:\Users\Tim\java\uwclass\class2\cp520\target\classes;C:\Users\Tim\.m2\repository\edu\uw\ext\cp520-support\1.0\cp520-support-1.0.jar;C:\Users\Tim\.m2\repository\edu\uw\ext\cp520-stubs\1.0\cp520-stubs-1.0.jar;C:\Users\Tim\.m2\repository\org\apache\derby\derby\10.15.2.0\derby-10.15.2.0.jar;C:\Users\Tim\.m2\repository\org\apache\derby\derbyshared\10.15.2.0\derbyshared-10.15.2.0.jar;C:\Users\Tim\.m2\repository\org\apache\derby\derbyclient\10.15.2.0\derbyclient-10.15.2.0.jar;C:\Users\Tim\.m2\repository\org\apache\derby\derbynet\10.15.2.0\derbynet-10.15.2.0.jar;C:\Users\Tim\.m2\repository\org\apache\derby\derbytools\10.15.2.0\derbytools-10.15.2.0.jar;C:\Users\Tim\.m2\repository\org\slf4j\slf4j-api\1.7.30\slf4j-api-1.7.30.jar;C:\Users\Tim\.m2\repository\org\slf4j\slf4j-jdk14\1.7.30\slf4j-jdk14-1.7.30.jar;C:\Users\Tim\.m2\repository\org\junit\jupiter\junit-jupiter\5.7.0\junit-jupiter-5.7.0.jar;C:\Users\Tim\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.7.0\junit-jupiter-api-5.7.0.jar;C:\Users\Tim\.m2\repository\org\apiguardian\apiguardian-api\1.1.0\apiguardian-api-1.1.0.jar;C:\Users\Tim\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\Tim\.m2\repository\org\junit\platform\junit-platform-commons\1.7.0\junit-platform-commons-1.7.0.jar;C:\Users\Tim\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.7.0\junit-jupiter-params-5.7.0.jar;C:\Users\Tim\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.7.0\junit-jupiter-engine-5.7.0.jar;C:\Users\Tim\.m2\repository\org\junit\platform\junit-platform-engine\1.7.0\junit-platform-engine-1.7.0.jar;"/>
+    <property name="surefire.test.class.path" value="C:\Users\Tim\java\uwclass\class2\assignment1\target\test-classes;C:\Users\Tim\java\uwclass\class2\assignment1\target\classes;C:\Users\Tim\.m2\repository\edu\uw\ext\cp520-support\1.0\cp520-support-1.0.jar;C:\Users\Tim\.m2\repository\edu\uw\ext\cp520-stubs\1.0\cp520-stubs-1.0.jar;C:\Users\Tim\.m2\repository\org\apache\derby\derby\10.15.2.0\derby-10.15.2.0.jar;C:\Users\Tim\.m2\repository\org\apache\derby\derbyshared\10.15.2.0\derbyshared-10.15.2.0.jar;C:\Users\Tim\.m2\repository\org\apache\derby\derbyclient\10.15.2.0\derbyclient-10.15.2.0.jar;C:\Users\Tim\.m2\repository\org\apache\derby\derbynet\10.15.2.0\derbynet-10.15.2.0.jar;C:\Users\Tim\.m2\repository\org\apache\derby\derbytools\10.15.2.0\derbytools-10.15.2.0.jar;C:\Users\Tim\.m2\repository\org\slf4j\slf4j-api\1.7.30\slf4j-api-1.7.30.jar;C:\Users\Tim\.m2\repository\org\slf4j\slf4j-jdk14\1.7.30\slf4j-jdk14-1.7.30.jar;C:\Users\Tim\.m2\repository\org\junit\jupiter\junit-jupiter\5.7.0\junit-jupiter-5.7.0.jar;C:\Users\Tim\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.7.0\junit-jupiter-api-5.7.0.jar;C:\Users\Tim\.m2\repository\org\apiguardian\apiguardian-api\1.1.0\apiguardian-api-1.1.0.jar;C:\Users\Tim\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\Tim\.m2\repository\org\junit\platform\junit-platform-commons\1.7.0\junit-platform-commons-1.7.0.jar;C:\Users\Tim\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.7.0\junit-jupiter-params-5.7.0.jar;C:\Users\Tim\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.7.0\junit-jupiter-engine-5.7.0.jar;C:\Users\Tim\.m2\repository\org\junit\platform\junit-platform-engine\1.7.0\junit-platform-engine-1.7.0.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="user.home" value="C:\Users\Tim"/>
     <property name="user.language" value="en"/>
@@ -27,13 +27,13 @@
     <property name="java.version.date" value="2020-07-14"/>
     <property name="java.home" value="C:\Program Files\Java\jdk-11.0.8"/>
     <property name="file.separator" value="\"/>
-    <property name="basedir" value="C:\Users\Tim\java\uwclass\class2\cp520"/>
+    <property name="basedir" value="C:\Users\Tim\java\uwclass\class2\assignment1"/>
     <property name="java.vm.compressedOopsMode" value="Zero based"/>
     <property name="line.separator" value="&#10;"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
-    <property name="surefire.real.class.path" value="C:\Users\Tim\AppData\Local\Temp\surefire14310357146757571103\surefirebooter7971631734502503922.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\Tim\AppData\Local\Temp\surefire3933667613200556542\surefirebooter1786102247083141930.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="11.0.8+10-LTS"/>
@@ -48,7 +48,7 @@
     <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
     <property name="java.io.tmpdir" value="C:\Users\Tim\AppData\Local\Temp\"/>
     <property name="java.version" value="11.0.8"/>
-    <property name="user.dir" value="C:\Users\Tim\java\uwclass\class2\cp520"/>
+    <property name="user.dir" value="C:\Users\Tim\java\uwclass\class2\assignment1"/>
     <property name="os.arch" value="amd64"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
     <property name="java.awt.printerjob" value="sun.awt.windows.WPrinterJob"/>
@@ -60,11 +60,11 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="55.0"/>
   </properties>
-  <testcase name="verifyConstructor" classname="edu.uw.cp520.example.RomanNumeralTest" time="0.035"/>
-  <testcase name="equals" classname="edu.uw.cp520.example.RomanNumeralTest" time="0.002"/>
+  <testcase name="verifyConstructor" classname="edu.uw.cp520.example.RomanNumeralTest" time="0.032"/>
+  <testcase name="equals" classname="edu.uw.cp520.example.RomanNumeralTest" time="0.003"/>
   <testcase name="verifyToString" classname="edu.uw.cp520.example.RomanNumeralTest" time="0.001"/>
   <testcase name="toRoman" classname="edu.uw.cp520.example.RomanNumeralTest" time="0.001"/>
   <testcase name="verifyHashCode" classname="edu.uw.cp520.example.RomanNumeralTest" time="0.002"/>
   <testcase name="parseInt" classname="edu.uw.cp520.example.RomanNumeralTest" time="0.001"/>
-  <testcase name="getValue" classname="edu.uw.cp520.example.RomanNumeralTest" time="0.001"/>
+  <testcase name="getValue" classname="edu.uw.cp520.example.RomanNumeralTest" time="0"/>
 </testsuite>
