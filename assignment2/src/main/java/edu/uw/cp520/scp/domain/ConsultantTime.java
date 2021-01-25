@@ -18,9 +18,9 @@ public class ConsultantTime {
         this.hours = hours;
     }
 
-
-
-
+    public boolean isBillable() {
+        return account.isBillable();
+    }
 
     public Skill getSkill() {
         return skill;

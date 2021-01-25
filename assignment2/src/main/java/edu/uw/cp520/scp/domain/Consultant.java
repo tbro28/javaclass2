@@ -1,14 +1,16 @@
 package edu.uw.cp520.scp.domain;
 
+import edu.uw.cp520.scp.util.PersonalName;
+
 public class Consultant {
 
-    Consultant name;
+    PersonalName name;
 
-    public Consultant(Consultant name) {
+    public Consultant(PersonalName name) {
         this.name = name;
     }
 
-    public Consultant getName() {
+    public PersonalName getName() {
         return name;
     }
 
@@ -18,4 +20,8 @@ public class Consultant {
                 "name=" + name +
                 '}';
     }
+
+
+
+
 }
