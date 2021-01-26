@@ -2,6 +2,12 @@ package edu.uw.cp520.scp.domain;
 
 import edu.uw.cp520.scp.util.PersonalName;
 
+/**
+ *
+ * A billable Account that additionally has client contact information.
+ *
+ * @author Tim Brown
+ */
 public class ClientAccount implements Account {
 
 

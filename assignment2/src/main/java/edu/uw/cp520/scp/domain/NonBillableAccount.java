@@ -1,5 +1,12 @@
 package edu.uw.cp520.scp.domain;
 
+/**
+ *
+ * Accounts which can not be billed - non-billable accounts,
+ * such as sick leave, vacation, or business development.
+ *
+ * @author Tim Brown
+ */
 public enum NonBillableAccount implements Account {
     SICK_LEAVE("Sick Leave"),
     VACATION("Vacation"),
@@ -24,7 +31,8 @@ public enum NonBillableAccount implements Account {
 
     @Override
     public String toString() {
-        return "NonBillableAccount{}";
+        return "NonBillableAccount{" +
+                "name='" + name + '\'' +
+                '}';
     }
-
 }

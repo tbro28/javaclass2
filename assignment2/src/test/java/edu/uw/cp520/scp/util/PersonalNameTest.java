@@ -4,6 +4,11 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Unit tests for the PersonalName class.
+ *
+ * @author Tim Brown
+ */
 class PersonalNameTest {
 
 

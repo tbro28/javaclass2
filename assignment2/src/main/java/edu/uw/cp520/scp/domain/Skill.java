@@ -1,5 +1,11 @@
 package edu.uw.cp520.scp.domain;
 
+/**
+ *
+ * Skill that a client may be billed for, consists of a name and an hourly rate.
+ *
+ * @author Tim Brown
+ */
 public enum Skill {
 
     PROJECT_MANAGER(75),

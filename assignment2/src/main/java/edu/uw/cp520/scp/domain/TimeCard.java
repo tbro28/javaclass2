@@ -4,6 +4,13 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *
+ * Represents a time card capable of storing a collection
+ * of a consultant's billable and non-billable hours for a week.
+ *
+ * @author Tim Brown
+ */
 public class TimeCard {
 
 
