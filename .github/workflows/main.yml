@@ -36,7 +36,7 @@ jobs:
           echo test, and deploy your project.
       - uses: jfrog/setup-jfrog-cli@v1
       - run: | 
-          jfrog --version --url https://codeinb8a.jfrog.io/
+          jfrog --version -rt.url https://codeinb8a.jfrog.io/
           jfrog rt c export https://codeinb8a.jfrog.io/
         env:
           JF_ARTIFACTORY_1: ${{ secrets.JF_ARTIFACTORY_SECRET_1 }}
