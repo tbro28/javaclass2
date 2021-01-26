@@ -21,6 +21,9 @@ public class PersonalName {
      * Empty constructor.
      */
     public PersonalName() {
+        this.lastName = "";
+        this.firstName = "";
+        this.middleName = "";
     }
 
     /**

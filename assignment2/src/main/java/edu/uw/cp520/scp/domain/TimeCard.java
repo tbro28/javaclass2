@@ -14,7 +14,6 @@ import java.util.List;
 public class TimeCard {
 
 
-
     Consultant consultant;
     LocalDate weekStartingDay;
     List<ConsultantTime> consultingHours = new ArrayList<>();
@@ -40,9 +39,7 @@ public class TimeCard {
      * @param consultantTime
      */
     public void addConsultantTime(ConsultantTime consultantTime){
-
         consultingHours.add(consultantTime);
-
     }
 
 
@@ -58,11 +55,8 @@ public class TimeCard {
         List<ConsultantTime> consultantClientTime = new ArrayList<>();
 
         for(ConsultantTime consultantTime : consultingHours) {
-
             if(consultantTime.getAccount().getName().equals(clientName))
-
                 if(consultantTime.isBillable()) {
-                    //System.out.println("HERE");
                     consultantClientTime.add(consultantTime);
                 }
         }
@@ -100,7 +94,6 @@ public class TimeCard {
      * @return
      */
     public int getTotalBillableHours() {
-
         int totalBillableHours = 0;
 
         for(ConsultantTime consultantTime : consultingHours) {
@@ -120,7 +113,6 @@ public class TimeCard {
      * @return
      */
     public int getTotalHours() {
-
         int totalHours = 0;
 
         for(ConsultantTime consultantTime : consultingHours) {
@@ -138,7 +130,6 @@ public class TimeCard {
      * @return
      */
     public int getTotalNonBillableHours() {
-
         int totalNonBillableHours = 0;
 
         for(ConsultantTime consultantTime : consultingHours) {
@@ -149,6 +140,7 @@ public class TimeCard {
 
         return totalNonBillableHours;
     }
+
 
     /**
      *
@@ -174,7 +166,6 @@ public class TimeCard {
 
 
     }
-
 
 
     /**
