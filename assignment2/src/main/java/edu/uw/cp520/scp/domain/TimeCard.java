@@ -13,9 +13,19 @@ import java.util.List;
  */
 public class TimeCard {
 
-
+    /**
+     * Consultant associated to the timecard.
+     */
     Consultant consultant;
+
+    /**
+     * Local date to start at.
+     */
     LocalDate weekStartingDay;
+
+    /**
+     * List to hold consulting time.
+     */
     List<ConsultantTime> consultingHours = new ArrayList<>();
 
 
@@ -48,7 +58,7 @@ public class TimeCard {
      * Return a list of billable hours for a given client.
      *
      * @param clientName
-     * @return
+     * @return the billable hours.
      */
     public List<ConsultantTime> getBillableHoursForClient(String clientName) {
 
@@ -67,9 +77,9 @@ public class TimeCard {
 
     /**
      *
-     * Get the consultant;
+     * Get the consultant.
      *
-     * @return
+     * @return the consultant.
      */
     public Consultant getConsultant() {
         return consultant;
@@ -80,7 +90,7 @@ public class TimeCard {
      *
      * Return a list of consulting times.
      *
-     * @return
+     * @return the consulting hours.
      */
     public List<ConsultantTime> getConsultingHours() {
         return consultingHours;
@@ -91,7 +101,7 @@ public class TimeCard {
      *
      * Get total billable hours regardless of client.
      *
-     * @return
+     * @return the total billable hours.
      */
     public int getTotalBillableHours() {
         int totalBillableHours = 0;
@@ -110,7 +120,7 @@ public class TimeCard {
      *
      * Get total hours regardless of client.
      *
-     * @return
+     * @return the total hours, both billable and non-billable.
      */
     public int getTotalHours() {
         int totalHours = 0;
@@ -127,7 +137,7 @@ public class TimeCard {
      *
      * Get total non-billable hours regardless of client.
      *
-     * @return
+     * @return the total non-billable hours.
      */
     public int getTotalNonBillableHours() {
         int totalNonBillableHours = 0;
@@ -146,7 +156,7 @@ public class TimeCard {
      *
      * Get the week starting day.
      *
-     * @return
+     * @return the week starting day.
      */
     public LocalDate getWeekStartingDay() {
         return weekStartingDay;
@@ -157,7 +167,7 @@ public class TimeCard {
      *
      * Returns a formatted report.
      *
-     * @return
+     * @return a formatted time card report.
      */
     public String toReportString() {
 
@@ -172,7 +182,7 @@ public class TimeCard {
      *
      * Return a string version of the TimeCard object.
      *
-     * @return
+     * @return a string version of the object.
      */
     @Override
     public String toString() {

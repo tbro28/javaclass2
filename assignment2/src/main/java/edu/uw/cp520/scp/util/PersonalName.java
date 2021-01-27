@@ -21,9 +21,12 @@ public class PersonalName {
      * Empty constructor.
      */
     public PersonalName() {
+        this("", "", "");
+/*
         this.lastName = "";
         this.firstName = "";
         this.middleName = "";
+ */
     }
 
     /**
@@ -33,8 +36,12 @@ public class PersonalName {
      * @param firstName
      */
     public PersonalName(String lastName, String firstName) {
+        this(lastName, firstName, "");
+/*
         this.lastName = lastName;
         this.firstName = firstName;
+        this.middleName = "";
+ */
     }
 
     /**
