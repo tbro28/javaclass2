@@ -223,7 +223,7 @@ public class TimeCard {
                     formatter.format("%-20s", consultantTime.getAccount().getName());
                     formatter.format("%-20s", consultantTime.getDate());
                     formatter.format("%-20s", consultantTime.getHours());
-                    formatter.format("%-20s", consultantTime.getSkill());
+                    formatter.format("%-20s", consultantTime.getSkill().name());
                     formatter.format("\n");
 
                 }
