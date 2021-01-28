@@ -150,10 +150,20 @@ public class PersonalName {
      */
     @Override
     public String toString() {
-        return "PersonalName{" +
-                "lastName='" + lastName + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", middleName='" + middleName + '\'' +
-                '}';
+
+        String pName = "";
+
+
+        if(middleName == "")
+            pName = "Consultant: " +
+                    lastName + ", " +
+                    firstName;
+        else
+            pName = "Consultant: " +
+                    lastName + ", " +
+                    firstName + ", " +
+                    middleName;
+
+        return pName;
     }
 }

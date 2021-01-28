@@ -1,8 +1,11 @@
 package edu.uw.cp520.scg.domain;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Formatter;
 import java.util.List;
+import java.util.Locale;
 
 /**
  *
@@ -171,8 +174,90 @@ public class TimeCard {
      */
     public String toReportString() {
 
+        DateTimeFormatter dateFormatter =
+                DateTimeFormatter.ofPattern("MMM dd, yyyy");
+        //System.out.println(weekStartingDay.format(dateFormatter));
 
-        return "REPORT TO DO!!!!!";
+        String strWeekStartingDate = "Week Starting: " + weekStartingDay.format(dateFormatter);
+
+        //Can only be 41 characters long before overlapping with the week date string.
+        String consultantName = consultant.getName().toString().substring(0, Math.min(consultant.getName().toString().length(), 41));
+
+
+
+        //https://docs.oracle.com/javase/7/docs/api/java/util/Formatter.html
+        StringBuilder sb = new StringBuilder();
+
+        // Send all output to the Appendable object sb
+        Formatter formatter = new Formatter(sb, Locale.US);
+
+        formatter.format("=".repeat(68)+"\n");
+
+        formatter.format(consultantName)
+        .format(" ".repeat(41-consultantName.length()))
+        .format(strWeekStartingDate+"\n\n")
+
+        .format("Billable Time:\n")
+
+        .format("%-29s", "Account")
+        .format("%-12s", "Date")
+        .format("%-7s", "Hours")
+        .format("%-20s", "Skill")
+        .format("\n")
+
+        .format("-".repeat(27)+"  ")
+        .format("-".repeat(10)+"  ")
+        .format("-".repeat(5)+"  ")
+        .format("-".repeat(18))
+        .format("\n");
+
+        for (ConsultantTime consultantTime : getConsultingHours())
+            System.out.println(consultantTime.getHours());
+
+        formatter.format("=".repeat(68));
+
+
+
+        //System.out.println(formatter);
+
+        String strReport = formatter.toString();
+
+        formatter.close();
+
+
+        String result2 = String.format("|%-20s|", "Hello World");
+
+        //formatter.format("-%-2s-", "Hello World");
+
+        String result5 = String.format("|%20s|", "Hello World")     // |$$$$$$$$$Hello$World|
+                .replace(' ', '$');
+
+        String result6 = String.format("|%20s|", "")     // |$$$$$$$$$Hello$World|
+                .replace(' ', '-');
+
+        String result7 = String.format("%68s", "=");     // |$$$$$$$$$Hello$World|
+
+
+/*
+        System.out.println(weekStartingDay);
+        System.out.println(weekStartingDay.plusDays(1));
+        System.out.println(weekStartingDay.plusDays(2));
+
+        DateTimeFormatter dateFormatter2 =
+                DateTimeFormatter.ofPattern("MM/dd/yyyy");
+        System.out.println(weekStartingDay.format(dateFormatter));
+        System.out.printf("%1$tb %1$td, %1$tY%n", weekStartingDay);
+
+
+        System.out.println(result2);
+        //System.out.println(formatter);
+        System.out.println(result5);
+        System.out.println(result6);
+        System.out.println(result7);
+*/
+
+
+        return strReport;
 
 
     }
