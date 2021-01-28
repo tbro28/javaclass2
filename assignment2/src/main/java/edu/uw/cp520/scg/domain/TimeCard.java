@@ -211,8 +211,26 @@ public class TimeCard {
         .format("-".repeat(18))
         .format("\n");
 
-        for (ConsultantTime consultantTime : getConsultingHours())
-            System.out.println(consultantTime.getHours());
+        for (int i = 0; i < 7; i++) {
+
+            //System.out.println(weekStartingDay.plusDays(i));
+
+            for (ConsultantTime consultantTime : consultingHours) {
+
+                //System.out.println(consultantTime.getHours());
+
+                if(consultantTime.isBillable() && consultantTime.getDate().equals(weekStartingDay.plusDays(i))) {
+                    formatter.format("%-20s", consultantTime.getAccount().getName());
+                    formatter.format("%-20s", consultantTime.getDate());
+                    formatter.format("%-20s", consultantTime.getHours());
+                    formatter.format("%-20s", consultantTime.getSkill());
+                    formatter.format("\n");
+
+                }
+            }
+
+        }
+
 
         formatter.format("=".repeat(68));
 
