@@ -176,14 +176,14 @@ public class TimeCard {
 
         DateTimeFormatter dateFormatter =
                 DateTimeFormatter.ofPattern("MMM dd, yyyy");
-        //System.out.println(weekStartingDay.format(dateFormatter));
 
-        String strWeekStartingDate = "Week Starting: " + weekStartingDay.format(dateFormatter);
+        String strWeekStartingDate = "Week Starting: "
+                + weekStartingDay.format(dateFormatter);
 
-        //Can only be 41 characters long before overlapping with the week date string.
-        String consultantName = consultant.getName().toString().substring(0, Math.min(consultant.getName().toString().length(), 41));
-
-
+        //Can only be 41 characters long before overlapping
+        // with the week date string.
+        String consultantName = consultant.getName().toString().substring(0,
+                Math.min(consultant.getName().toString().length(), 41));
 
         //https://docs.oracle.com/javase/7/docs/api/java/util/Formatter.html
         StringBuilder sb = new StringBuilder();
@@ -197,6 +197,7 @@ public class TimeCard {
         .format(" ".repeat(41-consultantName.length()))
         .format(strWeekStartingDate+"\n\n")
 
+        //Billable time formatting.
         .format("Billable Time:\n")
 
         .format("%-29s", "Account")
@@ -208,76 +209,69 @@ public class TimeCard {
         .format("-".repeat(27)+"  ")
         .format("-".repeat(10)+"  ")
         .format("-".repeat(5)+"  ")
-        .format("-".repeat(18))
+        .format("-".repeat(20))
         .format("\n");
 
         for (int i = 0; i < 7; i++) {
-
-            //System.out.println(weekStartingDay.plusDays(i));
-
             for (ConsultantTime consultantTime : consultingHours) {
-
-                //System.out.println(consultantTime.getHours());
-
-                if(consultantTime.isBillable() && consultantTime.getDate().equals(weekStartingDay.plusDays(i))) {
-                    formatter.format("%-20s", consultantTime.getAccount().getName());
-                    formatter.format("%-20s", consultantTime.getDate());
-                    formatter.format("%-20s", consultantTime.getHours());
-                    formatter.format("%-20s", consultantTime.getSkill().name());
-                    formatter.format("\n");
-
+                if(consultantTime.isBillable() && consultantTime.getDate()
+                        .equals(weekStartingDay.plusDays(i))) {
+                    formatter.format("%-29s",
+                            consultantTime.getAccount().getName())
+                    .format("%-12s", consultantTime.getDate())
+                    .format("%5s  ", consultantTime.getHours())
+                    .format("%-20s", consultantTime.getSkill())
+                    .format("\n");
                 }
             }
-
         }
 
+        //Non-billable time formatting.
+        formatter.format("\n")
+        .format("Non-billable Time:\n")
 
-        formatter.format("=".repeat(68));
+        .format("%-29s", "Account")
+        .format("%-12s", "Date")
+        .format("%-7s", "Hours")
+        .format("%-20s", "Skill")
+        .format("\n")
 
+        .format("-".repeat(27)+"  ")
+        .format("-".repeat(10)+"  ")
+        .format("-".repeat(5)+"  ")
+        .format("-".repeat(20))
+        .format("\n");
 
+        for (int i = 0; i < 7; i++) {
+            for (ConsultantTime consultantTime : consultingHours) {
+                if(!consultantTime.isBillable() && consultantTime.getDate()
+                        .equals(weekStartingDay.plusDays(i))) {
+                    formatter.format("%-29s",
+                            consultantTime.getAccount().getName())
+                            .format("%-12s", consultantTime.getDate())
+                            .format("%5s  ", consultantTime.getHours())
+                            .format("%-20s", consultantTime.getSkill())
+                            .format("\n");
+                }
+            }
+        }
 
-        //System.out.println(formatter);
+        //Summary section of the report.
+        formatter.format("\n")
+        .format("Summary:\n")
+
+        .format("%-41s", "Total Billable:")
+        .format("%5s\n", this.getTotalBillableHours())
+        .format("%-41s", "Total Non-Billable:")
+        .format("%5s\n", this.getTotalNonBillableHours())
+        .format("%-41s", "Total Hours:")
+        .format("%5s\n", this.getTotalHours())
+
+        .format("=".repeat(68));
 
         String strReport = formatter.toString();
 
-        formatter.close();
-
-
-        String result2 = String.format("|%-20s|", "Hello World");
-
-        //formatter.format("-%-2s-", "Hello World");
-
-        String result5 = String.format("|%20s|", "Hello World")     // |$$$$$$$$$Hello$World|
-                .replace(' ', '$');
-
-        String result6 = String.format("|%20s|", "")     // |$$$$$$$$$Hello$World|
-                .replace(' ', '-');
-
-        String result7 = String.format("%68s", "=");     // |$$$$$$$$$Hello$World|
-
-
-/*
-        System.out.println(weekStartingDay);
-        System.out.println(weekStartingDay.plusDays(1));
-        System.out.println(weekStartingDay.plusDays(2));
-
-        DateTimeFormatter dateFormatter2 =
-                DateTimeFormatter.ofPattern("MM/dd/yyyy");
-        System.out.println(weekStartingDay.format(dateFormatter));
-        System.out.printf("%1$tb %1$td, %1$tY%n", weekStartingDay);
-
-
-        System.out.println(result2);
-        //System.out.println(formatter);
-        System.out.println(result5);
-        System.out.println(result6);
-        System.out.println(result7);
-*/
-
-
         return strReport;
-
-
     }
 
 

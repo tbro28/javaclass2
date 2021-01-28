@@ -53,9 +53,11 @@ class ConsultantTimeTest {
         timeCard.addConsultantTime(consultantTime3);
     }
 
+
     @AfterEach
     void tearDown() {
     }
+
 
     @Test
     void constructorZeroHours() {
@@ -98,7 +100,6 @@ class ConsultantTimeTest {
     void getAccountNonBillable() {
         assertEquals(NonBillableAccount.SICK_LEAVE, consultantTime3.getAccount());
     }
-
 
     @Test
     void setAccount() {
@@ -166,7 +167,7 @@ class ConsultantTimeTest {
 
         System.out.println(consultantTime1);
 
-        assertEquals("ConsultantTime{skill=Skill{rate=75}, date=2021-01-15, hours=50}",
+        assertEquals("ConsultantTime{skill=Project Manager, date=2021-01-15, hours=50}",
                 consultantTime1.toString());
     }
 }

@@ -11,23 +11,23 @@ public enum Skill {
     /**
      * Project manager value.
      */
-    PROJECT_MANAGER(75),
+    PROJECT_MANAGER(75, "Project Manager"),
     /**
      * Software engineer value.
      */
-    SOFTWARE_ENGINEER(50),
+    SOFTWARE_ENGINEER(50, "Software Engineer"),
     /**
      * Software tester value.
      */
-    SOFTWARE_TESTER(25),
+    SOFTWARE_TESTER(25, "Software Tester"),
     /**
      * System architect value.
      */
-    SYSTEM_ARCHITECT(100),
+    SYSTEM_ARCHITECT(100, "System Architect"),
     /**
      * Unknown skill value.
      */
-    UNKNOWN_SKILL(150);
+    UNKNOWN_SKILL(150, "Unknown Skill");
 
     /**
      * Holds the rate value.
@@ -35,12 +35,19 @@ public enum Skill {
     private int rate;
 
     /**
+     * Holds the skill name value.
+     */
+    private String skillName;
+
+    /**
      * Sets the pay rate for the skill.
      *
      * @param rate is the rate of pay.
+     * @param skillName is the name of the skill.
      */
-    Skill(int rate) {
+    Skill(int rate, String skillName) {
         this.rate = rate;
+        this.skillName = skillName;
     }
 
     /**
@@ -60,9 +67,7 @@ public enum Skill {
      */
     @Override
     public String toString() {
-        return "Skill{" +
-                "rate=" + rate +
-                '}';
+        return skillName;
     }
 
 }

@@ -19,14 +19,12 @@ class PersonalNameTest {
         assertNotNull(personalName);
     }
 
-
     @Test
     void constructorFirstAndLastName() {
         PersonalName personalName = new PersonalName("Brown", "Tom");
 
         assertNotNull(personalName);
     }
-
 
     @Test
     void getLastName() {
@@ -98,6 +96,15 @@ class PersonalNameTest {
 
         System.out.println(personalName.toString());
 
-        assertEquals("PersonalName{lastName='Brown', firstName='Tom', middleName='Jack'}", personalName.toString());
+        assertEquals("Consultant: Brown, Tom, Jack", personalName.toString());
+    }
+
+    @Test
+    void testToStringWithNOMiddleName() {
+        PersonalName personalName = new PersonalName("Brown", "Tom");
+
+        System.out.println(personalName.toString());
+
+        assertEquals("Consultant: Brown, Tom", personalName.toString());
     }
 }

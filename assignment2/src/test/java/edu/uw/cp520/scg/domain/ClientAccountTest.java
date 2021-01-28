@@ -41,7 +41,6 @@ class ClientAccountTest {
         assertEquals(true, clientAccount.isBillable());
     }
 
-
     @Test
     public void setContactTest() {
 

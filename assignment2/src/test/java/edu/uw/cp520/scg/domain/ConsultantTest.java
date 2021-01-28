@@ -17,15 +17,6 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ConsultantTest {
 
     Consultant consultant;
-    LocalDate localDate;
-    TimeCard timeCard;
-
-    ConsultantTime consultantTime1;
-    ConsultantTime consultantTime2;
-    ConsultantTime consultantTime3;
-
-    ClientAccount clientAccount;
-
 
     @BeforeEach
     void setUp() {
@@ -56,7 +47,7 @@ public class ConsultantTest {
         PersonalName personalName = new PersonalName("Brown", "Tom", "Jack");
         consultant = new Consultant(personalName);
 
-        assertEquals("Consultant{name=PersonalName{lastName='Brown', firstName='Tom', middleName='Jack'}}",
+        assertEquals("Consultant{name=Consultant: Brown, Tom, Jack}",
                 consultant.toString());
     }
 

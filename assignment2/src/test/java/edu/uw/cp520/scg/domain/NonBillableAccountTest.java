@@ -35,18 +35,4 @@ class NonBillableAccountTest {
     void testToString() {
         assertEquals("NonBillableAccount{name='Business development'}", NonBillableAccount.BUSINESS_DEVELOPMENT.toString());
     }
-/*
-    @Test
-    void values() {
-        for(NonBillableAccount nonBillableAccount : NonBillableAccount.values())
-            System.out.println(nonBillableAccount);
-    }
-
-    @Test
-    void valueOf() {
-        System.out.println(NonBillableAccount.valueOf("VACATION"));
-    }
-
- */
-
 }

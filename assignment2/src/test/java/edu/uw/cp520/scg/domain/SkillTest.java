@@ -17,6 +17,6 @@ class SkillTest {
 
     @Test
     void testToString() {
-        assertEquals("Skill{rate=50}", Skill.SOFTWARE_ENGINEER.toString());
+        assertEquals("Software Engineer", Skill.SOFTWARE_ENGINEER.toString());
     }
 }
