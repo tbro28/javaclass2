@@ -1,0 +1,8 @@
+edu\uw\cp520\scg\domain\ConsultantTime.class
+edu\uw\cp520\scg\domain\Skill.class
+edu\uw\cp520\scg\util\PersonalName.class
+edu\uw\cp520\scg\domain\Account.class
+edu\uw\cp520\scg\domain\TimeCard.class
+edu\uw\cp520\scg\domain\ClientAccount.class
+edu\uw\cp520\scg\domain\NonBillableAccount.class
+edu\uw\cp520\scg\domain\Consultant.class
