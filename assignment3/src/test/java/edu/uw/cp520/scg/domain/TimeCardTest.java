@@ -23,7 +23,7 @@ class TimeCardTest {
 
     //      business.name
     //(StateCode stateCode, String streetNumber, String city, String postalCode)
-    Address address = new Address("streetNumber", "city", StateCode.valueOf("Washington"),"postalCode");
+    Address address = new Address("streetNumber", "city", StateCode.WA,"postalCode");
 
     @Test
     void constructor() {
