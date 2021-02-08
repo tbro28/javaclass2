@@ -1,6 +1,8 @@
 package edu.uw.cp520.scg.domain;
 
+import edu.uw.cp520.scg.util.Address;
 import edu.uw.cp520.scg.util.PersonalName;
+import edu.uw.cp520.scg.util.StateCode;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,6 +19,10 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Tim Brown
  */
 class ConsultantTimeTest {
+
+    //      business.name
+    //(StateCode stateCode, String streetNumber, String city, String postalCode)
+    Address address = new Address("streetNumber", "city", StateCode.valueOf("Washington"),"postalCode");
 
     Consultant consultant;
     LocalDate localDate;
@@ -37,7 +43,7 @@ class ConsultantTimeTest {
 
         String name = "TimBiz";
         PersonalName personalName = new PersonalName("Brown", "Tom", "Jack");
-        clientAccount = new ClientAccount(name, personalName);
+        clientAccount = new ClientAccount(name, personalName, address);
 
         consultantTime1 = new ConsultantTime(localDate, clientAccount, Skill.PROJECT_MANAGER, 50);
         consultantTime2 = new ConsultantTime(localDate, clientAccount, Skill.SOFTWARE_TESTER, 50);
@@ -106,7 +112,7 @@ class ConsultantTimeTest {
 
         String name = "ChangedAccount";
         PersonalName personalName = new PersonalName("Brown", "Tom", "Jack");
-        ClientAccount changedAccount = new ClientAccount(name, personalName);
+        ClientAccount changedAccount = new ClientAccount(name, personalName, address);
 
         consultantTime1.setAccount(changedAccount);
 

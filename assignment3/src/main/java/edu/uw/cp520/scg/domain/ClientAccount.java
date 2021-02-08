@@ -1,5 +1,6 @@
 package edu.uw.cp520.scg.domain;
 
+import edu.uw.cp520.scg.util.Address;
 import edu.uw.cp520.scg.util.PersonalName;
 
 /**
@@ -21,14 +22,21 @@ public class ClientAccount implements Account {
     PersonalName personalName;
 
     /**
-     * The only constructor that requires two parameters.
+     * Holds the client account address.
+     */
+    Address address;
+
+    /**
+     * The only constructor; requires three parameters.
      *
      * @param name
      * @param personalName
+     * @param address
      */
-    public ClientAccount(String name, PersonalName personalName) {
+    public ClientAccount(String name, PersonalName personalName, Address address) {
         this.name = name;
         this.personalName = personalName;
+        this.address = address;
     }
 
     /**

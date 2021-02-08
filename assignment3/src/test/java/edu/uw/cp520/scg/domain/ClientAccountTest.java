@@ -1,11 +1,17 @@
 package edu.uw.cp520.scg.domain;
 
+import edu.uw.cp520.scg.util.Address;
 import edu.uw.cp520.scg.util.PersonalName;
+import edu.uw.cp520.scg.util.StateCode;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class ClientAccountTest {
+
+    //      business.name
+    //(StateCode stateCode, String streetNumber, String city, String postalCode)
+    Address address = new Address( "streetNumber", "city", StateCode.valueOf("Washington"),"postalCode");
 
 
     @Test
@@ -14,7 +20,7 @@ class ClientAccountTest {
         String name = "TimBiz";
         PersonalName personalName = new PersonalName("Brown", "Tom", "Jack");
 
-        ClientAccount clientAccount = new ClientAccount(name, personalName);
+        ClientAccount clientAccount = new ClientAccount(name, personalName, address);
 
         assertEquals(personalName, clientAccount.getContact());
     }
@@ -25,7 +31,7 @@ class ClientAccountTest {
         String name = "TimBiz";
         PersonalName personalName = new PersonalName("Brown", "Tom", "Jack");
 
-        ClientAccount clientAccount = new ClientAccount(name, personalName);
+        ClientAccount clientAccount = new ClientAccount(name, personalName, address);
 
         assertEquals(name, clientAccount.getName());
     }
@@ -36,7 +42,7 @@ class ClientAccountTest {
         String name = "TimBiz";
         PersonalName personalName = new PersonalName("Brown", "Tom", "Jack");
 
-        ClientAccount clientAccount = new ClientAccount(name, personalName);
+        ClientAccount clientAccount = new ClientAccount(name, personalName, address);
 
         assertEquals(true, clientAccount.isBillable());
     }
@@ -47,7 +53,7 @@ class ClientAccountTest {
         String name = "TimBiz";
         PersonalName personalName = new PersonalName("Brown", "Tom", "Jack");
 
-        ClientAccount clientAccount = new ClientAccount(name, personalName);
+        ClientAccount clientAccount = new ClientAccount(name, personalName, address);
 
         PersonalName personalName2 = new PersonalName("Anderson", "Neo", "Matrix");
         clientAccount.setContact(personalName2);
