@@ -146,11 +146,11 @@ public class Invoice {
 
             if(invoiceYear == consultantTime.getDate().getYear() && month == consultantTime.getDate().getMonth()) {
 
-                System.out.println(consultantTime.getDate());
+                //System.out.println(consultantTime.getDate());
 
                 if (consultantTime.isBillable()) {
-                    System.out.println(consultantTime.toString());
-                    System.out.println(consultantTime.getAccount().getName());
+                    //System.out.println(consultantTime.toString());
+                    //System.out.println(consultantTime.getAccount().getName());
 
 //I think this should be the addLineItem method????
 //Look at the diagram, second item.
@@ -246,7 +246,7 @@ public class Invoice {
 
         LocalDate invoiceMonthYear = LocalDate.of(invoiceYear, numericalMonth, 1);
 
-        System.out.println(invoiceMonthYear);
+//        System.out.println(invoiceMonthYear);
 
         InvoiceHeader invoiceHeader = new InvoiceHeader(BIZ_NAME,BIZ_ADDRESS,clientAccount,invoiceDate,invoiceMonthYear);
 
@@ -272,17 +272,16 @@ public class Invoice {
         int numberOfPages = (int) Math.ceil(invoiceLineItemCount / 5.0);
 
         NumberFormat defaultFormat = NumberFormat.getCurrencyInstance();
-        System.out.println("US: " + defaultFormat.format(234));
+//        System.out.println("US: " + defaultFormat.format(234));
 
 
         NumberFormat nf = NumberFormat.getCurrencyInstance();
         DecimalFormatSymbols decimalFormatSymbols = ((DecimalFormat) nf).getDecimalFormatSymbols();
         decimalFormatSymbols.setCurrencySymbol("");
         ((DecimalFormat) nf).setDecimalFormatSymbols(decimalFormatSymbols);
-        System.out.println(nf.format(12345.124).trim());
 
-
-        System.out.println(numberOfPages+" --- ssssssssssssssss");
+//        System.out.println(nf.format(12345.124).trim());
+//        System.out.println(numberOfPages+" --- ssssssssssssssss");
 
         for(int page = 1; page <= numberOfPages; page++) {
 

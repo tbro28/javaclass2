@@ -15,8 +15,8 @@ public class TestClass {
 
         StateCode state = StateCode.WA;
 
-        System.out.println(state.name());
-        System.out.println(state.getName());
+        //System.out.println(state.name());
+        //System.out.println(state.getName());
 
 
         Consultant consultant = new Consultant(new PersonalName("Brown", "Tom", "Jack"));
@@ -79,13 +79,13 @@ public class TestClass {
         Invoice invoice = new Invoice(clientAccount, month, invoiceYear);
 
         invoice.extractLineItems(timeCard);
-
+/*
 System.out.println(invoice.getStartDate());
 System.out.println(invoice.getTotalCharges());
 System.out.println(invoice.getTotalHours());
 
 System.out.println(invoice.toString());
-
+*/
 System.out.println(invoice.toReportString());
 
       //  for(InvoiceLineItem invoiceLineItem : invoice.extractLineItems(timeCard)) {
