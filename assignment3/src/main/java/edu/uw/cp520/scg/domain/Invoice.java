@@ -43,8 +43,13 @@ public class Invoice {
     private List<InvoiceLineItem> invoiceLineItemList = new ArrayList<>();
 
 
+    /*
     private Address businessAddress;
     private String businessName;
+*/
+
+    private static Address BIZ_ADDRESS;
+    private static String BIZ_NAME;
 
     /**
      *
@@ -60,6 +65,61 @@ public class Invoice {
         this.month = month;
         this.invoiceYear = invoiceYear;
     }
+
+
+    static {
+
+        try (InputStream input = new FileInputStream("src/main/resources/invoice.properties")) {
+
+            Properties prop = new Properties();
+
+            // load a properties file
+            prop.load(input);
+
+            // get the property value and print it out
+/*
+            System.out.println(prop.getProperty("business.name"));
+            System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+            System.out.println(StateCode.valueOf(prop.getProperty("business.state")));
+*/
+
+            BIZ_NAME = prop.getProperty("business.name");
+            BIZ_ADDRESS = new Address(prop.getProperty("business.street"), prop.getProperty("business.city"), StateCode.valueOf(prop.getProperty("business.state")), prop.getProperty("business.zip"));
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+
+    }
+
+/*
+    public void setBusinessAddress() {
+
+        try (InputStream input = new FileInputStream("src/main/resources/invoice.properties")) {
+
+            Properties prop = new Properties();
+
+            // load a properties file
+            prop.load(input);
+
+            // get the property value and print it out
+
+            System.out.println(prop.getProperty("business.name"));
+            System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+            System.out.println(StateCode.valueOf(prop.getProperty("business.state")));
+
+
+            businessName = prop.getProperty("business.name");
+            businessAddress = new Address(prop.getProperty("business.street"), prop.getProperty("business.city"), StateCode.valueOf(prop.getProperty("business.state")), prop.getProperty("business.zip"));
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+
+    }
+*/
 
     /**
      *
@@ -91,11 +151,19 @@ public class Invoice {
                 if (consultantTime.isBillable()) {
                     System.out.println(consultantTime.toString());
                     System.out.println(consultantTime.getAccount().getName());
-                    invoiceLineItemList.add(new InvoiceLineItem(consultantTime.getDate(), timeCard.consultant, consultantTime.getSkill(), consultantTime.getHours()));
+
+//I think this should be the addLineItem method????
+//Look at the diagram, second item.
+                    //invoiceLineItemList.add(new InvoiceLineItem(consultantTime.getDate(), timeCard.consultant, consultantTime.getSkill(), consultantTime.getHours()));
+                    this.addLineItem(new InvoiceLineItem(consultantTime.getDate(), timeCard.consultant, consultantTime.getSkill(), consultantTime.getHours()));
+
                 }
             }
         }
     }
+
+
+
 
     /**
      *
@@ -170,7 +238,7 @@ public class Invoice {
      */
     public String toReportString() {
 
-        setBusinessAddress();
+        //setBusinessAddress();
 
         LocalDate invoiceDate = LocalDate.now();
 
@@ -180,9 +248,9 @@ public class Invoice {
 
         System.out.println(invoiceMonthYear);
 
-        InvoiceHeader invoiceHeader = new InvoiceHeader(businessName,businessAddress,clientAccount,invoiceDate,invoiceMonthYear);
+        InvoiceHeader invoiceHeader = new InvoiceHeader(BIZ_NAME,BIZ_ADDRESS,clientAccount,invoiceDate,invoiceMonthYear);
 
-        InvoiceFooter invoiceFooter = new InvoiceFooter(businessName);
+        InvoiceFooter invoiceFooter = new InvoiceFooter(BIZ_NAME);
 
   //      System.out.println(invoiceHeader);
 
@@ -263,11 +331,6 @@ public class Invoice {
             formatter.format("\n\n");
 
 
-
-
-
-
-
             //Format footer
 
 
@@ -277,18 +340,10 @@ public class Invoice {
         }
 
 
-
-
-
         String strReport = formatter.toString();
 
 
         return strReport;
-
-
-
-
-
 
 
 //        formatter.format("=".repeat(68)+"\n");
@@ -300,34 +355,7 @@ public class Invoice {
 
 
 
-    public void setBusinessAddress() {
 
-        try (InputStream input = new FileInputStream("src/main/resources/invoice.properties")) {
-
-            Properties prop = new Properties();
-
-            // load a properties file
-            prop.load(input);
-
-            // get the property value and print it out
-            System.out.println(prop.getProperty("business.name"));
-            System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-
-            System.out.println(StateCode.valueOf(prop.getProperty("business.state")));
-
-
-
-            businessName = prop.getProperty("business.name");
-            businessAddress = new Address(prop.getProperty("business.street"), prop.getProperty("business.city"), StateCode.valueOf(prop.getProperty("business.state")), prop.getProperty("business.zip"));
-
-
-
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-
-
-    }
 
 
 
@@ -339,12 +367,18 @@ public class Invoice {
      */
     @Override
     public String toString() {
-        return "Invoice{" +
-                "clientAccount=" + clientAccount +
-                ", month=" + month +
-                ", invoiceYear=" + invoiceYear +
-                ", invoiceLineItemList=" + invoiceLineItemList +
-                '}';
+
+        String invoiceString = "";
+
+        for(InvoiceLineItem invoiceLineItem : invoiceLineItemList) {
+            invoiceString += invoiceLineItem.getDate()+":"+invoiceLineItem.getSkill()+":"+invoiceLineItem.getHours()+":"+invoiceLineItem.getConsultant()+"\n";
+        }
+
+        return "Invoice:\n" +
+                "clientAccount=" + clientAccount.getName() +
+                ", \nmonth=" + month +
+                ", \ninvoiceYear=" + invoiceYear +
+                ", \ninvoiceLineItemList=\n" + invoiceString;
     }
 
 }

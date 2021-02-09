@@ -11,6 +11,10 @@ public enum StateCode {
         this.stateName = stateName;
     }
 
+    StateCode forName(String stateName) {
+        return StateCode.valueOf(stateName);
+    }
+
     public String getName() {
         return stateName;
     }
