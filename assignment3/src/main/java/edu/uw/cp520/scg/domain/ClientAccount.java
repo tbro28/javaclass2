@@ -33,7 +33,8 @@ public class ClientAccount implements Account {
      * @param personalName
      * @param address
      */
-    public ClientAccount(String name, PersonalName personalName, Address address) {
+    public ClientAccount(String name, PersonalName
+            personalName, Address address) {
         this.name = name;
         this.personalName = personalName;
         this.address = address;

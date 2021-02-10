@@ -69,7 +69,8 @@ public class Invoice {
 
     static {
 
-        try (InputStream input = new FileInputStream("src/main/resources/invoice.properties")) {
+        try (InputStream input = new FileInputStream(
+                "src/main/resources/invoice.properties")) {
 
             Properties prop = new Properties();
 
@@ -77,14 +78,11 @@ public class Invoice {
             prop.load(input);
 
             // get the property value and print it out
-/*
-            System.out.println(prop.getProperty("business.name"));
-            System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-            System.out.println(StateCode.valueOf(prop.getProperty("business.state")));
-*/
-
             BIZ_NAME = prop.getProperty("business.name");
-            BIZ_ADDRESS = new Address(prop.getProperty("business.street"), prop.getProperty("business.city"), StateCode.valueOf(prop.getProperty("business.state")), prop.getProperty("business.zip"));
+            BIZ_ADDRESS = new Address(prop.getProperty("business.street"),
+                    prop.getProperty("business.city"),
+                    StateCode.valueOf(prop.getProperty("business.state")),
+                    prop.getProperty("business.zip"));
 
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -93,33 +91,6 @@ public class Invoice {
 
     }
 
-/*
-    public void setBusinessAddress() {
-
-        try (InputStream input = new FileInputStream("src/main/resources/invoice.properties")) {
-
-            Properties prop = new Properties();
-
-            // load a properties file
-            prop.load(input);
-
-            // get the property value and print it out
-
-            System.out.println(prop.getProperty("business.name"));
-            System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-            System.out.println(StateCode.valueOf(prop.getProperty("business.state")));
-
-
-            businessName = prop.getProperty("business.name");
-            businessAddress = new Address(prop.getProperty("business.street"), prop.getProperty("business.city"), StateCode.valueOf(prop.getProperty("business.state")), prop.getProperty("business.zip"));
-
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-
-
-    }
-*/
 
     /**
      *
@@ -133,7 +104,8 @@ public class Invoice {
 
     /**
      *
-     * Extract the billable hours for this Invoice's client from the input TimeCard and add them to the collection of line items.
+     * Extract the billable hours for this Invoice's client
+     * from the input TimeCard and add them to the collection of line items.
      *
      * @param timeCard
      */
@@ -144,32 +116,26 @@ public class Invoice {
 
         for(ConsultantTime consultantTime : timeCard.getConsultingHours()){
 
-            if(invoiceYear == consultantTime.getDate().getYear() && month == consultantTime.getDate().getMonth()) {
-
-                //System.out.println(consultantTime.getDate());
+            if(invoiceYear == consultantTime.getDate().getYear()
+                    && month == consultantTime.getDate().getMonth()) {
 
                 if (consultantTime.isBillable()) {
-                    //System.out.println(consultantTime.toString());
-                    //System.out.println(consultantTime.getAccount().getName());
-
-//I think this should be the addLineItem method????
-//Look at the diagram, second item.
-                    //invoiceLineItemList.add(new InvoiceLineItem(consultantTime.getDate(), timeCard.consultant, consultantTime.getSkill(), consultantTime.getHours()));
-                    this.addLineItem(new InvoiceLineItem(consultantTime.getDate(), timeCard.consultant, consultantTime.getSkill(), consultantTime.getHours()));
-
+                    this.addLineItem(
+                            new InvoiceLineItem(consultantTime.getDate(),
+                            timeCard.consultant,
+                            consultantTime.getSkill(),
+                            consultantTime.getHours()));
                 }
             }
         }
     }
 
 
-
-
     /**
      *
      * Get the client for this Invoice.
      *
-     * @return
+     * @return the client account.
      */
     public ClientAccount getClientAccount() {
         return clientAccount;
@@ -179,7 +145,7 @@ public class Invoice {
      *
      * Get the invoice month.
      *
-     * @return
+     * @return the invoice Month object.
      */
     public Month getInvoiceMonth() {
         return month;
@@ -190,7 +156,7 @@ public class Invoice {
      * Get the start date for this Invoice, this is the earliest date a
      * ConsultantTime instance may have and still be billed on this invoice.
      *
-     * @return
+     * @return the start date.
      */
     public LocalDate getStartDate() {
         return LocalDate.of(invoiceYear, month.getValue(), 1);
@@ -200,7 +166,7 @@ public class Invoice {
      *
      * Get the total charges for this Invoice.
      *
-     * @return
+     * @return the total charges on the invoice.
      */
     public int getTotalCharges() {
 
@@ -217,7 +183,7 @@ public class Invoice {
      *
      * Get the total hours for this Invoice.
      *
-     * @return
+     * @return the total hours for a given invoice.
      */
     public int getTotalHours() {
 
@@ -234,7 +200,7 @@ public class Invoice {
      *
      * Create a formatted string containing the printable invoice.
      *
-     * @return
+     * @return a printable invoice String.
      */
     public String toReportString() {
 
@@ -244,17 +210,14 @@ public class Invoice {
 
         int numericalMonth = month.getValue();
 
-        LocalDate invoiceMonthYear = LocalDate.of(invoiceYear, numericalMonth, 1);
+        LocalDate invoiceMonthYear =
+                LocalDate.of(invoiceYear, numericalMonth, 1);
 
-//        System.out.println(invoiceMonthYear);
-
-        InvoiceHeader invoiceHeader = new InvoiceHeader(BIZ_NAME,BIZ_ADDRESS,clientAccount,invoiceDate,invoiceMonthYear);
+        InvoiceHeader invoiceHeader =
+                new InvoiceHeader(BIZ_NAME, BIZ_ADDRESS,
+                        clientAccount, invoiceDate, invoiceMonthYear);
 
         InvoiceFooter invoiceFooter = new InvoiceFooter(BIZ_NAME);
-
-  //      System.out.println(invoiceHeader);
-
-
 
         StringBuilder sb = new StringBuilder();
 
@@ -264,24 +227,17 @@ public class Invoice {
         DateTimeFormatter dateFormatter =
                 DateTimeFormatter.ofPattern("MM/dd/yyyy");
 
-
         int invoiceLineItemCount =  invoiceLineItemList.size();
-
         int currentInvoiceLineItem = 0;
-
         int numberOfPages = (int) Math.ceil(invoiceLineItemCount / 5.0);
 
         NumberFormat defaultFormat = NumberFormat.getCurrencyInstance();
-//        System.out.println("US: " + defaultFormat.format(234));
-
 
         NumberFormat nf = NumberFormat.getCurrencyInstance();
-        DecimalFormatSymbols decimalFormatSymbols = ((DecimalFormat) nf).getDecimalFormatSymbols();
+        DecimalFormatSymbols decimalFormatSymbols =
+                ((DecimalFormat) nf).getDecimalFormatSymbols();
         decimalFormatSymbols.setCurrencySymbol("");
         ((DecimalFormat) nf).setDecimalFormatSymbols(decimalFormatSymbols);
-
-//        System.out.println(nf.format(12345.124).trim());
-//        System.out.println(numberOfPages+" --- ssssssssssssssss");
 
         for(int page = 1; page <= numberOfPages; page++) {
 
@@ -307,11 +263,18 @@ public class Invoice {
                 if(currentInvoiceLineItem == invoiceLineItemCount)
                     break;
 
-                formatter.format("%-12s", invoiceLineItemList.get(currentInvoiceLineItem).getDate().format(dateFormatter));
-                formatter.format("%-29s", invoiceLineItemList.get(currentInvoiceLineItem).getConsultant().getName().toString().substring(12));
-                formatter.format("%-20s", invoiceLineItemList.get(currentInvoiceLineItem).getSkill());
-                formatter.format("%5s", invoiceLineItemList.get(currentInvoiceLineItem).getHours());
-                formatter.format("%12s", nf.format(invoiceLineItemList.get(currentInvoiceLineItem).getCharge()).trim());
+                formatter.format("%-12s", invoiceLineItemList
+                        .get(currentInvoiceLineItem).getDate()
+                        .format(dateFormatter));
+                formatter.format("%-29s", invoiceLineItemList
+                        .get(currentInvoiceLineItem).getConsultant()
+                        .getName().toString().substring(12));
+                formatter.format("%-20s", invoiceLineItemList
+                        .get(currentInvoiceLineItem).getSkill());
+                formatter.format("%5s", invoiceLineItemList
+                        .get(currentInvoiceLineItem).getHours());
+                formatter.format("%12s", nf.format(invoiceLineItemList
+                        .get(currentInvoiceLineItem).getCharge()).trim());
                 formatter.format("\n");
                 currentInvoiceLineItem++;
 
@@ -319,10 +282,10 @@ public class Invoice {
 
             if(page == numberOfPages) {
                 formatter.format("\n")
-                .format("%-61s", "Total:")
-                .format("%5s", this.getTotalHours())
-                .format("%12s", nf.format(this.getTotalCharges()).trim())
-                .format("\n");
+                    .format("%-61s", "Total:")
+                    .format("%5s", this.getTotalHours())
+                    .format("%12s", nf.format(this.getTotalCharges()).trim())
+                    .format("\n");
             }
             else
                 formatter.format("\n");
@@ -370,7 +333,10 @@ public class Invoice {
         String invoiceString = "";
 
         for(InvoiceLineItem invoiceLineItem : invoiceLineItemList) {
-            invoiceString += invoiceLineItem.getDate()+":"+invoiceLineItem.getSkill()+":"+invoiceLineItem.getHours()+":"+invoiceLineItem.getConsultant()+"\n";
+            invoiceString += invoiceLineItem.getDate()+":"
+                    +invoiceLineItem.getSkill()+":"
+                    +invoiceLineItem.getHours()
+                    +":"+invoiceLineItem.getConsultant()+"\n";
         }
 
         return "Invoice:\n" +

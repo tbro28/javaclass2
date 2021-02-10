@@ -11,10 +11,21 @@ public enum StateCode {
         this.stateName = stateName;
     }
 
+    /**
+     * Returns the state name.
+     *
+     * @param stateName
+     * @return the state name.
+     */
     StateCode forName(String stateName) {
         return StateCode.valueOf(stateName);
     }
 
+    /**
+     *
+     *
+     * @return
+     */
     public String getName() {
         return stateName;
     }

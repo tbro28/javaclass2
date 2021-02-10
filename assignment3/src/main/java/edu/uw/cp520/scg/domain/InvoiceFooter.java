@@ -7,14 +7,24 @@ import java.time.format.DateTimeFormatter;
 import java.util.Formatter;
 import java.util.Locale;
 
+/**
+ *
+ * The InvoiceFooter class.
+ * Primarily used for printing invoices.
+ *
+ * @author Tim Brown
+ */
 public class InvoiceFooter {
 
+    /**Business name needed for the footer information.*/
     String businessName;
+
+    /**Page number set to 1.*/
     int pageNumber = 1;
 
     /**
      *
-     * Constructor for an InvoiceHeader.
+     * Constructor for an InvoiceFooter.
      *
      * @param businessName
      */
@@ -23,22 +33,25 @@ public class InvoiceFooter {
     }
 
 
+    /**
+     * Increment the page number for the invoice.
+     */
     public void incrementPageNumber() {
         pageNumber++;
     }
 
+    /**
+     *
+     * Creates and returns the footer for printing.
+     *
+     * @return a string of the footer oject.
+     */
     @Override
     public String toString() {
-
 
         DateTimeFormatter dateFormatter =
                 DateTimeFormatter.ofPattern("MMMM dd, yyyy");
 
-        //Can only be 41 characters long before overlapping
-        // with the week date string.
-/*        String consultantName = consultant.getName().toString().substring(0,
-                Math.min(consultant.getName().toString().length(), 41));
-*/
         //https://docs.oracle.com/javase/7/docs/api/java/util/Formatter.html
         StringBuilder sb = new StringBuilder();
 
@@ -54,8 +67,5 @@ public class InvoiceFooter {
         String strReport = formatter.toString();
 
         return strReport;
-
-
-
     }
 }

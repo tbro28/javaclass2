@@ -10,13 +10,13 @@ import java.time.LocalDate;
  */
 public class InvoiceLineItem {
 
-    /**date the service was provided*/
+    /**date the service was provided.*/
     private LocalDate date;
-    /**name of consultant providing the service*/
+    /**name of consultant providing the service.*/
     private Consultant consultant;
-    /**the sevice/skill provided*/
+    /**the sevice/skill provided.*/
     private Skill skill;
-    /**number of hours*/
+    /**number of hours.*/
     private int hours;
 
     /**
@@ -27,7 +27,8 @@ public class InvoiceLineItem {
      * @param skill
      * @param hours
      */
-    public InvoiceLineItem(LocalDate date, Consultant consultant, Skill skill, int hours) {
+    public InvoiceLineItem(LocalDate date, Consultant consultant,
+                           Skill skill, int hours) {
         this.date = date;
         this.consultant = consultant;
         this.skill = skill;
@@ -37,7 +38,7 @@ public class InvoiceLineItem {
     /**
      * Get the date for this line item.
      *
-     * @return
+     * @return the date for the invoice.
      */
     public LocalDate getDate() {
         return date;
@@ -46,7 +47,7 @@ public class InvoiceLineItem {
     /**
      * Get the consultant for this line item.
      *
-     * @return
+     * @return the consultant for the line item.
      */
     public Consultant getConsultant() {
         return consultant;
@@ -55,7 +56,7 @@ public class InvoiceLineItem {
     /**
      * Get the skill for this line item.
      *
-     * @return
+     * @return the skill used for the line item.
      */
     public Skill getSkill() {
         return skill;
@@ -64,7 +65,7 @@ public class InvoiceLineItem {
     /**
      * Get the hours for this line item.
      *
-     * @return
+     * @return the hours for a line item.
      */
     public int getHours() {
         return hours;
@@ -75,7 +76,7 @@ public class InvoiceLineItem {
     /**
      * Get the charge for this line item.
      *
-     * @return
+     * @return the charge for a given line item.
      */
     public int getCharge() {
         return skill.getRate() * hours;

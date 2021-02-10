@@ -7,12 +7,24 @@ import java.time.format.DateTimeFormatter;
 import java.util.Formatter;
 import java.util.Locale;
 
+/**
+ *
+ * The InvoiceHeader class.
+ * Primarily used for printing invoices.
+ *
+ * @author Tim Brown
+ */
 public class InvoiceHeader {
 
+    /**Name of the business.*/
     String businessName;
+    /**Holds the business address.*/
     Address businessAddress;
+    /**Set to the client account.*/
     ClientAccount client;
+    /**Contains the invoice date.*/
     LocalDate invoiceDate;
+    /**Contains the invoice month.*/
     LocalDate invoiceForMonth;
 
     /**
@@ -25,7 +37,9 @@ public class InvoiceHeader {
      * @param invoiceDate
      * @param invoiceForMonth
      */
-    public InvoiceHeader(String businessName, Address businessAddress, ClientAccount client, LocalDate invoiceDate, LocalDate invoiceForMonth) {
+    public InvoiceHeader(String businessName, Address businessAddress,
+                         ClientAccount client, LocalDate invoiceDate,
+                         LocalDate invoiceForMonth) {
         this.businessName = businessName;
         this.businessAddress = businessAddress;
         this.client = client;
@@ -55,20 +69,21 @@ public class InvoiceHeader {
         formatter.format(businessName+"\n")
                 .format(businessAddress.getStreetNumber()+"\n")
                 .format(businessAddress.getCity()+", ")
-                .format(businessAddress.getStateCode()+ " ")
+                .format(businessAddress.getState()+ " ")
                 .format(businessAddress.getPostalCode()+"\n\n")
 
                 .format("Invoice for: \n")
                 .format(client.getName()+"\n")
                 .format(client.address.getStreetNumber()+"\n")
                 .format(client.address.getCity()+", ")
-                .format(client.address.getStateCode()+" ")
+                .format(client.address.getState()+" ")
                 .format(client.address.getPostalCode()+"\n")
                 .format(client.personalName.toString().substring(12)+"\n\n")
 
                 .format("Invoice For Month Of: ")
                 .format(invoiceForMonth.getMonth().name().substring(0,1)
-                        +invoiceForMonth.getMonth().name().substring(1).toLowerCase(Locale.ROOT)+" ")
+                        +invoiceForMonth.getMonth().name()
+                        .substring(1).toLowerCase(Locale.ROOT)+" ")
                 .format(Integer.toString(invoiceForMonth.getYear())+"\n")
 
                 .format("Invoice Date: ")

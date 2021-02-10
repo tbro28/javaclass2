@@ -22,7 +22,7 @@ class AddressTest {
     }
 
     @Test
-    void getStateCode() {
+    void getState() {
     }
 
     @Test
