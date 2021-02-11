@@ -1,8 +1,14 @@
-edu\uw\cp520\scg\domain\ConsultantTime.class
 edu\uw\cp520\scg\domain\Skill.class
 edu\uw\cp520\scg\util\PersonalName.class
 edu\uw\cp520\scg\domain\Account.class
 edu\uw\cp520\scg\domain\TimeCard.class
 edu\uw\cp520\scg\domain\ClientAccount.class
+edu\uw\cp520\scg\domain\InvoiceFooter.class
 edu\uw\cp520\scg\domain\NonBillableAccount.class
+edu\uw\cp520\scg\util\StateCode.class
+edu\uw\cp520\scg\domain\Invoice.class
+edu\uw\cp520\scg\domain\InvoiceLineItem.class
+edu\uw\cp520\scg\domain\ConsultantTime.class
+edu\uw\cp520\scg\domain\InvoiceHeader.class
 edu\uw\cp520\scg\domain\Consultant.class
+edu\uw\cp520\scg\util\Address.class

@@ -1,0 +1,11 @@
+edu\uw\cp520\scg\domain\ConsultantTimeTest.class
+edu\uw\cp520\scg\util\PersonalNameTest.class
+edu\uw\cp520\scg\util\StateCodeTest.class
+edu\uw\cp520\scg\domain\InvoiceLineItemTest.class
+edu\uw\cp520\scg\domain\InvoiceTest.class
+edu\uw\cp520\scg\util\AddressTest.class
+edu\uw\cp520\scg\domain\SkillTest.class
+edu\uw\cp520\scg\domain\ConsultantTest.class
+edu\uw\cp520\scg\domain\TimeCardTest.class
+edu\uw\cp520\scg\domain\ClientAccountTest.class
+edu\uw\cp520\scg\domain\NonBillableAccountTest.class
