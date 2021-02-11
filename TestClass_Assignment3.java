@@ -18,14 +18,19 @@ public class TestClass {
         //System.out.println(state.name());
         //System.out.println(state.getName());
 
-        Consultant consultant = new Consultant(new PersonalName("Brown", "Tom", "Jack"));
-        LocalDate localDate = LocalDate.of(2020, 1, 15);
-        LocalDate localDate2 = LocalDate.of(2020, 2, 15);
-        TimeCard timeCard = new TimeCard(consultant, localDate);
-
         String name = "TimBiz";
         PersonalName personalName = new PersonalName("Brown", "Tom", "Jack");
         PersonalName personalName2 = new PersonalName("Bro2", "Tim", "Middle");
+
+        Consultant consultant1 = new Consultant(personalName);
+        Consultant consultant2 = new Consultant(personalName2);
+
+        LocalDate localDate = LocalDate.of(2020, 1, 15);
+        LocalDate localDate2 = LocalDate.of(2020, 2, 15);
+
+        TimeCard timeCard1 = new TimeCard(consultant1, localDate);
+        TimeCard timeCard2 = new TimeCard(consultant2, localDate);
+
 
         //      business.name
         //(StateCode stateCode, String streetNumber, String city, String postalCode)
@@ -58,15 +63,15 @@ public class TestClass {
         consultantTimeList.add(consultantTime8);
 
 
-        timeCard.addConsultantTime(consultantTime1);
-        timeCard.addConsultantTime(consultantTime2);
-        timeCard.addConsultantTime(consultantTime3);
-        timeCard.addConsultantTime(consultantTime4);
+        timeCard1.addConsultantTime(consultantTime1);
+        timeCard1.addConsultantTime(consultantTime2);
+        timeCard1.addConsultantTime(consultantTime3);
+        timeCard1.addConsultantTime(consultantTime4);
 
-        timeCard.addConsultantTime(consultantTime5);
-        timeCard.addConsultantTime(consultantTime6);
-        timeCard.addConsultantTime(consultantTime7);
-        timeCard.addConsultantTime(consultantTime8);
+        timeCard2.addConsultantTime(consultantTime5);
+        timeCard2.addConsultantTime(consultantTime6);
+        timeCard2.addConsultantTime(consultantTime7);
+        timeCard2.addConsultantTime(consultantTime8);
 
         //ClientAccount clientAccount = new ClientAccount(String "Client Name", PersonalName personalName);
         Month month = Month.of(1);
@@ -74,7 +79,8 @@ public class TestClass {
 
         Invoice invoice = new Invoice(clientAccount, month, invoiceYear);
 
-        invoice.extractLineItems(timeCard);
+        invoice.extractLineItems(timeCard1);
+        invoice.extractLineItems(timeCard2);
 
         /*
         System.out.println(invoice.getStartDate());

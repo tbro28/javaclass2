@@ -106,31 +106,12 @@ public class Invoice {
      */
     public void extractLineItems(TimeCard timeCard) {
 
-      //  timeCard.getTotalBillableHours();
-      //  ConsultantTime consultantTime = time.getConsultingHours;
+        List<ConsultantTime> billableHours = timeCard.getBillableHoursForClient(clientAccount.getName());
 
-        System.out.println(timeCard.getBillableHoursForClient("TimBiz"));
-        timeCard.getConsultant().getName();
-
-        for(ConsultantTime consultantTime : timeCard.getConsultingHours()){
-
-            System.out.println(timeCard.consultant);
-            System.out.println(timeCard.getConsultant().getName());
-            System.out.println(timeCard.getConsultant());
-            System.out.println(timeCard.consultant.getName());
-            System.out.println(consultantTime.getAccount().getName());
-            System.out.println(clientAccount.getName());
-            System.out.println(clientAccount.getContact());
-
+        for (ConsultantTime consultantTime : billableHours) {
             if(invoiceYear == consultantTime.getDate().getYear()
                     && month == consultantTime.getDate().getMonth()) {
-
                 if (consultantTime.isBillable()) {
-                   /* System.out.println("----------------");
-                    System.out.println(timeCard.getConsultant());
-                    System.out.println(timeCard.consultant.getName());
-                    System.out.println(consultantTime.getAccount().getName());*/
-
                     this.addLineItem(
                             new InvoiceLineItem(consultantTime.getDate(),
                             timeCard.consultant,
@@ -140,7 +121,6 @@ public class Invoice {
             }
         }
     }
-
 
     /**
      *
