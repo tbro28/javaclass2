@@ -21,8 +21,6 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class TimeCardTest {
 
-    //      business.name
-    //(StateCode stateCode, String streetNumber, String city, String postalCode)
     Address address = new Address("streetNumber", "city", StateCode.WA,"postalCode");
 
     @Test
@@ -44,7 +42,6 @@ class TimeCardTest {
         PersonalName personalName = new PersonalName("Brown", "Tom", "Jack");
         ClientAccount clientAccount = new ClientAccount(name, personalName, address);
 
-        //ConsultantTime(LocalDate date, Account account, Skill skillType, int hours)
         ConsultantTime consultantTime = new ConsultantTime(localDate, clientAccount, Skill.PROJECT_MANAGER, 50);
 
         timeCard.addConsultantTime(consultantTime);
@@ -63,7 +60,6 @@ class TimeCardTest {
         PersonalName personalName = new PersonalName("Brown", "Tom", "Jack");
         ClientAccount clientAccount = new ClientAccount(name, personalName, address);
 
-        //ConsultantTime(LocalDate date, Account account, Skill skillType, int hours)
         ConsultantTime consultantTime1 = new ConsultantTime(localDate, clientAccount, Skill.PROJECT_MANAGER, 50);
         ConsultantTime consultantTime2 = new ConsultantTime(localDate, clientAccount, Skill.PROJECT_MANAGER, 50);
 

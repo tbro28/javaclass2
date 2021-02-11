@@ -50,7 +50,6 @@ class InvoiceTest {
      */
     @BeforeEach
     void setUp() {
-
         String name = "TimBiz";
         personalName = new PersonalName("Brown", "Tom", "Jack");
         address = new Address("TimsStreetNumber", "TimsCity", StateCode.WA, "TimsPostalCode");
@@ -85,23 +84,12 @@ class InvoiceTest {
         startDate = LocalDate.of(2020, 1, 1);
     }
 
-    @AfterEach
-    void tearDown() {
-    }
-
     @Test
     void addLineItem() {
         String testItem = "2020-01-15:Project Manager:25:Consultant{name=Consultant: Brown, Tom, Jack}";
         LocalDate localDate = LocalDate.of(2020,1,1);
 
         invoice.addLineItem(new InvoiceLineItem(consultantTime1.getDate(), timeCard.consultant, consultantTimeList.get(0).getSkill(), consultantTimeList.get(0).getHours()));
-
-        System.out.println(invoice.toString());
-        System.out.println(invoice.getStartDate());
-        System.out.println(invoice.getClientAccount().getName());
-        System.out.println(invoice.getClientAccount().personalName);
-        System.out.println(invoice.toReportString());
-        System.out.println(invoice.getStartDate());
 
         assertTrue(invoice.toString().contains(testItem));
     }

@@ -18,7 +18,6 @@ public class TestClass {
         //System.out.println(state.name());
         //System.out.println(state.getName());
 
-
         Consultant consultant = new Consultant(new PersonalName("Brown", "Tom", "Jack"));
         LocalDate localDate = LocalDate.of(2020, 1, 15);
         LocalDate localDate2 = LocalDate.of(2020, 2, 15);
@@ -26,24 +25,24 @@ public class TestClass {
 
         String name = "TimBiz";
         PersonalName personalName = new PersonalName("Brown", "Tom", "Jack");
+        PersonalName personalName2 = new PersonalName("Bro2", "Tim", "Middle");
 
         //      business.name
         //(StateCode stateCode, String streetNumber, String city, String postalCode)
         Address address = new Address("TimsStreetNumber", "TimsCity", StateCode.WA, "TimsPostalCode");
 
-
         ClientAccount clientAccount = new ClientAccount(name, personalName, address);
-
+        ClientAccount clientAccount2 = new ClientAccount(name, personalName2, address);
 
         ConsultantTime consultantTime1 = new ConsultantTime(localDate, clientAccount, Skill.PROJECT_MANAGER, 25);
         ConsultantTime consultantTime2 = new ConsultantTime(localDate, clientAccount, Skill.PROJECT_MANAGER, 50);
         ConsultantTime consultantTime4 = new ConsultantTime(localDate2, clientAccount, Skill.PROJECT_MANAGER, 75);
-        ConsultantTime consultantTime3 = new ConsultantTime(localDate, NonBillableAccount.BUSINESS_DEVELOPMENT, Skill.PROJECT_MANAGER, 100);
+        ConsultantTime consultantTime3 = new ConsultantTime(localDate, NonBillableAccount.BUSINESS_DEVELOPMENT, Skill.UNKNOWN_SKILL, 100);
 
-        ConsultantTime consultantTime5 = new ConsultantTime(localDate, clientAccount, Skill.PROJECT_MANAGER, 5);
-        ConsultantTime consultantTime6 = new ConsultantTime(localDate, clientAccount, Skill.PROJECT_MANAGER, 10);
-        ConsultantTime consultantTime7 = new ConsultantTime(localDate, clientAccount, Skill.PROJECT_MANAGER, 15);
-        ConsultantTime consultantTime8 = new ConsultantTime(localDate, clientAccount, Skill.PROJECT_MANAGER, 20);
+        ConsultantTime consultantTime5 = new ConsultantTime(localDate, clientAccount2, Skill.SOFTWARE_ENGINEER, 5);
+        ConsultantTime consultantTime6 = new ConsultantTime(localDate, clientAccount2, Skill.SOFTWARE_ENGINEER, 10);
+        ConsultantTime consultantTime7 = new ConsultantTime(localDate, clientAccount2, Skill.SYSTEM_ARCHITECT, 15);
+        ConsultantTime consultantTime8 = new ConsultantTime(localDate, clientAccount2, Skill.SYSTEM_ARCHITECT, 20);
 
 
 
@@ -69,31 +68,25 @@ public class TestClass {
         timeCard.addConsultantTime(consultantTime7);
         timeCard.addConsultantTime(consultantTime8);
 
-
         //ClientAccount clientAccount = new ClientAccount(String "Client Name", PersonalName personalName);
         Month month = Month.of(1);
         int invoiceYear = 2020;
 
-
-
         Invoice invoice = new Invoice(clientAccount, month, invoiceYear);
 
         invoice.extractLineItems(timeCard);
-/*
-System.out.println(invoice.getStartDate());
-System.out.println(invoice.getTotalCharges());
-System.out.println(invoice.getTotalHours());
 
-System.out.println(invoice.toString());
-*/
-System.out.println(invoice.toReportString());
+        /*
+        System.out.println(invoice.getStartDate());
+        System.out.println(invoice.getTotalCharges());
+        System.out.println(invoice.getTotalHours());
+
+        System.out.println(invoice.toString());
+        */
+        System.out.println(invoice.toReportString());
 
       //  for(InvoiceLineItem invoiceLineItem : invoice.extractLineItems(timeCard)) {
 
       //  }
-
-
-
     }
-
 }

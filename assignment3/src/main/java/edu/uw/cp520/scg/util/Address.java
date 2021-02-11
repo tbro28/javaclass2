@@ -8,7 +8,7 @@ import java.util.Objects;
  *
  * @author Tim Brown
  */
-public class Address {
+public final class Address {
 
     private StateCode stateCode;
     private String streetNumber;

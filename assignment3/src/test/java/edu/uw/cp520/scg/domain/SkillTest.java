@@ -12,7 +12,7 @@ class SkillTest {
 
     @Test
     void getRate() {
-        assertEquals(75, Skill.PROJECT_MANAGER.getRate());
+        assertEquals(250, Skill.PROJECT_MANAGER.getRate());
     }
 
     @Test

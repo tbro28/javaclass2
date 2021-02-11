@@ -6,6 +6,11 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Unit tests for the Address class.
+ *
+ * @author Tim Brown
+ */
 class AddressTest {
 
     Address address;
@@ -15,26 +20,6 @@ class AddressTest {
 
         address = new Address("TestStreet", "TestCity", StateCode.WA, "TestPostalCode");
 
-    }
-
-    @AfterEach
-    void tearDown() {
-    }
-
-    @Test
-    void getState() {
-    }
-
-    @Test
-    void getStreetNumber() {
-    }
-
-    @Test
-    void getCity() {
-    }
-
-    @Test
-    void getPostalCode() {
     }
 
     @Test

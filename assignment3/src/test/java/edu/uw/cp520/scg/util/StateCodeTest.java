@@ -1,10 +1,14 @@
 package edu.uw.cp520.scg.util;
 
-import edu.uw.cp520.scg.domain.Skill;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Unit tests for the StateCode enum.
+ *
+ * @author Tim Brown
+ */
 import static org.junit.jupiter.api.Assertions.*;
 
 class StateCodeTest {
@@ -25,13 +29,5 @@ class StateCodeTest {
     @Test
     void getName() {
         assertEquals("Washington", StateCode.WA.getName());
-    }
-
-    @Test
-    void values() {
-    }
-
-    @Test
-    void valueOf() {
     }
 }

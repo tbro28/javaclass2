@@ -9,14 +9,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ClientAccountTest {
 
-    //      business.name
-    //(StateCode stateCode, String streetNumber, String city, String postalCode)
     Address address = new Address( "streetNumber", "city", StateCode.WA,"postalCode");
-
 
     @Test
     public void getContactTest() {
-
         String name = "TimBiz";
         PersonalName personalName = new PersonalName("Brown", "Tom", "Jack");
 
@@ -27,7 +23,6 @@ class ClientAccountTest {
 
     @Test
     public void personalNameTest() {
-
         String name = "TimBiz";
         PersonalName personalName = new PersonalName("Brown", "Tom", "Jack");
 
@@ -38,7 +33,6 @@ class ClientAccountTest {
 
     @Test
     public void isBillableTrueTest() {
-
         String name = "TimBiz";
         PersonalName personalName = new PersonalName("Brown", "Tom", "Jack");
 
@@ -49,7 +43,6 @@ class ClientAccountTest {
 
     @Test
     public void setContactTest() {
-
         String name = "TimBiz";
         PersonalName personalName = new PersonalName("Brown", "Tom", "Jack");
 
@@ -60,5 +53,4 @@ class ClientAccountTest {
 
         assertEquals(personalName2, clientAccount.getContact());
     }
-
 }

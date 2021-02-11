@@ -20,8 +20,6 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class ConsultantTimeTest {
 
-    //      business.name
-    //(StateCode stateCode, String streetNumber, String city, String postalCode)
     Address address = new Address("streetNumber", "city", StateCode.WA,"postalCode");
 
     Consultant consultant;
@@ -33,7 +31,6 @@ class ConsultantTimeTest {
     ConsultantTime consultantTime3;
 
     ClientAccount clientAccount;
-
 
     @BeforeEach
     void setUp() {
@@ -59,11 +56,9 @@ class ConsultantTimeTest {
         timeCard.addConsultantTime(consultantTime3);
     }
 
-
     @AfterEach
     void tearDown() {
     }
-
 
     @Test
     void constructorZeroHours() {
@@ -165,7 +160,6 @@ class ConsultantTimeTest {
         ConsultantTime consultantTimeDuplicate2 = new ConsultantTime(localDate, clientAccount, Skill.SOFTWARE_TESTER, 50);
 
         assertEquals(consultantTimeDuplicate2.hashCode(), consultantTime2.hashCode());
-
     }
 
     @Test

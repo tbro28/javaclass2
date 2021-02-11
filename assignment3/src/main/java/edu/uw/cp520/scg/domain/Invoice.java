@@ -8,6 +8,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.Time;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
@@ -42,13 +43,9 @@ public class Invoice {
     /** Invoice of line items for the account. */
     private List<InvoiceLineItem> invoiceLineItemList = new ArrayList<>();
 
-
-    /*
-    private Address businessAddress;
-    private String businessName;
-*/
-
+    /**Business address from properties file.*/
     private static Address BIZ_ADDRESS;
+    /**Business name from properties file.*/
     private static String BIZ_NAME;
 
     /**
@@ -66,9 +63,10 @@ public class Invoice {
         this.invoiceYear = invoiceYear;
     }
 
-
+    /**
+     * Static initializer instead of using a method.
+     */
     static {
-
         try (InputStream input = new FileInputStream(
                 "src/main/resources/invoice.properties")) {
 
@@ -87,10 +85,7 @@ public class Invoice {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-
-
     }
-
 
     /**
      *
@@ -114,12 +109,28 @@ public class Invoice {
       //  timeCard.getTotalBillableHours();
       //  ConsultantTime consultantTime = time.getConsultingHours;
 
+        System.out.println(timeCard.getBillableHoursForClient("TimBiz"));
+        timeCard.getConsultant().getName();
+
         for(ConsultantTime consultantTime : timeCard.getConsultingHours()){
+
+            System.out.println(timeCard.consultant);
+            System.out.println(timeCard.getConsultant().getName());
+            System.out.println(timeCard.getConsultant());
+            System.out.println(timeCard.consultant.getName());
+            System.out.println(consultantTime.getAccount().getName());
+            System.out.println(clientAccount.getName());
+            System.out.println(clientAccount.getContact());
 
             if(invoiceYear == consultantTime.getDate().getYear()
                     && month == consultantTime.getDate().getMonth()) {
 
                 if (consultantTime.isBillable()) {
+                   /* System.out.println("----------------");
+                    System.out.println(timeCard.getConsultant());
+                    System.out.println(timeCard.consultant.getName());
+                    System.out.println(consultantTime.getAccount().getName());*/
+
                     this.addLineItem(
                             new InvoiceLineItem(consultantTime.getDate(),
                             timeCard.consultant,
@@ -204,8 +215,6 @@ public class Invoice {
      */
     public String toReportString() {
 
-        //setBusinessAddress();
-
         LocalDate invoiceDate = LocalDate.now();
 
         int numericalMonth = month.getValue();
@@ -231,8 +240,6 @@ public class Invoice {
         int currentInvoiceLineItem = 0;
         int numberOfPages = (int) Math.ceil(invoiceLineItemCount / 5.0);
 
-        NumberFormat defaultFormat = NumberFormat.getCurrencyInstance();
-
         NumberFormat nf = NumberFormat.getCurrencyInstance();
         DecimalFormatSymbols decimalFormatSymbols =
                 ((DecimalFormat) nf).getDecimalFormatSymbols();
@@ -240,7 +247,6 @@ public class Invoice {
         ((DecimalFormat) nf).setDecimalFormatSymbols(decimalFormatSymbols);
 
         for(int page = 1; page <= numberOfPages; page++) {
-
 
             formatter.format(invoiceHeader.toString())
 
@@ -292,40 +298,21 @@ public class Invoice {
 
             formatter.format("\n\n");
 
-
             //Format footer
-
-
             formatter.format(invoiceFooter.toString());
             invoiceFooter.incrementPageNumber();
-
         }
-
 
         String strReport = formatter.toString();
 
-
         return strReport;
-
-
-//        formatter.format("=".repeat(68)+"\n");
-
-
-
-        //return invoiceDate.toString();
     }
-
-
-
-
-
-
 
     /**
      *
      * Create a string representation of this object, suitable for printing.
      *
-     * @return
+     * @return a string representation of the Invoice object.
      */
     @Override
     public String toString() {

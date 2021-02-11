@@ -50,5 +50,4 @@ public class ConsultantTest {
         assertEquals("Consultant{name=Consultant: Brown, Tom, Jack}",
                 consultant.toString());
     }
-
 }

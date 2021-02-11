@@ -11,19 +11,19 @@ public enum Skill {
     /**
      * Project manager value.
      */
-    PROJECT_MANAGER(75, "Project Manager"),
+    PROJECT_MANAGER(250, "Project Manager"),
     /**
      * Software engineer value.
      */
-    SOFTWARE_ENGINEER(50, "Software Engineer"),
+    SOFTWARE_ENGINEER(150, "Software Engineer"),
     /**
      * Software tester value.
      */
-    SOFTWARE_TESTER(25, "Software Tester"),
+    SOFTWARE_TESTER(100, "Software Tester"),
     /**
      * System architect value.
      */
-    SYSTEM_ARCHITECT(100, "System Architect"),
+    SYSTEM_ARCHITECT(200, "System Architect"),
     /**
      * Unknown skill value.
      */

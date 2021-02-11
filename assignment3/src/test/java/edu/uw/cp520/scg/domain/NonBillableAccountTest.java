@@ -13,14 +13,6 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class NonBillableAccountTest {
 
-    @BeforeEach
-    void setUp() {
-    }
-
-    @AfterEach
-    void tearDown() {
-    }
-
     @Test
     void getName() {
         assertEquals("Sick Leave", NonBillableAccount.SICK_LEAVE.getName());

@@ -12,8 +12,12 @@ import java.time.Month;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Unit tests for the InvoiceLineItem class.
+ *
+ * @author Tim Brown
+ */
 class InvoiceLineItemTest {
-
 
     Consultant consultant = new Consultant(new PersonalName("Brown", "Tom", "Jack"));
     LocalDate localDate = LocalDate.of(2020, 1, 15);
@@ -34,7 +38,6 @@ class InvoiceLineItemTest {
      */
     @BeforeEach
     void setUp() {
-
         String name = "TimBiz";
         personalName = new PersonalName("Brown", "Tom", "Jack");
         address = new Address("TimsStreetNumber", "TimsCity", StateCode.WA, "TimsPostalCode");
@@ -46,42 +49,14 @@ class InvoiceLineItemTest {
         startDate = LocalDate.of(2020, 1, 1);
     }
 
-    @AfterEach
-    void tearDown() {
-    }
-
-    @Test
-    void getDate() {
-    }
-
-    @Test
-    void getConsultant() {
-    }
-
-    @Test
-    void getSkill() {
-    }
-
-    @Test
-    void getHours() {
-    }
-
-    @Test
-    void getCharge() {
-    }
-
     @Test
     void testToString() {
-
         String lineItem = "InvoiceLineItem{date=2020-01-15, consultant=Consultant{name=Consultant: Brown, Tom, Jack}, skill=Project Manager, hours=25}";
 
         InvoiceLineItem invoiceLineItem = new InvoiceLineItem(localDate, timeCard.consultant, Skill.PROJECT_MANAGER, 25);
 
-
         System.out.println(invoiceLineItem.toString());
 
         assertEquals(lineItem, invoiceLineItem.toString());
-
-
     }
 }

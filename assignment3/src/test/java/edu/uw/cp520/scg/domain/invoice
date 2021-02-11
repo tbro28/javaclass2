@@ -12,7 +12,7 @@ Invoice For Month Of: January 2020
 
 Date        Consultant                   Skill               Hours  Charge    
 ----------  ---------------------------  ------------------  -----  ----------
-01/15/2020  Brown, Tom, Jack             Project Manager        25    1,875.00
-01/15/2020  Brown, Tom, Jack             Project Manager        50    3,750.00
+01/15/2020  Brown, Tom, Jack             Project Manager        25    6,250.00
+01/15/2020  Brown, Tom, Jack             Project Manager        50   12,500.00
 
-Total:                                                          75    5,625.00
+Total:                                                          75   18,750.00
