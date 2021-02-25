@@ -105,7 +105,17 @@ public class Invoice {
 
         List<ConsultantTime> billableHours = timeCard.getBillableHoursForClient(clientAccount.getName());
 
-        for (ConsultantTime consultantTime : billableHours) {
+        billableHours.stream()
+                .filter(e -> invoiceYear == e.getDate().getYear() && month == e.getDate().getMonth())
+                .forEach(e -> this.addLineItem(
+                        new InvoiceLineItem(e.getDate(),
+                                timeCard.getConsultant(),
+                                e.getSkill(),
+                                e.getHours()
+                        )
+                ));
+
+/*        for (ConsultantTime consultantTime : billableHours) {
             if(invoiceYear == consultantTime.getDate().getYear()
                     && month == consultantTime.getDate().getMonth()) {
                 if (consultantTime.isBillable()) {
@@ -117,6 +127,7 @@ public class Invoice {
                 }
             }
         }
+        */
     }
 
     /**

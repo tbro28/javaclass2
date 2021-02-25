@@ -2,10 +2,9 @@ package edu.uw.cp520.scg.domain;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Formatter;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  *
@@ -14,7 +13,7 @@ import java.util.Locale;
  *
  * @author Tim Brown
  */
-public class TimeCard {
+public class TimeCard implements Comparable<TimeCard> {
 
     /**
      * Consultant associated to the timecard.
@@ -29,6 +28,7 @@ public class TimeCard {
     /**
      * List to hold consulting time.
      */
+    //List<ConsultantTime> consultingHours;
     List<ConsultantTime> consultingHours = new ArrayList<>();
 
 
@@ -67,13 +67,19 @@ public class TimeCard {
 
         List<ConsultantTime> consultantClientTime = new ArrayList<>();
 
+        consultingHours.stream()
+                .filter(e -> e.getAccount().getName().equals(clientName) && e.isBillable())
+                .forEach(consultantClientTime::add);
+                //.forEach(e -> consultantClientTime.add(e))
+
+/*
         for(ConsultantTime consultantTime : consultingHours) {
             if(consultantTime.getAccount().getName().equals(clientName))
                 if(consultantTime.isBillable()) {
                     consultantClientTime.add(consultantTime);
                 }
         }
-
+*/
         return consultantClientTime;
     }
 
@@ -289,4 +295,92 @@ public class TimeCard {
                 ", consultingHours=" + consultingHours +
                 '}';
     }
+
+    /**
+     * TimeCard's natural ordering should be in ascending order by
+     * beginning date,
+     * consultant,
+     * total billable hours
+     * and finally total non-billable hours.
+     *
+     * Compares this object with the specified object for order.  Returns a
+     * negative integer, zero, or a positive integer as this object is less
+     * than, equal to, or greater than the specified object.
+     *
+     * <p>The implementor must ensure
+     * {@code sgn(x.compareTo(y)) == -sgn(y.compareTo(x))}
+     * for all {@code x} and {@code y}.  (This
+     * implies that {@code x.compareTo(y)} must throw an exception iff
+     * {@code y.compareTo(x)} throws an exception.)
+     *
+     * <p>The implementor must also ensure that the relation is transitive:
+     * {@code (x.compareTo(y) > 0 && y.compareTo(z) > 0)} implies
+     * {@code x.compareTo(z) > 0}.
+     *
+     * <p>Finally, the implementor must ensure that {@code x.compareTo(y)==0}
+     * implies that {@code sgn(x.compareTo(z)) == sgn(y.compareTo(z))}, for
+     * all {@code z}.
+     *
+     * <p>It is strongly recommended, but <i>not</i> strictly required that
+     * {@code (x.compareTo(y)==0) == (x.equals(y))}.  Generally speaking, any
+     * class that implements the {@code Comparable} interface and violates
+     * this condition should clearly indicate this fact.  The recommended
+     * language is "Note: this class has a natural ordering that is
+     * inconsistent with equals."
+     *
+     * <p>In the foregoing description, the notation
+     * {@code sgn(}<i>expression</i>{@code )} designates the mathematical
+     * <i>signum</i> function, which is defined to return one of {@code -1},
+     * {@code 0}, or {@code 1} according to whether the value of
+     * <i>expression</i> is negative, zero, or positive, respectively.
+     *
+     * @param o the object to be compared.
+     * @return a negative integer, zero, or a positive integer as this object
+     * is less than, equal to, or greater than the specified object.
+     * @throws NullPointerException if the specified object is null
+     * @throws ClassCastException   if the specified object's type prevents it
+     *                              from being compared to this object.
+     */
+    @Override
+    public int compareTo(TimeCard o) {
+
+        int diff = 0;
+
+        System.out.println("\nTimecard CompareTo: " + this.getWeekStartingDay().equals(o.getWeekStartingDay()));
+
+        diff = this.getWeekStartingDay().compareTo(o.getWeekStartingDay());
+        if ( diff != 0) {
+            return diff;
+        }
+        diff = this.getConsultant().compareTo(o.getConsultant());
+        if ( diff != 0) {
+            return diff;
+        }
+        diff = Integer.compare(this.getTotalBillableHours(), o.getTotalBillableHours());
+        if ( diff != 0) {
+            return diff;
+        }
+        diff = Integer.compare(this.getTotalNonBillableHours(), o.getTotalNonBillableHours());
+        if ( diff != 0) {
+            return diff;
+        }
+
+        return 0;
+    }
+
+/*
+    public int compareTo(final Employee o) {
+        int diff = 0;
+        if (this != o) {
+            if ((diff = surname.compareTo(o.surname)) == 0)
+                if ((diff = givenName.compareTo(o.givenName)) == 0)
+                    if ((diff = middleName.compareTo(o.middleName)) == 0)
+                        if ((diff = Integer.compare(salary, o.salary)) == 0)
+                            diff = Integer.compare(employeeId, o.employeeId);
+        }
+
+        return diff;
+    }
+*/
+
 }
