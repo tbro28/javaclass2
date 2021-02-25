@@ -54,8 +54,6 @@ class InvoiceLineItemTest {
 
         InvoiceLineItem invoiceLineItem = new InvoiceLineItem(localDate, timeCard.consultant, Skill.PROJECT_MANAGER, 25);
 
-        System.out.println(invoiceLineItem.toString());
-
         assertEquals(lineItem, invoiceLineItem.toString());
     }
 }

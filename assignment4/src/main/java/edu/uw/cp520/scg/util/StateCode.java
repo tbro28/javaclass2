@@ -1,8 +1,16 @@
 package edu.uw.cp520.scg.util;
 
+/**
+ *
+ * Encapsulates the state code information.
+ *
+ * @author Tim Brown
+ */
 public enum StateCode {
 
+    /**Enum for CA.*/
     CA("California"),
+    /**Enum for WA.*/
     WA("Washington");
 
     private String stateName;
@@ -22,9 +30,9 @@ public enum StateCode {
     }
 
     /**
+     * The name of the state.
      *
-     *
-     * @return
+     * @return the state name.
      */
     public String getName() {
         return stateName;

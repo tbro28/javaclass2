@@ -68,7 +68,8 @@ public class TimeCard implements Comparable<TimeCard> {
         List<ConsultantTime> consultantClientTime = new ArrayList<>();
 
         consultingHours.stream()
-                .filter(e -> e.getAccount().getName().equals(clientName) && e.isBillable())
+                .filter(e -> e.getAccount().getName()
+                        .equals(clientName) && e.isBillable())
                 .forEach(consultantClientTime::add);
                 //.forEach(e -> consultantClientTime.add(e))
 
@@ -346,8 +347,6 @@ public class TimeCard implements Comparable<TimeCard> {
 
         int diff = 0;
 
-        System.out.println("\nTimecard CompareTo: " + this.getWeekStartingDay().equals(o.getWeekStartingDay()));
-
         diff = this.getWeekStartingDay().compareTo(o.getWeekStartingDay());
         if ( diff != 0) {
             return diff;
@@ -356,11 +355,13 @@ public class TimeCard implements Comparable<TimeCard> {
         if ( diff != 0) {
             return diff;
         }
-        diff = Integer.compare(this.getTotalBillableHours(), o.getTotalBillableHours());
+        diff = Integer.compare(this.getTotalBillableHours(),
+                o.getTotalBillableHours());
         if ( diff != 0) {
             return diff;
         }
-        diff = Integer.compare(this.getTotalNonBillableHours(), o.getTotalNonBillableHours());
+        diff = Integer.compare(this.getTotalNonBillableHours(),
+                o.getTotalNonBillableHours());
         if ( diff != 0) {
             return diff;
         }

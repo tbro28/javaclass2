@@ -10,14 +10,10 @@ import java.util.List;
 public class TestClass_Assignment3 {
 
     public static void main(final String[] args) {
-
         StateCode state = StateCode.WA;
 
-        //System.out.println(state.name());
-        //System.out.println(state.getName());
-
         String name = "TimBiz";
-        PersonalName personalName = new PersonalName("ZZBrown", "Tom", "Jack");
+        PersonalName personalName = new PersonalName("Brown", "Tom", "Jack");
         PersonalName personalName2 = new PersonalName("ZBro2", "Tim", "Middle");
 
         Consultant consultant1 = new Consultant(personalName);
@@ -25,18 +21,10 @@ public class TestClass_Assignment3 {
 
         LocalDate localDate = LocalDate.of(2020, 1, 20);
         LocalDate localDate2 = LocalDate.of(2020, 1, 15);
-/*
-
-        LocalDate localDate3 = LocalDate.of(2020, 1, 19);
-        TimeCard timeCard3 = new TimeCard(consultant1, localDate3);
-*/
 
         TimeCard timeCard1 = new TimeCard(consultant1, localDate);
         TimeCard timeCard2 = new TimeCard(consultant2, localDate2);
 
-
-        //      business.name
-        //(StateCode stateCode, String streetNumber, String city, String postalCode)
         Address address = new Address("TimsStreetNumber", "TimsCity", StateCode.WA, "TimsPostalCode");
 
         ClientAccount clientAccount = new ClientAccount(name, personalName, address);
@@ -136,17 +124,21 @@ public class TestClass_Assignment3 {
             System.out.println(timeCard.getWeekStartingDay() + "\n");
         }
 
-        System.out.println("getTimeCardsForConsultant: ");
+        System.out.println("\ngetTimeCardsForConsultant: ");
         List<TimeCard> filteredConsultant = TimeCardListUtil.getTimeCardsForConsultant(timeCardList, consultant1);
         for(TimeCard tc : filteredConsultant) {
             System.out.println(tc.toString());
         }
 
-        System.out.println("Sorted by consultant: ");
+        System.out.println("\nSorted by consultant: ");
         TimeCardListUtil.sortByConsultantName(timeCardList);
+        timeCardList.stream()
+                .forEach(System.out::println);
 
-        System.out.println("Sorted by start date: ");
+        System.out.println("\nSorted by start date: ");
         TimeCardListUtil.sortByStartDate(timeCardList);
+        timeCardList.stream()
+                .forEach(System.out::println);
 
 
         /*

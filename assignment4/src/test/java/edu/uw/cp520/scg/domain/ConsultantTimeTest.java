@@ -165,8 +165,6 @@ class ConsultantTimeTest {
     @Test
     void testToString() {
 
-        System.out.println(consultantTime1);
-
         assertEquals("ConsultantTime{skill=Project Manager, date=2021-01-15, hours=50}",
                 consultantTime1.toString());
     }

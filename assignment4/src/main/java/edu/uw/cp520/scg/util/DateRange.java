@@ -21,13 +21,10 @@ public class DateRange {
      * @param end
      */
     public DateRange(String start, String end) {
-
-        startDate = LocalDate.parse(start, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        endDate = LocalDate.parse(end, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-
-        System.out.println(startDate.toString() + " ::: ");
-        System.out.println(endDate.toString());
-
+        startDate = LocalDate.parse(start,
+                DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        endDate = LocalDate.parse(end,
+                DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
 
     /**
@@ -56,15 +53,12 @@ public class DateRange {
         startDate = LocalDate.of(year, month, 1);
         endDate = LocalDate.of(year, monthPlusOne, 1);
         endDate = endDate.minusDays(1);
-
-        System.out.println(startDate);
-        System.out.println(endDate);
-        System.out.println("---------------");
     }
 
     /**
      * Returns the start date for this DateRange.
-     * @return
+     *
+     * @return the start date.
      */
     public LocalDate getStartDate() {
         return startDate;
@@ -72,7 +66,8 @@ public class DateRange {
 
     /**
      * Returns the end date for this DateRange.
-     * @return
+     *
+     * @return the end date.
      */
     public LocalDate getEndDate() {
         return endDate;
@@ -83,7 +78,7 @@ public class DateRange {
      * the range start date <= date <= end date.
      *
      * @param date
-     * @return
+     * @return whether the date is within the range.
      */
     public boolean isInRange(LocalDate date) {
 

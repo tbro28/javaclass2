@@ -103,10 +103,12 @@ public class Invoice {
      */
     public void extractLineItems(TimeCard timeCard) {
 
-        List<ConsultantTime> billableHours = timeCard.getBillableHoursForClient(clientAccount.getName());
+        List<ConsultantTime> billableHours = timeCard
+                .getBillableHoursForClient(clientAccount.getName());
 
         billableHours.stream()
-                .filter(e -> invoiceYear == e.getDate().getYear() && month == e.getDate().getMonth())
+                .filter(e -> invoiceYear == e.getDate().getYear()
+                        && month == e.getDate().getMonth())
                 .forEach(e -> this.addLineItem(
                         new InvoiceLineItem(e.getDate(),
                                 timeCard.getConsultant(),

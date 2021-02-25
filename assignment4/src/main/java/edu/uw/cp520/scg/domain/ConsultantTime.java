@@ -2,6 +2,7 @@ package edu.uw.cp520.scg.domain;
 
 import java.time.LocalDate;
 import java.util.Objects;
+import edu.uw.cp520.scg.domain.ConsultantTime;
 
 /**
  *
@@ -139,7 +140,7 @@ public class ConsultantTime {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
 
-        edu.uw.cp520.scg.domain.ConsultantTime that = (edu.uw.cp520.scg.domain.ConsultantTime) obj;
+        ConsultantTime that = (ConsultantTime) obj;
 
         return hours == that.hours && skill == that.skill
                 && Objects.equals(account, that.account)

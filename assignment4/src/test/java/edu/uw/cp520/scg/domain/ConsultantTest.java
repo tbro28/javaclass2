@@ -49,4 +49,13 @@ public class ConsultantTest {
         assertEquals("Consultant{name=Consultant: Brown, Tom, Jack}",
                 consultant.toString());
     }
+
+    @Test
+    void getHashcodeOfConsultant() {
+        PersonalName personalName = new PersonalName("Brown", "Tom", "Jack");
+        consultant = new Consultant(personalName);
+
+        assertEquals(1820528929,
+                consultant.hashCode());
+    }
 }

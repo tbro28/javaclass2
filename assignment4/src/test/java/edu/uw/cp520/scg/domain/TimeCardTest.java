@@ -192,8 +192,6 @@ class TimeCardTest {
         LocalDate localDate = LocalDate.of(2021, 1, 15);
         TimeCard timeCard = new TimeCard(consultant, localDate);
 
-        System.out.println(timeCard.weekStartingDay + " --- "+timeCard.weekStartingDay.plusDays(30));
-
         assertEquals(localDate, timeCard.getWeekStartingDay());
     }
 

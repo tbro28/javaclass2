@@ -47,6 +47,12 @@ public class Consultant implements Comparable<Consultant> {
                 '}';
     }
 
+    /**
+     * Implement the equals method.
+     *
+     * @param o
+     * @return whether the two Consultant objects are equal or not.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -55,13 +61,19 @@ public class Consultant implements Comparable<Consultant> {
         return Objects.equals(name, that.name);
     }
 
+    /**
+     * Implement the hashcode.
+     *
+     * @return a hash of the object.
+     */
     @Override
     public int hashCode() {
         return Objects.hash(name);
     }
 
     /**
-     * The Consultant natural ordering is in ascending ordered by the consultant's name.
+     * The Consultant natural ordering is in ascending
+     * ordered by the consultant's name.
      *
      * Compares this object with the specified object for order.  Returns a
      * negative integer, zero, or a positive integer as this object is less
@@ -103,39 +115,10 @@ public class Consultant implements Comparable<Consultant> {
      */
     @Override
     public int compareTo(Consultant o) {
-
-/*
-        if(this.name.toString() > o.getName().toString()) {
-        }
-*/
         int diff = 0;
 
+        diff = this.name.compareTo(o.getName());
 
-        System.out.println(this.name.toString().compareTo(o.getName().toString()));
-
-        diff = this.name.toString().compareTo(o.getName().toString());
-        if ( diff != 0) {
-            return diff;
-        }
-
-        //this.name.toString().equalsIgnoreCase(o.getName().toString());
-
-/*        if (this.name.toString().compareTo(o.getName().toString()) > 0) {
-            diff = 1;
-        }
-        else if (this.name.toString().compareTo(o.getName().toString()) < 0) {
-            diff = -1;
-        }*/
-
-/*
-        if(this.hashCode() > o.hashCode())
-            diff = 1;
-        else
-            diff = -1;
-*/
-
-        return 0;
-
-       // return this.name.toString().compareTo(o.name.toString());
+        return diff;
     }
 }

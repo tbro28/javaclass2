@@ -8,7 +8,7 @@ import java.util.Objects;
  *
  * @author Tim Brown
  */
-public class PersonalName {
+public class PersonalName implements Comparable<PersonalName> {
 
     /**
      * A person's name details.
@@ -22,11 +22,6 @@ public class PersonalName {
      */
     public PersonalName() {
         this("", "", "");
-/*
-        this.lastName = "";
-        this.firstName = "";
-        this.middleName = "";
- */
     }
 
     /**
@@ -37,11 +32,6 @@ public class PersonalName {
      */
     public PersonalName(String lastName, String firstName) {
         this(lastName, firstName, "");
-/*
-        this.lastName = lastName;
-        this.firstName = firstName;
-        this.middleName = "";
- */
     }
 
     /**
@@ -112,9 +102,6 @@ public class PersonalName {
         this.middleName = middleName;
     }
 
-
-//Can there be null values?  Maybe middle name?
-
     /**
      * Override the equals method.
      *
@@ -126,7 +113,7 @@ public class PersonalName {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
 
-        edu.uw.cp520.scg.util.PersonalName that = (edu.uw.cp520.scg.util.PersonalName) obj;
+        PersonalName that = (PersonalName) obj;
 
         return Objects.equals(lastName, that.lastName)
                 && Objects.equals(firstName, that.firstName)
@@ -165,5 +152,64 @@ public class PersonalName {
                     middleName;
 
         return pName;
+    }
+
+    /**
+     * Compares this object with the specified object for order.  Returns a
+     * negative integer, zero, or a positive integer as this object is less
+     * than, equal to, or greater than the specified object.
+     *
+     * <p>The implementor must ensure
+     * {@code sgn(x.compareTo(y)) == -sgn(y.compareTo(x))}
+     * for all {@code x} and {@code y}.  (This
+     * implies that {@code x.compareTo(y)} must throw an exception iff
+     * {@code y.compareTo(x)} throws an exception.)
+     *
+     * <p>The implementor must also ensure that the relation is transitive:
+     * {@code (x.compareTo(y) > 0 && y.compareTo(z) > 0)} implies
+     * {@code x.compareTo(z) > 0}.
+     *
+     * <p>Finally, the implementor must ensure that {@code x.compareTo(y)==0}
+     * implies that {@code sgn(x.compareTo(z)) == sgn(y.compareTo(z))}, for
+     * all {@code z}.
+     *
+     * <p>It is strongly recommended, but <i>not</i> strictly required that
+     * {@code (x.compareTo(y)==0) == (x.equals(y))}.  Generally speaking, any
+     * class that implements the {@code Comparable} interface and violates
+     * this condition should clearly indicate this fact.  The recommended
+     * language is "Note: this class has a natural ordering that is
+     * inconsistent with equals."
+     *
+     * <p>In the foregoing description, the notation
+     * {@code sgn(}<i>expression</i>{@code )} designates the mathematical
+     * <i>signum</i> function, which is defined to return one of {@code -1},
+     * {@code 0}, or {@code 1} according to whether the value of
+     * <i>expression</i> is negative, zero, or positive, respectively.
+     *
+     * @param o the object to be compared.
+     * @return a negative integer, zero, or a positive integer as this object
+     * is less than, equal to, or greater than the specified object.
+     * @throws NullPointerException if the specified object is null
+     * @throws ClassCastException   if the specified object's type prevents it
+     *                              from being compared to this object.
+     */
+    @Override
+    public int compareTo(PersonalName o) {
+        int diff = 0;
+
+        diff = this.lastName.compareTo((o.getLastName()));
+        if ( diff != 0) {
+            return diff;
+        }
+        diff = this.firstName.compareTo(o.getFirstName());
+        if ( diff != 0) {
+            return diff;
+        }
+        diff = this.middleName.compareTo(o.getMiddleName());
+        if ( diff != 0) {
+            return diff;
+        }
+
+        return 0;
     }
 }

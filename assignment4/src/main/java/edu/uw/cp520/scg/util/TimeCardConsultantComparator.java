@@ -13,7 +13,7 @@ public class TimeCardConsultantComparator implements Comparator<TimeCard> {
 
 
     /**
-     * compare timecards based on
+     * Compare time cards based on
      * the consultant,
      * the beginning date,
      * total billable hours
@@ -24,8 +24,10 @@ public class TimeCardConsultantComparator implements Comparator<TimeCard> {
      * to, or greater than the second.<p>
      * <p>
      * public int compare(TimeCard firstTimeCard, TimeCard secondTimeCard)
-     * Compares its two arguments, in ascending order by (in precedence order) consultant,
-     * the starting date, total billable hours and lastly total non-billable hours
+     * Compares its two arguments, in ascending order
+     * by (in precedence order) consultant,
+     * the starting date, total billable hours
+     * and lastly total non-billable hours
      *
      * Specified by:
      * compare in interface Comparator<TimeCard>
@@ -35,9 +37,9 @@ public class TimeCardConsultantComparator implements Comparator<TimeCard> {
      * secondTimeCard - the second object to be compared.
      *
      * Returns:
-     * a negative integer, zero, or a positive integer as the first argument is less than,
+     * a negative integer, zero, or a positive integer
+     * as the first argument is less than,
      * equal to, or greater than the second.
-     *
      *
      * @param firstTimeCard the first object to be compared.
      * @param secondTimeCard the second object to be compared.
@@ -54,48 +56,24 @@ public class TimeCardConsultantComparator implements Comparator<TimeCard> {
 
         int diff = 0;
 
-        diff = firstTimeCard.getConsultant().compareTo(secondTimeCard.getConsultant());
+        diff = firstTimeCard.getConsultant()
+                .compareTo(secondTimeCard.getConsultant());
         if ( diff != 0) {
             return diff;
         }
-        diff = firstTimeCard.getWeekStartingDay().compareTo(secondTimeCard.getWeekStartingDay());
+        diff = firstTimeCard.getWeekStartingDay()
+                .compareTo(secondTimeCard.getWeekStartingDay());
         if ( diff != 0) {
             return diff;
         }
-        diff = Integer.compare(firstTimeCard.getTotalBillableHours(), secondTimeCard.getTotalBillableHours());
+        diff = Integer.compare(firstTimeCard.getTotalBillableHours(),
+                secondTimeCard.getTotalBillableHours());
         if ( diff != 0) {
             return diff;
         }
-        diff = Integer.compare(firstTimeCard.getTotalNonBillableHours(), secondTimeCard.getTotalNonBillableHours());
-        if ( diff != 0) {
-            return diff;
-        }
-
-        return 0;
-
-
-/*        int diff = 0;
-
-        System.out.println(firstTimeCard.getConsultant().hashCode());
-        System.out.println(secondTimeCard.getConsultant().hashCode());
-
-        if(firstTimeCard.getConsultant().hashCode() > secondTimeCard.getConsultant().hashCode()
-            || firstTimeCard.getWeekStartingDay().isAfter(secondTimeCard.getWeekStartingDay())
-            || firstTimeCard.getTotalBillableHours() > secondTimeCard.getTotalBillableHours()
-            || firstTimeCard.getTotalNonBillableHours() > secondTimeCard.getTotalNonBillableHours()
-            ) {
-
-            diff = 1;
-        }
-        else if (firstTimeCard.getConsultant().hashCode() < secondTimeCard.getConsultant().hashCode()
-            || firstTimeCard.getWeekStartingDay().isBefore(secondTimeCard.getWeekStartingDay())
-            || firstTimeCard.getTotalBillableHours() < secondTimeCard.getTotalBillableHours()
-            || firstTimeCard.getTotalNonBillableHours() < secondTimeCard.getTotalNonBillableHours()
-        )
-        {
-            diff = -1;
-        }
-
-        return diff;*/
+        diff = Integer.compare(firstTimeCard.getTotalNonBillableHours(),
+                secondTimeCard.getTotalNonBillableHours());
+        return diff;
     }
+
 }

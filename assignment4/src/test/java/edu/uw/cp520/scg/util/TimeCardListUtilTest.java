@@ -74,11 +74,6 @@ public final class TimeCardListUtilTest {
     public void testSortByStartDate() {
         TimeCardListUtil.sortByStartDate(timeCards);
 
-/*        System.out.println("Sorted Test:");
-
-        timeCards.stream()
-                .forEach(System.out::println);*/
-
         assertEquals(timeCard1, timeCards.get(0));
         assertEquals(timeCard3, timeCards.get(1));
         assertEquals(timeCard2, timeCards.get(2));
@@ -88,10 +83,6 @@ public final class TimeCardListUtilTest {
     @Test
     public void testSortByConsultantName() {
         TimeCardListUtil.sortByConsultantName(timeCards);
-
-        System.out.println("test sorted by name: ");
-        timeCards.stream()
-                .forEach(System.out::println);
 
         assertEquals(timeCard2, timeCards.get(0));
         assertEquals(timeCard1, timeCards.get(1));
@@ -103,12 +94,7 @@ public final class TimeCardListUtilTest {
     @Test
     public void testGetTimeCardsForDateRange() {
         final DateRange dateRange = new DateRange("2007-02-11", "2007-02-17");
-
         final List<TimeCard> selected = TimeCardListUtil.getTimeCardsForDateRange(timeCards, dateRange);
-
-        System.out.println("2-11 - 2-17 Date Range ONLY: ");
-        selected.stream()
-                .forEach(System.out::println);
 
         assertEquals(1, selected.size());
     }

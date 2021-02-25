@@ -18,17 +18,14 @@ public class TimeCardListUtil {
      *
      * @param timeCards
      * @param consultant
-     * @return
+     * @return the time cards for the supplied consultant.
      */
-    public static List<TimeCard> getTimeCardsForConsultant(List<TimeCard> timeCards, Consultant consultant) {
+    public static List<TimeCard> getTimeCardsForConsultant(
+            List<TimeCard> timeCards, Consultant consultant) {
 
         List<TimeCard> timeCardForConsultantList = timeCards.stream()
                 .filter(e -> e.getConsultant().equals(consultant))
                 .collect(Collectors.toList());
-
-/*        timeCards.stream()
-                .filter(e -> e.getConsultant().equals(consultant))
-                .forEach(System.out::println);*/
 
         return timeCardForConsultantList;
     }
@@ -38,23 +35,17 @@ public class TimeCardListUtil {
      *
      * @param timeCards
      * @param dateRange
-     * @return
+     * @return the time cards for the supplied date range.
      */
-    public static List<TimeCard> getTimeCardsForDateRange(List<TimeCard> timeCards, DateRange dateRange) {
-
-/*        for(TimeCard timeCard : timeCards) {
-            System.out.println("getTimeCardsForDateRange - " + dateRange.isInRange(timeCard.getWeekStartingDay()) + " " + timeCard.toString());
-            //System.out.println("getTimeCardsForDateRange - " + dateRange.isInRange(timeCard.getWeekStartingDay()) + " " + timeCard.toString());
-        }*/
+    public static List<TimeCard> getTimeCardsForDateRange(
+            List<TimeCard> timeCards, DateRange dateRange) {
 
         List<TimeCard> timeCardDateRangeList = timeCards.stream()
-                //.filter(e -> dateRange.isInRange(e.getWeekStartingDay()) || dateRange.isInRange(e.getWeekStartingDay().plusDays(7)))
                 .filter(e -> dateRange.isInRange(e.getWeekStartingDay()))
                 .collect(Collectors.toList());
 
         return timeCardDateRangeList;
     }
-
 
     /**
      * Sorts this list into ascending order by consultant name.
@@ -63,18 +54,7 @@ public class TimeCardListUtil {
      * @param timeCards
      */
     public static void sortByConsultantName(List<TimeCard> timeCards) {
-
         Collections.sort(timeCards, new TimeCardConsultantComparator());
-
-/*        System.out.println("sortByConsultantName1: ");
-        timeCards.stream()
-                .sorted(Comparator.comparing(TimeCard::getConsultant))
-                .collect(Collectors.toList());
-              //  .forEach(System.out::println);*/
-
-/*        System.out.println("sortByConsultantName2: ");
-        timeCards.stream()
-                .forEach(System.out::println);*/
     }
 
     /**
@@ -85,33 +65,6 @@ public class TimeCardListUtil {
      */
     public static void sortByStartDate(List<TimeCard> timeCards) {
         Collections.sort(timeCards);
-
-/*
-
-
-        //Just by date, not using the C
-        System.out.println("sByStartDate1:");
-        timeCards.stream()
-                .sorted(Comparator.comparing(TimeCard::getWeekStartingDay))
-                .collect(Collectors.toList())
-                .forEach(System.out::println);
-
-System.out.println("***************************************************");
-
-        Collections.sort(timeCards);
-*/
-
-/*
-        System.out.println("sortByStartDate:");
-        for(TimeCard tc : timeCards) {
-            System.out.println(tc.toString());
-        }
-*/
-
     }
-
-
-
-
 
 }

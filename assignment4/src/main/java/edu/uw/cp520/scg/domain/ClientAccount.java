@@ -59,10 +59,6 @@ public class ClientAccount implements Account, Comparable<ClientAccount> {
         return name;
     }
 
-
-    //Because the enum is nonbillable, isn't this one always true???
-    //Or is it actually set?
-
     /**
      * Always true since this object is billable.
      *
@@ -128,25 +124,20 @@ public class ClientAccount implements Account, Comparable<ClientAccount> {
      */
     @Override
     public int compareTo(ClientAccount o) {
-
         int diff = 0;
 
-/*
-        System.out.println(this.name.compareTo((o.getName())));
-
-        diff = this.name.compareTo((o.getName()));
+        diff = this.name.compareTo(o.getName());
         if ( diff != 0) {
             return diff;
         }
-        diff = this.getContact() .getConsultant().compareTo(o.getConsultant());
+        diff = this.getContact().compareTo(o.getContact());
         if ( diff != 0) {
             return diff;
         }
-        diff = Integer.compare(this.getTotalBillableHours(), (o.getTotalBillableHours()));
+        diff = this.address.compareTo(o.address);
         if ( diff != 0) {
             return diff;
         }
-*/
 
         return 0;
     }

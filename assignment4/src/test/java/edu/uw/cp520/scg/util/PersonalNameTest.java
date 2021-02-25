@@ -94,8 +94,6 @@ class PersonalNameTest {
     void testToString() {
         PersonalName personalName = new PersonalName("Brown", "Tom", "Jack");
 
-        System.out.println(personalName.toString());
-
         assertEquals("Consultant: Brown, Tom, Jack", personalName.toString());
     }
 
