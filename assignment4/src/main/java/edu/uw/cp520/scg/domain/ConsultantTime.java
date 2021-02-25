@@ -146,11 +146,6 @@ public class ConsultantTime {
                 && Objects.equals(account, that.account)
                 && Objects.equals(date, that.date);
     }
-/*
-    public boolean equals(Object obj){
-        return true;
-    }
-*/
 
     /**
      * Implements a hashcode method for the consultant class.
@@ -161,7 +156,6 @@ public class ConsultantTime {
     public int hashCode() {
         return Objects.hash(skill, account, date, hours);
     }
-
 
     /**
      * Implements a string method for the consultant class.

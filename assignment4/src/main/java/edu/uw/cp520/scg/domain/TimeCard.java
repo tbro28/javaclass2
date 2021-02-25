@@ -28,7 +28,6 @@ public class TimeCard implements Comparable<TimeCard> {
     /**
      * List to hold consulting time.
      */
-    //List<ConsultantTime> consultingHours;
     List<ConsultantTime> consultingHours = new ArrayList<>();
 
 
@@ -64,7 +63,6 @@ public class TimeCard implements Comparable<TimeCard> {
      * @return the billable hours.
      */
     public List<ConsultantTime> getBillableHoursForClient(String clientName) {
-
         List<ConsultantTime> consultantClientTime = new ArrayList<>();
 
         consultingHours.stream()
@@ -73,14 +71,15 @@ public class TimeCard implements Comparable<TimeCard> {
                 .forEach(consultantClientTime::add);
                 //.forEach(e -> consultantClientTime.add(e))
 
-/*
+        /*
         for(ConsultantTime consultantTime : consultingHours) {
             if(consultantTime.getAccount().getName().equals(clientName))
                 if(consultantTime.isBillable()) {
                     consultantClientTime.add(consultantTime);
                 }
         }
-*/
+        */
+
         return consultantClientTime;
     }
 
@@ -368,20 +367,5 @@ public class TimeCard implements Comparable<TimeCard> {
 
         return 0;
     }
-
-/*
-    public int compareTo(final Employee o) {
-        int diff = 0;
-        if (this != o) {
-            if ((diff = surname.compareTo(o.surname)) == 0)
-                if ((diff = givenName.compareTo(o.givenName)) == 0)
-                    if ((diff = middleName.compareTo(o.middleName)) == 0)
-                        if ((diff = Integer.compare(salary, o.salary)) == 0)
-                            diff = Integer.compare(employeeId, o.employeeId);
-        }
-
-        return diff;
-    }
-*/
 
 }

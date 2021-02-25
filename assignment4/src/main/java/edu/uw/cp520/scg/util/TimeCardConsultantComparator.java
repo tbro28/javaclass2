@@ -11,7 +11,6 @@ import java.util.Comparator;
  */
 public class TimeCardConsultantComparator implements Comparator<TimeCard> {
 
-
     /**
      * Compare time cards based on
      * the consultant,
@@ -53,7 +52,6 @@ public class TimeCardConsultantComparator implements Comparator<TimeCard> {
      */
     @Override
     public int compare(TimeCard firstTimeCard, TimeCard secondTimeCard) {
-
         int diff = 0;
 
         diff = firstTimeCard.getConsultant()

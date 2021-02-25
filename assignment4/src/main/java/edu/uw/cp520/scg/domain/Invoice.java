@@ -117,7 +117,8 @@ public class Invoice {
                         )
                 ));
 
-/*        for (ConsultantTime consultantTime : billableHours) {
+        /*
+        for (ConsultantTime consultantTime : billableHours) {
             if(invoiceYear == consultantTime.getDate().getYear()
                     && month == consultantTime.getDate().getMonth()) {
                 if (consultantTime.isBillable()) {

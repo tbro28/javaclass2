@@ -1,30 +1,39 @@
 package edu.uw.cp520.scg.domain;
 
-import edu.uw.cp520.scg.util.*;
+import edu.uw.cp520.scg.util.Address;
+import edu.uw.cp520.scg.util.PersonalName;
+import edu.uw.cp520.scg.util.StateCode;
 
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TestClass_Assignment3 {
+public class TestClass {
 
     public static void main(final String[] args) {
+
         StateCode state = StateCode.WA;
+
+        //System.out.println(state.name());
+        //System.out.println(state.getName());
 
         String name = "TimBiz";
         PersonalName personalName = new PersonalName("Brown", "Tom", "Jack");
-        PersonalName personalName2 = new PersonalName("ZBro2", "Tim", "Middle");
+        PersonalName personalName2 = new PersonalName("Bro2", "Tim", "Middle");
 
         Consultant consultant1 = new Consultant(personalName);
         Consultant consultant2 = new Consultant(personalName2);
 
-        LocalDate localDate = LocalDate.of(2020, 1, 20);
-        LocalDate localDate2 = LocalDate.of(2020, 1, 15);
+        LocalDate localDate = LocalDate.of(2020, 1, 15);
+        LocalDate localDate2 = LocalDate.of(2020, 2, 15);
 
         TimeCard timeCard1 = new TimeCard(consultant1, localDate);
-        TimeCard timeCard2 = new TimeCard(consultant2, localDate2);
+        TimeCard timeCard2 = new TimeCard(consultant2, localDate);
 
+
+        //      business.name
+        //(StateCode stateCode, String streetNumber, String city, String postalCode)
         Address address = new Address("TimsStreetNumber", "TimsCity", StateCode.WA, "TimsPostalCode");
 
         ClientAccount clientAccount = new ClientAccount(name, personalName, address);
@@ -79,75 +88,11 @@ public class TestClass_Assignment3 {
         System.out.println(invoice.getTotalHours());
 
         System.out.println(invoice.toString());
-         */
-
+        */
         System.out.println(invoice.toReportString());
 
-
-        //  for(InvoiceLineItem invoiceLineItem : invoice.extractLineItems(timeCard)) {
+      //  for(InvoiceLineItem invoiceLineItem : invoice.extractLineItems(timeCard)) {
 
       //  }
-
-
-        System.out.println("Consultant comparison: " + consultant1.compareTo(consultant2));
-        System.out.println("Consultant comparison: " + consultant1.compareTo(consultant1));
-        System.out.println("Timecard comparison: " + timeCard1.compareTo(timeCard2));
-        System.out.println("Timecard comparison: " + timeCard1.compareTo(timeCard1));
-
-
-
-        List<TimeCard> timeCardList = new ArrayList<>();
-        timeCardList.add(timeCard1);
-        timeCardList.add(timeCard2);
-
-        //timeCardList.add(timeCard3);
-
-        final TimeCardConsultantComparator timeCardConsultantComparator = new TimeCardConsultantComparator();
-        System.out.println("timeCardConsultantComparator: " + timeCardConsultantComparator.compare(timeCard1, timeCard2));
-
-/*
-        TimeCardListUtil timeCardListUtil = new TimeCardListUtil();
-        timeCardListUtil.sortByStartDate(timeCardList);
-*/
-
-
-        //       getTimeCardsForDateRange(List<TimeCard> timeCards, DateRange dateRange)
-
-
-
-        DateRange dateRange = new DateRange("2020-01-10", "2020-02-01");
-        System.out.println(dateRange.getStartDate() +" & " +dateRange.getEndDate());
-        List<TimeCard> filteredDate = TimeCardListUtil.getTimeCardsForDateRange(timeCardList, dateRange);
-
-        for(TimeCard timeCard : filteredDate) {
-            System.out.println("\ngetTimeCardsForDateRange: \n" + timeCard.toString());
-            System.out.println(timeCard.getWeekStartingDay() + "\n");
-        }
-
-        System.out.println("\ngetTimeCardsForConsultant: ");
-        List<TimeCard> filteredConsultant = TimeCardListUtil.getTimeCardsForConsultant(timeCardList, consultant1);
-        for(TimeCard tc : filteredConsultant) {
-            System.out.println(tc.toString());
-        }
-
-        System.out.println("\nSorted by consultant: ");
-        TimeCardListUtil.sortByConsultantName(timeCardList);
-        timeCardList.stream()
-                .forEach(System.out::println);
-
-        System.out.println("\nSorted by start date: ");
-        TimeCardListUtil.sortByStartDate(timeCardList);
-        timeCardList.stream()
-                .forEach(System.out::println);
-
-
-        /*
-        System.out.println("where is this:");
-        TimeCardListUtil.getTimeCardsForDateRange(timeCardList, dateRange)
-                .stream()
-                .forEach(System.out::println);
-*/
-
-
     }
 }

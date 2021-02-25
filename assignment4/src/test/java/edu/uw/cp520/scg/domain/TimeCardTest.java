@@ -237,4 +237,57 @@ class TimeCardTest {
                         "weekStartingDay=2021-01-15, consultingHours=[]}",
                 timeCard.toString());
     }
+
+    @Test
+    void toCompareEquals() throws IOException {
+
+        Consultant consultant = new Consultant(new PersonalName("Brown", "Tom", "Jack"));
+        LocalDate localDate = LocalDate.of(2021, 1, 15);
+        TimeCard timeCard = new TimeCard(consultant, localDate);
+        TimeCard timeCard2 = new TimeCard(consultant, localDate);
+
+        String name = "TimBiz";
+        PersonalName personalName = new PersonalName("Brown", "Tom", "Jack");
+        ClientAccount clientAccount = new ClientAccount(name, personalName, address);
+
+        ConsultantTime consultantTime1 = new ConsultantTime(localDate, clientAccount, Skill.PROJECT_MANAGER, 50);
+        ConsultantTime consultantTime2 = new ConsultantTime(localDate, clientAccount, Skill.PROJECT_MANAGER, 50);
+        ConsultantTime consultantTime3 = new ConsultantTime(localDate, NonBillableAccount.BUSINESS_DEVELOPMENT, Skill.PROJECT_MANAGER, 50);
+
+        timeCard.addConsultantTime(consultantTime1);
+        timeCard.addConsultantTime(consultantTime2);
+        timeCard.addConsultantTime(consultantTime3);
+        timeCard2.addConsultantTime(consultantTime1);
+        timeCard2.addConsultantTime(consultantTime2);
+        timeCard2.addConsultantTime(consultantTime3);
+
+        assertEquals(0, timeCard.compareTo(timeCard2));
+    }
+
+    @Test
+    void toCompareNotEqualDiffStartingDate() throws IOException {
+
+        Consultant consultant = new Consultant(new PersonalName("Brown", "Tom", "Jack"));
+        LocalDate localDate = LocalDate.of(2021, 1, 15);
+        LocalDate localDate2 = LocalDate.of(2021, 1, 16);
+        TimeCard timeCard = new TimeCard(consultant, localDate);
+        TimeCard timeCard2 = new TimeCard(consultant, localDate2);
+
+        String name = "TimBiz";
+        PersonalName personalName = new PersonalName("Brown", "Tom", "Jack");
+        ClientAccount clientAccount = new ClientAccount(name, personalName, address);
+
+        ConsultantTime consultantTime1 = new ConsultantTime(localDate, clientAccount, Skill.PROJECT_MANAGER, 50);
+        ConsultantTime consultantTime2 = new ConsultantTime(localDate, clientAccount, Skill.PROJECT_MANAGER, 50);
+        ConsultantTime consultantTime3 = new ConsultantTime(localDate, NonBillableAccount.BUSINESS_DEVELOPMENT, Skill.PROJECT_MANAGER, 50);
+
+        timeCard.addConsultantTime(consultantTime1);
+        timeCard.addConsultantTime(consultantTime2);
+        timeCard.addConsultantTime(consultantTime3);
+        timeCard2.addConsultantTime(consultantTime1);
+        timeCard2.addConsultantTime(consultantTime2);
+        timeCard2.addConsultantTime(consultantTime3);
+
+        assertNotEquals(0, timeCard.compareTo(timeCard2));
+    }
 }
