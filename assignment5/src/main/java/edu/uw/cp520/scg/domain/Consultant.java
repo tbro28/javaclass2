@@ -2,6 +2,8 @@ package edu.uw.cp520.scg.domain;
 
 import edu.uw.cp520.scg.util.PersonalName;
 
+import java.io.InvalidObjectException;
+import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -26,6 +28,45 @@ public class Consultant implements Comparable<Consultant>, Serializable {
     public Consultant(PersonalName name) {
         this.name = name;
     }
+
+
+    /**
+     * Write out the serialization version of the class.
+     *
+     * @return the serialization proxy inner class object.
+     */
+    private Object writeReplace() {
+        return new SerializationProxy(this);
+    }
+
+    /**
+     * Requires the read to use the proxy and not the class itself.
+     *
+     * @param objectInputStream
+     * @throws InvalidObjectException
+     */
+    private void readObject(ObjectInputStream objectInputStream) throws InvalidObjectException {
+        throw new InvalidObjectException("Proxy required.");
+    }
+
+    /**
+     * Private static nested class that represents the classes state (the proxy).
+     */
+    private static class SerializationProxy implements Serializable {
+        private PersonalName serName;
+
+        SerializationProxy( final Consultant consultant) {
+            serName = consultant.name;
+        }
+
+        /**
+         * Returns the Consultant.
+         *
+         * @return return the consultant instance.
+         */
+        private Object readResolve() { return new Consultant(serName); }
+    }
+
 
     /**
      * Returns the personal object.
