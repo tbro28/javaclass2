@@ -1,9 +1,6 @@
 package app;
 
 import edu.uw.cp520.scg.domain.*;
-import edu.uw.cp520.scg.util.Address;
-import edu.uw.cp520.scg.util.PersonalName;
-import edu.uw.cp520.scg.util.StateCode;
 import edu.uw.cp520.scg.util.TimeCardListUtil;
 import edu.uw.ext.util.ListFactory;
 import org.slf4j.Logger;
@@ -12,16 +9,20 @@ import org.slf4j.LoggerFactory;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.time.LocalDate;
-import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Serializes lists of TimeCards and Clients into two files:
+ * - TimeCareList.ser
+ * - ClientList.ser
+ *
+ * @author Tim
+ */
 public class InitLists {
 
     private static Logger log = LoggerFactory.getLogger(InitLists.class);
     private static final String ENCODING = "ISO-8859-1";
-
 
     public static void main(final String[] args) {
 
@@ -60,11 +61,12 @@ public class InitLists {
                 consoleWrtr.printf("  %s, %s%n", tc.getWeekStartingDay(), tc.getConsultant());
             }
 
+            /*
             accounts.clear();
             consultants.clear();
             timeCards.clear();
-
-            ListFactory.populateLists(accounts, consultants, timeCards);
+*/
+/*            ListFactory.populateLists(accounts, consultants, timeCards);
 
             // Create the Invoices
             final List<Invoice> invoices = ListFactory.createInvoices(accounts, timeCards);
@@ -81,7 +83,7 @@ public class InitLists {
                 ListFactory.printInvoices(invoices, fileWriter);
             } catch (final IOException ex) {
                 log.error("Unable to print invoices to file.", ex);
-            }
+            }*/
         } catch (UnsupportedEncodingException e) {
             log.error("Printing of invoices failed.", e);
         }
@@ -90,7 +92,7 @@ public class InitLists {
         /**
          * Timecard serialization.
          * Note: The timecards reference the consultants, so the
-         * consultants don't need to be serialized separately.
+         * consultants don't need to be serialized separately (like I had done).
          */
         Path path = Path.of("TimeCardList.ser");
         try {
@@ -116,34 +118,5 @@ public class InitLists {
             log.error("Could not serialize Client list of object(s).");
             e.printStackTrace();
         }
-
-        /**
-         * Consultant serialization.
-         * Log the name of the consultant.
-         */
-/*        path = Path.of("/ConsultantList.ser");
-        try {
-            ObjectOutputStream out = new ObjectOutputStream(Files.newOutputStream(path));
-
-            int objectCount = consultantList.size();
-
-            out.writeInt(objectCount);
-
-            for( Consultant consultant : consultantList) {
-
-                out.writeObject(consultant.getName().toString());
-                out.writeObject(consultant);
-
-            }
-            out.writeObject(null);
-
-            //out.writeObject(consultantList);
-            out.close();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
-
     }
-
 }

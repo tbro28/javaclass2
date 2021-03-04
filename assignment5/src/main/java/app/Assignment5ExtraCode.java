@@ -1,10 +1,8 @@
 package app;
 
 import edu.uw.cp520.scg.domain.ClientAccount;
-import edu.uw.cp520.scg.domain.Consultant;
 import edu.uw.cp520.scg.domain.Invoice;
 import edu.uw.cp520.scg.domain.TimeCard;
-import edu.uw.cp520.scg.util.TimeCardListUtil;
 import edu.uw.ext.util.ListFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,19 +19,15 @@ import java.util.List;
  *
  * @author Tim
  */
-public class Assignment5 {
+public class Assignment5ExtraCode {
 
-    private static Logger log = LoggerFactory.getLogger(Assignment5.class);
+    private static Logger log = LoggerFactory.getLogger(Assignment5ExtraCode.class);
     private static final String ENCODING = "ISO-8859-1";
-
-
 
     public static void main(final String[] args) {
 
         List<TimeCard> tCardList  = new ArrayList<>();;
         List<ClientAccount> clientCardList  = new ArrayList<>();;
-
-
 
         /**
          * TimeCard deserialization.
@@ -84,18 +78,13 @@ public class Assignment5 {
 
 
 
-/*
         // Create lists to be populated by factory
-        final List<ClientAccount> accounts = new ArrayList<>();
+/*        final List<ClientAccount> accounts = new ArrayList<>();
         final List<Consultant> consultants = new ArrayList<>();
-        final List<TimeCard> timeCards = new ArrayList<>();
-        ListFactory.populateLists(accounts, consultants, timeCards);
+        final List<TimeCard> timeCards = new ArrayList<>();*/
+        //ListFactory.populateLists(accounts, consultants, timeCards);
         // Print them
-        ListFactory.printTimeCards(timeCards);
-*/
-
-
-
+        //ListFactory.printTimeCards(timeCards);
 
         // Use the list util methods
         Console console = System.console();
@@ -127,10 +116,10 @@ public class Assignment5 {
             accounts.clear();
             consultants.clear();
             timeCards.clear();
+
+            ListFactory.populateLists(accounts, consultants, timeCards);
 */
 
-
-            //ListFactory.populateLists(accounts, consultants, timeCards);
 
             // Create the Invoices
             final List<Invoice> invoices = ListFactory.createInvoices(clientCardList, tCardList);
