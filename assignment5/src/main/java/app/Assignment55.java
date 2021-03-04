@@ -11,14 +11,14 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Assignment5 {
+public class Assignment55 {
 
     public static void main(final String[] args) {
 
         /**
          * Timecard deserialization.
          */
-        Path path = Path.of("TimeCardList.ser");
+        Path path = Path.of("src/main/resources/TimeCardList.ser");
         try {
             ObjectInputStream in = new ObjectInputStream(Files.newInputStream(path));
 
@@ -26,7 +26,7 @@ public class Assignment5 {
             List<TimeCard> tCardList = (List<TimeCard>) in.readObject();
             //display its data
             for (TimeCard t : tCardList) {
-                System.out.println("De-serialized TimeCard: " + t);
+                System.out.println("Recovered TimeCard: " + t);
             }
 
         } catch (IOException | ClassNotFoundException e) {
@@ -36,7 +36,7 @@ public class Assignment5 {
         /**
          * Client deserialization.
          */
-        path = Path.of("ClientList.ser");
+        path = Path.of("src/main/resources/ClientList.ser");
         try {
             ObjectInputStream in = new ObjectInputStream(Files.newInputStream(path));
 
@@ -44,7 +44,7 @@ public class Assignment5 {
             List<ClientAccount> clientCardList = (List<ClientAccount>) in.readObject();
             //display its data
             for (ClientAccount t : clientCardList) {
-                System.out.println("De-serialized ClientAccount: " + t.getName());
+                System.out.println("Recovered ClientAccount: " + t.getName());
             }
 
         } catch (IOException | ClassNotFoundException e) {
@@ -56,7 +56,7 @@ public class Assignment5 {
          * Log the name of the consultant.
          */
 
-/*        List<Consultant> consultantList = new ArrayList<>();
+        List<Consultant> consultantList = new ArrayList<>();
 
         path = Path.of("src/main/resources/ConsultantList.ser");
         try {
@@ -73,17 +73,17 @@ public class Assignment5 {
                 System.out.println(consultantList.get(i).getName());
             }
 
-*//*
+/*
             List<Consultant> conCardList = (List<Consultant>) in.readObject();
             //display its data
             for (Consultant t : conCardList) {
                 System.out.println("Recovered Consultant: " + t);
             }
-*//*
+*/
 
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
-        }*/
+        }
 
 
 

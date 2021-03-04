@@ -1,5 +1,6 @@
 package edu.uw.cp520.scg.util;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
@@ -8,7 +9,7 @@ import java.time.format.DateTimeFormatter;
  *
  * Encapsulates a range of two dates, inclusive of the start date and end date.
  */
-public class DateRange {
+public class DateRange implements Serializable {
 
     private LocalDate startDate;
     private LocalDate endDate;

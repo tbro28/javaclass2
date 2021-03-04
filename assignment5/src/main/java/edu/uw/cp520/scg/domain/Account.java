@@ -1,5 +1,7 @@
 package edu.uw.cp520.scg.domain;
 
+import java.io.Serializable;
+
 /**
  *
  * Defines an account as having a name
@@ -8,7 +10,7 @@ package edu.uw.cp520.scg.domain;
  *
  * @author Tim Brown
  */
-public interface Account {
+public interface Account extends Serializable {
 
     /**
      *

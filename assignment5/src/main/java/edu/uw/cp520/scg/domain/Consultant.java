@@ -1,6 +1,8 @@
 package edu.uw.cp520.scg.domain;
 
 import edu.uw.cp520.scg.util.PersonalName;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.InvalidObjectException;
 import java.io.ObjectInputStream;
@@ -20,6 +22,8 @@ public class Consultant implements Comparable<Consultant>, Serializable {
      */
     private PersonalName name;
 
+    private static Logger log = LoggerFactory.getLogger(Consultant.class);
+
     /**
      * Constructor.
      *
@@ -30,14 +34,24 @@ public class Consultant implements Comparable<Consultant>, Serializable {
     }
 
 
+
+
+
     /**
      * Write out the serialization version of the class.
      *
      * @return the serialization proxy inner class object.
      */
     private Object writeReplace() {
+
+        //log name info here.
+        //log.info("here");
+
         return new SerializationProxy(this);
+
+
     }
+
 
     /**
      * Requires the read to use the proxy and not the class itself.
@@ -47,16 +61,25 @@ public class Consultant implements Comparable<Consultant>, Serializable {
      */
     private void readObject(ObjectInputStream objectInputStream) throws InvalidObjectException {
         throw new InvalidObjectException("Proxy required.");
+
+
+
     }
+
 
     /**
      * Private static nested class that represents the classes state (the proxy).
      */
     private static class SerializationProxy implements Serializable {
         private PersonalName serName;
+        //private String x, y, z;
 
         SerializationProxy( final Consultant consultant) {
-            serName = consultant.name;
+            serName = consultant.getName();
+
+/*            x = serName.getLastName();
+            y = serName.getFirstName();
+            z = serName.getMiddleName();*/
         }
 
         /**
@@ -64,8 +87,17 @@ public class Consultant implements Comparable<Consultant>, Serializable {
          *
          * @return return the consultant instance.
          */
-        private Object readResolve() { return new Consultant(serName); }
+        private Object readResolve() {
+
+            //log name info here.
+            log.info("Name: " + serName.toString());
+
+            return new Consultant(serName);
+            //return new Consultant(new PersonalName(x, y, z));
+        }
     }
+
+
 
 
     /**

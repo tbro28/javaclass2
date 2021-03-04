@@ -4,9 +4,12 @@ import edu.uw.cp520.scg.domain.*;
 import edu.uw.cp520.scg.util.Address;
 import edu.uw.cp520.scg.util.PersonalName;
 import edu.uw.cp520.scg.util.StateCode;
+import edu.uw.cp520.scg.util.TimeCardListUtil;
+import edu.uw.ext.util.ListFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDate;
@@ -16,136 +19,101 @@ import java.util.List;
 
 public class InitLists {
 
+    private static Logger log = LoggerFactory.getLogger(InitLists.class);
+    private static final String ENCODING = "ISO-8859-1";
+
+
     public static void main(final String[] args) {
-        StateCode state = StateCode.WA;
 
-        String bizName1 = "TimBiz";
-        String bizName2 = "TimB2";
-        PersonalName personalName = new PersonalName("Brown", "Tom", "Jack");
-        PersonalName personalName2 = new PersonalName("ZBro2", "Tim", "Middle");
+        // Create lists to be populated by factory
+        final List<ClientAccount> accounts = new ArrayList<>();
+        final List<Consultant> consultants = new ArrayList<>();
+        final List<TimeCard> timeCards = new ArrayList<>();
+        ListFactory.populateLists(accounts, consultants, timeCards);
+        // Print them
+        ListFactory.printTimeCards(timeCards);
 
-        Consultant consultant1 = new Consultant(personalName);
-        Consultant consultant2 = new Consultant(personalName2);
+        // Use the list util methods
+        Console console = System.console();
+        try {
+            @SuppressWarnings("resource")  // don't want to close console or System.out
+            PrintWriter consoleWrtr = (console != null) ? console.writer()
+                    : new PrintWriter(new OutputStreamWriter(System.out, ENCODING), true);
 
-        LocalDate localDate = LocalDate.of(2020, 1, 20);
-        LocalDate localDate2 = LocalDate.of(2020, 1, 15);
+            Consultant carl = consultants.get(0);
+            final List<TimeCard> selected = TimeCardListUtil.getTimeCardsForConsultant(timeCards, carl);
+            final int count = selected.size();
+            consoleWrtr.printf("Counted %d time cards for %s%n",count, carl);
+            if (count != 2) {
+                log.error(String.format("Bad time card count for %s", carl));
+            }
 
-        //Serialize
-        TimeCard timeCard1 = new TimeCard(consultant1, localDate);
-        TimeCard timeCard2 = new TimeCard(consultant2, localDate2);
+            TimeCardListUtil.sortByStartDate(timeCards);
+            consoleWrtr.println("Time cards by date:");
+            for (TimeCard tc : timeCards) {
+                consoleWrtr.printf("  %s, %s%n", tc.getWeekStartingDay(), tc.getConsultant());
+            }
 
-        Address address = new Address("TimsStreetNumber", "TimsCity", StateCode.WA, "TimsPostalCode");
+            TimeCardListUtil.sortByConsultantName(timeCards);
+            consoleWrtr.println("Time cards by consultant:");
+            for (TimeCard tc : timeCards) {
+                consoleWrtr.printf("  %s, %s%n", tc.getWeekStartingDay(), tc.getConsultant());
+            }
 
-        //Serialize
-        ClientAccount clientAccount = new ClientAccount(bizName1, personalName, address);
-        ClientAccount clientAccount2 = new ClientAccount(bizName2, personalName2, address);
+            accounts.clear();
+            consultants.clear();
+            timeCards.clear();
 
-        ConsultantTime consultantTime1 = new ConsultantTime(localDate, clientAccount, Skill.PROJECT_MANAGER, 25);
-        ConsultantTime consultantTime2 = new ConsultantTime(localDate, clientAccount, Skill.PROJECT_MANAGER, 50);
-        ConsultantTime consultantTime4 = new ConsultantTime(localDate2, clientAccount, Skill.PROJECT_MANAGER, 75);
-        ConsultantTime consultantTime3 = new ConsultantTime(localDate, NonBillableAccount.BUSINESS_DEVELOPMENT, Skill.UNKNOWN_SKILL, 100);
+            ListFactory.populateLists(accounts, consultants, timeCards);
 
-        ConsultantTime consultantTime5 = new ConsultantTime(localDate, clientAccount2, Skill.SOFTWARE_ENGINEER, 5);
-        ConsultantTime consultantTime6 = new ConsultantTime(localDate, clientAccount2, Skill.SOFTWARE_ENGINEER, 10);
-        ConsultantTime consultantTime7 = new ConsultantTime(localDate, clientAccount2, Skill.SYSTEM_ARCHITECT, 15);
-        ConsultantTime consultantTime8 = new ConsultantTime(localDate, clientAccount2, Skill.SYSTEM_ARCHITECT, 20);
+            // Create the Invoices
+            final List<Invoice> invoices = ListFactory.createInvoices(accounts, timeCards);
+            // Print them
+            consoleWrtr.println();
+            consoleWrtr.println("==================================================================================");
+            consoleWrtr.println("=============================== I N V O I C E S ==================================");
+            consoleWrtr.println("==================================================================================");
+            consoleWrtr.println();
+            ListFactory.printInvoices(invoices, consoleWrtr);
 
-
-
-        List<ConsultantTime> consultantTimeList = new ArrayList<>();
-        consultantTimeList.add(consultantTime1);
-        consultantTimeList.add(consultantTime2);
-        consultantTimeList.add(consultantTime3);
-        consultantTimeList.add(consultantTime4);
-
-        consultantTimeList.add(consultantTime5);
-        consultantTimeList.add(consultantTime6);
-        consultantTimeList.add(consultantTime7);
-        consultantTimeList.add(consultantTime8);
-
-
-        timeCard1.addConsultantTime(consultantTime1);
-        timeCard1.addConsultantTime(consultantTime2);
-        timeCard1.addConsultantTime(consultantTime3);
-        timeCard1.addConsultantTime(consultantTime4);
-
-        timeCard2.addConsultantTime(consultantTime5);
-        timeCard2.addConsultantTime(consultantTime6);
-        timeCard2.addConsultantTime(consultantTime7);
-        timeCard2.addConsultantTime(consultantTime8);
-
-        //ClientAccount clientAccount = new ClientAccount(String "Client Name", PersonalName personalName);
-        Month month = Month.of(1);
-        int invoiceYear = 2020;
-
-        Invoice invoice = new Invoice(clientAccount, month, invoiceYear);
-
-        invoice.extractLineItems(timeCard1);
-        invoice.extractLineItems(timeCard2);
-
-        /*
-        System.out.println(invoice.getStartDate());
-        System.out.println(invoice.getTotalCharges());
-        System.out.println(invoice.getTotalHours());
-
-        System.out.println(invoice.toString());
-         */
-
-        System.out.println(invoice.toReportString());
-
-
-
-
-
-        //  for(InvoiceLineItem invoiceLineItem : invoice.extractLineItems(timeCard)) {
-
-        //  }
-
-
-        System.out.println("Consultant comparison: " + consultant1.compareTo(consultant2));
-        System.out.println("Consultant comparison: " + consultant1.compareTo(consultant1));
-        System.out.println("Timecard comparison: " + timeCard1.compareTo(timeCard2));
-        System.out.println("Timecard comparison: " + timeCard1.compareTo(timeCard1));
-
-
-        List<TimeCard> timeCardList = new ArrayList<>();
-        timeCardList.add(timeCard1);
-        timeCardList.add(timeCard2);
-
-        List<ClientAccount> clientAccountList = new ArrayList<>();
-        clientAccountList.add(clientAccount);
-        clientAccountList.add(clientAccount2);
-
-        List<Consultant> consultantList = new ArrayList<>();
-        consultantList.add(consultant1);
-        consultantList.add(consultant2);
+            // Now print it to a file
+            try (PrintWriter fileWriter = new PrintWriter("invoices.txt", ENCODING)) {
+                ListFactory.printInvoices(invoices, fileWriter);
+            } catch (final IOException ex) {
+                log.error("Unable to print invoices to file.", ex);
+            }
+        } catch (UnsupportedEncodingException e) {
+            log.error("Printing of invoices failed.", e);
+        }
 
 
         /**
          * Timecard serialization.
+         * Note: The timecards reference the consultants, so the
+         * consultants don't need to be serialized separately.
          */
-        Path path = Path.of("src/main/resources/TimeCardList.ser");
+        Path path = Path.of("TimeCardList.ser");
         try {
             ObjectOutputStream out = new ObjectOutputStream(Files.newOutputStream(path));
-
-            out.writeObject(timeCardList);
+            out.writeObject(timeCards);
             out.close();
 
         } catch (IOException e) {
+            log.error("Could not serialize TimeCard list of object(s).");
             e.printStackTrace();
         }
 
         /**
          * Client serialization.
          */
-        path = Path.of("src/main/resources/ClientList.ser");
+        path = Path.of("ClientList.ser");
         try {
             ObjectOutputStream out = new ObjectOutputStream(Files.newOutputStream(path));
-
-            out.writeObject(clientAccountList);
+            out.writeObject(accounts);
             out.close();
 
         } catch (IOException e) {
+            log.error("Could not serialize Client list of object(s).");
             e.printStackTrace();
         }
 
@@ -153,7 +121,7 @@ public class InitLists {
          * Consultant serialization.
          * Log the name of the consultant.
          */
-        path = Path.of("src/main/resources/ConsultantList.ser");
+/*        path = Path.of("/ConsultantList.ser");
         try {
             ObjectOutputStream out = new ObjectOutputStream(Files.newOutputStream(path));
 
@@ -163,7 +131,7 @@ public class InitLists {
 
             for( Consultant consultant : consultantList) {
 
-                out.writeChars(consultant.getName().toString());
+                out.writeObject(consultant.getName().toString());
                 out.writeObject(consultant);
 
             }
@@ -174,9 +142,7 @@ public class InitLists {
 
         } catch (IOException e) {
             e.printStackTrace();
-        }
-
-
+        }*/
 
     }
 
