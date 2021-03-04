@@ -142,7 +142,7 @@ public class PersonalName implements Comparable<PersonalName>, Serializable {
         String pName = "";
 
 
-        if(middleName == "")
+        if(middleName.equals(""))
             pName = "Consultant: " +
                     lastName + ", " +
                     firstName;

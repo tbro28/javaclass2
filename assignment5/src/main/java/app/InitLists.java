@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Serializes lists of TimeCards and Clients into two files:
+ * Serializes lists of TimeCards and Clients into two files.
  * - TimeCareList.ser
  * - ClientList.ser
  *
@@ -24,6 +24,11 @@ public class InitLists {
     private static Logger log = LoggerFactory.getLogger(InitLists.class);
     private static final String ENCODING = "ISO-8859-1";
 
+    /**
+     * Main program for serialization.
+     *
+     * @param args
+     */
     public static void main(final String[] args) {
 
         // Create lists to be populated by factory
@@ -52,42 +57,19 @@ public class InitLists {
             TimeCardListUtil.sortByStartDate(timeCards);
             consoleWrtr.println("Time cards by date:");
             for (TimeCard tc : timeCards) {
-                consoleWrtr.printf("  %s, %s%n", tc.getWeekStartingDay(), tc.getConsultant());
+                consoleWrtr.printf("  %s, %s%n",
+                        tc.getWeekStartingDay(), tc.getConsultant());
             }
 
             TimeCardListUtil.sortByConsultantName(timeCards);
             consoleWrtr.println("Time cards by consultant:");
             for (TimeCard tc : timeCards) {
-                consoleWrtr.printf("  %s, %s%n", tc.getWeekStartingDay(), tc.getConsultant());
+                consoleWrtr.printf("  %s, %s%n",
+                        tc.getWeekStartingDay(), tc.getConsultant());
             }
-
-            /*
-            accounts.clear();
-            consultants.clear();
-            timeCards.clear();
-*/
-/*            ListFactory.populateLists(accounts, consultants, timeCards);
-
-            // Create the Invoices
-            final List<Invoice> invoices = ListFactory.createInvoices(accounts, timeCards);
-            // Print them
-            consoleWrtr.println();
-            consoleWrtr.println("==================================================================================");
-            consoleWrtr.println("=============================== I N V O I C E S ==================================");
-            consoleWrtr.println("==================================================================================");
-            consoleWrtr.println();
-            ListFactory.printInvoices(invoices, consoleWrtr);
-
-            // Now print it to a file
-            try (PrintWriter fileWriter = new PrintWriter("invoices.txt", ENCODING)) {
-                ListFactory.printInvoices(invoices, fileWriter);
-            } catch (final IOException ex) {
-                log.error("Unable to print invoices to file.", ex);
-            }*/
         } catch (UnsupportedEncodingException e) {
             log.error("Printing of invoices failed.", e);
         }
-
 
         /**
          * Timecard serialization.
@@ -96,7 +78,8 @@ public class InitLists {
          */
         Path path = Path.of("TimeCardList.ser");
         try {
-            ObjectOutputStream out = new ObjectOutputStream(Files.newOutputStream(path));
+            ObjectOutputStream out =
+                    new ObjectOutputStream(Files.newOutputStream(path));
             out.writeObject(timeCards);
             out.close();
 
@@ -110,7 +93,8 @@ public class InitLists {
          */
         path = Path.of("ClientList.ser");
         try {
-            ObjectOutputStream out = new ObjectOutputStream(Files.newOutputStream(path));
+            ObjectOutputStream out =
+                    new ObjectOutputStream(Files.newOutputStream(path));
             out.writeObject(accounts);
             out.close();
 

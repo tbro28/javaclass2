@@ -6,15 +6,15 @@ Invoice for:
 Acme Industries
 1616 Index Ct.
 Redmond, WA 98055
-Coyote, Wiley, 
+Coyote, Wiley
 
 Invoice For Month Of: March 2017
 Invoice Date: March 03, 2021
 
 Date        Consultant                   Skill               Hours  Charge    
 ----------  ---------------------------  ------------------  -----  ----------
-03/06/2017  Coder, Carl,                 Software Engineer       8    1,200.00
-03/07/2017  Coder, Carl,                 Software Engineer       8    1,200.00
+03/06/2017  Coder, Carl                  Software Engineer       8    1,200.00
+03/07/2017  Coder, Carl                  Software Engineer       8    1,200.00
 
 Total:                                                          16    2,400.00
 
@@ -31,7 +31,7 @@ Invoice for:
 FooBar Enterprises
 1024 Kilobyte Dr.
 Silicone Gulch, CA 94105
-Sam, Yosemite, 
+Sam, Yosemite
 
 Invoice For Month Of: March 2017
 Invoice Date: March 03, 2021
@@ -57,7 +57,7 @@ Invoice for:
 FooBar Enterprises
 1024 Kilobyte Dr.
 Silicone Gulch, CA 94105
-Sam, Yosemite, 
+Sam, Yosemite
 
 Invoice For Month Of: March 2017
 Invoice Date: March 03, 2021
@@ -67,8 +67,8 @@ Date        Consultant                   Skill               Hours  Charge
 03/13/2017  Architect, Ann, S.           System Architect        8    1,600.00
 03/14/2017  Architect, Ann, S.           System Architect        8    1,600.00
 03/17/2017  Architect, Ann, S.           System Architect        8    1,600.00
-03/01/2017  Coder, Carl,                 Software Engineer       8    1,200.00
-03/02/2017  Coder, Carl,                 Software Engineer       8    1,200.00
+03/01/2017  Coder, Carl                  Software Engineer       8    1,200.00
+03/02/2017  Coder, Carl                  Software Engineer       8    1,200.00
 
 
 
@@ -83,16 +83,16 @@ Invoice for:
 FooBar Enterprises
 1024 Kilobyte Dr.
 Silicone Gulch, CA 94105
-Sam, Yosemite, 
+Sam, Yosemite
 
 Invoice For Month Of: March 2017
 Invoice Date: March 03, 2021
 
 Date        Consultant                   Skill               Hours  Charge    
 ----------  ---------------------------  ------------------  -----  ----------
-03/03/2017  Coder, Carl,                 Software Engineer       8    1,200.00
-03/08/2017  Coder, Carl,                 Software Engineer       8    1,200.00
-03/09/2017  Coder, Carl,                 Software Engineer      12    1,800.00
+03/03/2017  Coder, Carl                  Software Engineer       8    1,200.00
+03/08/2017  Coder, Carl                  Software Engineer       8    1,200.00
+03/09/2017  Coder, Carl                  Software Engineer      12    1,800.00
 
 Total:                                                         108   19,400.00
 
