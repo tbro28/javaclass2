@@ -1,22 +1,21 @@
 package demo;
 
-import java.util.Random;
-
-import javax.swing.event.EventListenerList;
-
 import edu.washington.example.eventlistener.PriceChangeEvent;
 import edu.washington.example.eventlistener.PriceChangeListener;
 import edu.washington.example.eventlistener.PriceTracker;
 import edu.washington.example.eventlistener.Stock;
+
+import javax.swing.event.EventListenerList;
+import java.util.Random;
 
 /**
  * A simulated market.
  *
  * @author Russ Moul
  */
-public final class FakeMarket extends Thread {
+public final class FakeMarketOriginal extends Thread {
     /** Initial price for ACME. */
-    private static final int INIT_ACME_PRICE = 1000;
+    private static final int INIT_ACME_PRICE = 10000;
 
     /** Initial price for ACE. */
     private static final int INIT_ACE_PRICE = 4000;
@@ -37,12 +36,9 @@ public final class FakeMarket extends Thread {
     private boolean mAdjusting = true;
 
     /** The stocks in the market. */
-    /*private Stock[] stocks = {new Stock("ACME", INIT_ACME_PRICE),
+    private Stock[] stocks = {new Stock("ACME", INIT_ACME_PRICE),
                               new Stock("ACE", INIT_ACE_PRICE),
                               new Stock("ABC", INIT_ABC_PRICE)};
-*/
-    private Stock[] stocks = {new Stock("ACME", INIT_ACME_PRICE)};
-
 
     /** The markets listeners. */
     private EventListenerList listenerList = new EventListenerList();
@@ -50,7 +46,7 @@ public final class FakeMarket extends Thread {
     /**
      * Constructs the market and starts adjusting prices.
      */
-    public FakeMarket() {
+    public FakeMarketOriginal() {
     	    // PropertyChangeListener to all the stocks. 
     	    PriceTracker tracker = new PriceTracker();
     	    for (Stock s : stocks) {
@@ -77,7 +73,7 @@ public final class FakeMarket extends Thread {
                 // get random adjustment <= 1%
                 int price = stocks[ndx].getPrice();
                 int adjustment = rand.nextInt() % (price / PERCENT);
-                price += 1;
+                price += adjustment;
                 stocks[ndx].setPrice(price);
                 firePriceChangeEvent(new PriceChangeEvent(this,
                         stocks[ndx].getTicker(), price));

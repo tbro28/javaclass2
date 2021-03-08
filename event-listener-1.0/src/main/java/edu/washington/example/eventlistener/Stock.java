@@ -18,8 +18,10 @@ public final class Stock {
     /** The stock price. */
     private int price = 0;
 
+
     /** PropertyChangeSupport instance. */
     private final PropertyChangeSupport pcs;
+
 
     /**
      * Constructor.
@@ -45,6 +47,10 @@ public final class Stock {
 
     }
 
+
+
+
+
     /**
      * Gets the ticker.
      *
@@ -53,6 +59,7 @@ public final class Stock {
     public String getTicker() {
         return ticker;
     }
+
 
     /**
      * Sets the price, price is a bound property.
@@ -70,13 +77,16 @@ public final class Stock {
 	    pcs.firePropertyChange("price", oldPrice, price);        
     }
 
+
     public void addPropertyChangeListener(PropertyChangeListener pcl) {
     	    pcs.addPropertyChangeListener("price", pcl);
     }
 
+
     public void removePropertyChangeListener(PropertyChangeListener pcl) {
 	    pcs.removePropertyChangeListener("price", pcl);
     }
+
 
     /**
      * Gets the price.
@@ -87,6 +97,7 @@ public final class Stock {
         return price;
     }
 
+
     /**
      * Gets the string representation of the stock, <i>ticker</i>:<i>price</i>
      *
@@ -95,4 +106,6 @@ public final class Stock {
     public String toString() {
         return ticker + ":" + price;
     }
+
+
 }
