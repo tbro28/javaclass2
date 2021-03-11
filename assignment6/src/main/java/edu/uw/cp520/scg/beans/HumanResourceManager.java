@@ -4,13 +4,9 @@ import edu.uw.cp520.scg.domain.Consultant;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.EventListener;
-import java.util.List;
-//import javax.swing.event.EventListenerList;
+import javax.swing.event.EventListenerList;
 import java.beans.PropertyVetoException;
 import java.time.LocalDate;
-
-import edu.uw.cp520.scg.beans.HumanResourceManager.listenerList;
 
 /**
  * Responsible for modifying the pay rate,
@@ -25,10 +21,6 @@ public class HumanResourceManager {
 
     private EventListenerList listenerList = new EventListenerList();
 
-    public HumanResourceManager() {
-    }
-
-
 
     /**
      *     Adds a benefit listener.
@@ -36,7 +28,7 @@ public class HumanResourceManager {
      * @param l
      */
     public void addBenefitListener(BenefitListener l) {
-        listenerList.add(l);
+        listenerList.add(BenefitListener.class, l);
     }
 
     /**
@@ -44,7 +36,9 @@ public class HumanResourceManager {
      *
      * @param l
      */
-    public void addTerminationListener(TerminationListener l)
+    public void addTerminationListener(TerminationListener l) {
+        listenerList.add(TerminationListener.class, l);
+    }
 
 
     /**
@@ -52,15 +46,18 @@ public class HumanResourceManager {
      *
      * @param l
      */
-    public void removeBenefitListener(BenefitListener l)
+    public void removeBenefitListener(BenefitListener l) {
+        listenerList.remove(BenefitListener.class, l);
+    }
 
     /**
      *     Removes a termination listener.
      *
      * @param l
      */
-    public void removeTerminationListener(TerminationListener l)
-
+    public void removeTerminationListener(TerminationListener l) {
+        listenerList.remove(TerminationListener.class, l);
+    }
 
 
     /**
@@ -70,17 +67,29 @@ public class HumanResourceManager {
      * @param c
      */
     public void acceptResignation(Consultant c) {
+        TerminationEvent terminationEvent =  new TerminationEvent(this, c, true);
 
-        fireEvent()
-        TerminationEvent(this, c, true);
-
-
+        for (TerminationListener terminationListener : listenerList.getListeners(TerminationListener.class)) {
+            if(terminationEvent.isVoluntary())
+                terminationListener.voluntaryTermination(terminationEvent);
+        }
     }
 
 
+    /**
+     *     Fires an involuntary termination event
+     *     for the staff consultant.
+     *
+     * @param c
+     */
+    public void terminate(Consultant c) {
+        TerminationEvent terminationEvent =  new TerminationEvent(this, c, false);
 
-
-
+        for (TerminationListener terminationListener : listenerList.getListeners(TerminationListener.class)) {
+            if(!terminationEvent.isVoluntary())
+                terminationListener.forcedTermination(terminationEvent);
+        }
+    }
 
 
     /**
@@ -101,6 +110,7 @@ public class HumanResourceManager {
 
     }
 
+
     /**
      *     Sets the sick leave hours for a staff consultant.
      *
@@ -110,6 +120,7 @@ public class HumanResourceManager {
     public void adjustSickLeaveHours(StaffConsultant c, int newSickLeaveHours) {
         c.setSickLeaveHours(newSickLeaveHours);
     }
+
 
     /**
      *     Sets the vacation hours for a staff consultant.
@@ -121,6 +132,7 @@ public class HumanResourceManager {
         c.setVacationHours(newVacationHours);
     }
 
+
     /**
      *     Cancel a consultant's enrollment in dental,
      *     and fires a dental cancellation event.
@@ -129,12 +141,15 @@ public class HumanResourceManager {
      */
     public void cancelDental(Consultant c) {
         //cancelDental(Object source, Consultant consultant, LocalDate effectiveDate)
+        //BenefitEvent benefitEvent = new BenefitEvent(this, c, LocalDate.now());
+        //return new BenefitEvent(source, Optional.of(false), Optional.empty(), consultant, effectiveDate);
+        BenefitEvent cancelBenefitEvent = BenefitEvent.cancelDental(this, c, LocalDate.now());
 
-        BenefitEvent benefitEvent;
-
-        benefitEvent.
-        new BenefitEvent(this, c, LocalDate.now());
-
+        for (BenefitListener benefitListener : listenerList.getListeners(BenefitListener.class)) {
+            if(!cancelBenefitEvent.getDentalStatus().get())
+                benefitListener.dentalCancellation(cancelBenefitEvent);
+                //benefitListener.dentalCancellation(BenefitEvent.cancelDental(this, c, LocalDate.now()));
+        }
     }
 
     /**
@@ -143,7 +158,14 @@ public class HumanResourceManager {
      *
      * @param c
      */
-    public void cancelMedical(Consultant c)
+    public void cancelMedical(Consultant c) {
+        BenefitEvent cancelBenefitEvent = BenefitEvent.cancelMedical(this, c, LocalDate.now());
+
+        for (BenefitListener benefitListener : listenerList.getListeners(BenefitListener.class)) {
+            if(!cancelBenefitEvent.getMedicalStatus().get())
+                benefitListener.medicalCancellation(cancelBenefitEvent);
+        }
+    }
 
     /**
      *     Enroll a consultant in dental, and fires a
@@ -151,7 +173,15 @@ public class HumanResourceManager {
      *
      * @param c
      */
-    public void enrollDental(Consultant c)
+    public void enrollDental(Consultant c) {
+        BenefitEvent enrollBenefitEvent = BenefitEvent.enrollDental(this, c, LocalDate.now());
+
+        for (BenefitListener benefitListener : listenerList.getListeners(BenefitListener.class)) {
+            if(enrollBenefitEvent.getDentalStatus().get())
+                benefitListener.dentalEnrollment(enrollBenefitEvent);
+        }
+    }
+
 
     /**
      *     Enroll a consultant in medical,
@@ -159,15 +189,13 @@ public class HumanResourceManager {
      *
      * @param c
      */
-    public void enrollMedical(Consultant c)
+    public void enrollMedical(Consultant c) {
+        BenefitEvent enrollBenefitEvent = BenefitEvent.enrollMedical(this, c, LocalDate.now());
 
-
-    /**
-     *     Fires an involuntary termination event
-     *     for the staff consultant.
-     *
-     * @param c
-     */
-    public void terminate(Consultant c)
+        for (BenefitListener benefitListener : listenerList.getListeners(BenefitListener.class)) {
+            if(enrollBenefitEvent.getMedicalStatus().get())
+                benefitListener.medicalEnrollment(enrollBenefitEvent);
+        }
+    }
 
 }
