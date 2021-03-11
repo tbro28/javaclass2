@@ -1,0 +1,17 @@
+edu\uw\cp520\scg\util\PersonalNameTest.class
+test\Assignment06Test$TestBenefitListener.class
+test\Assignment06Test$TestPropertyListener.class
+edu\uw\cp520\scg\util\StateCodeTest.class
+edu\uw\cp520\scg\domain\InvoiceLineItemTest.class
+edu\uw\cp520\scg\util\TimeCardConsultantComparatorTest.class
+test\Assignment06Test.class
+edu\uw\cp520\scg\util\AddressTest.class
+edu\uw\cp520\scg\util\TimeCardListUtilTest.class
+edu\uw\cp520\scg\domain\NonBillableAccountTest.class
+edu\uw\cp520\scg\domain\ConsultantTimeTest.class
+edu\uw\cp520\scg\util\DateRangeTest.class
+edu\uw\cp520\scg\domain\InvoiceTest.class
+edu\uw\cp520\scg\domain\SkillTest.class
+edu\uw\cp520\scg\domain\ConsultantTest.class
+edu\uw\cp520\scg\domain\TimeCardTest.class
+edu\uw\cp520\scg\domain\ClientAccountTest.class

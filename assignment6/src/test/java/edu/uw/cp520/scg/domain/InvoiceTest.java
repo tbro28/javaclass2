@@ -1,6 +1,5 @@
 package edu.uw.cp520.scg.domain;
 
-import edu.uw.cp520.scg.domain.*;
 import edu.uw.cp520.scg.util.Address;
 import edu.uw.cp520.scg.util.PersonalName;
 import edu.uw.cp520.scg.util.StateCode;
@@ -87,7 +86,7 @@ class InvoiceTest {
 
     @Test
     void addLineItem() {
-        String testItem = "2020-01-15:Project Manager:25:Consultant{name=Consultant: Brown, Tom, Jack}";
+        String testItem = "2020-01-15:Project Manager:25:Consultant: Brown, Tom, Jack";
         LocalDate localDate = LocalDate.of(2020,1,1);
 
         invoice.addLineItem(new InvoiceLineItem(consultantTime1.getDate(), timeCard.consultant, consultantTimeList.get(0).getSkill(), consultantTimeList.get(0).getHours()));
@@ -97,8 +96,8 @@ class InvoiceTest {
 
     @Test
     void extractLineItems() {
-        String lineItem1 = "2020-01-15:Project Manager:25:Consultant{name=Consultant: Brown, Tom, Jack}";
-        String lineItem2 = "2020-01-15:Project Manager:50:Consultant{name=Consultant: Brown, Tom, Jack}";
+        String lineItem1 = "2020-01-15:Project Manager:25:Consultant: Brown, Tom, Jack";
+        String lineItem2 = "2020-01-15:Project Manager:50:Consultant: Brown, Tom, Jack";
 
         invoice.extractLineItems(timeCard);
 

@@ -1,6 +1,5 @@
 package edu.uw.cp520.scg.domain;
 
-import edu.uw.cp520.scg.domain.*;
 import edu.uw.cp520.scg.util.Address;
 import edu.uw.cp520.scg.util.PersonalName;
 import edu.uw.cp520.scg.util.StateCode;
@@ -234,7 +233,7 @@ class TimeCardTest {
         LocalDate localDate = LocalDate.of(2021, 1, 15);
         TimeCard timeCard = new TimeCard(consultant, localDate);
 
-        assertEquals("TimeCard{consultant=Consultant{name=Consultant: Brown, Tom, Jack}, " +
+        assertEquals("TimeCard{consultant=Consultant: Brown, Tom, Jack, " +
                         "weekStartingDay=2021-01-15, consultingHours=[]}",
                 timeCard.toString());
     }

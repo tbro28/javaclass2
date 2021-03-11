@@ -1,6 +1,5 @@
 package edu.uw.cp520.scg.domain;
 
-import edu.uw.cp520.scg.domain.*;
 import edu.uw.cp520.scg.util.Address;
 import edu.uw.cp520.scg.util.PersonalName;
 import edu.uw.cp520.scg.util.StateCode;
@@ -51,7 +50,7 @@ class InvoiceLineItemTest {
 
     @Test
     void testToString() {
-        String lineItem = "InvoiceLineItem{date=2020-01-15, consultant=Consultant{name=Consultant: Brown, Tom, Jack}, skill=Project Manager, hours=25}";
+        String lineItem = "InvoiceLineItem{date=2020-01-15, consultant=Consultant: Brown, Tom, Jack, skill=Project Manager, hours=25}";
 
         InvoiceLineItem invoiceLineItem = new InvoiceLineItem(localDate, timeCard.consultant, Skill.PROJECT_MANAGER, 25);
 
