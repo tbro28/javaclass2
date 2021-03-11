@@ -7,6 +7,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyVetoException;
 import java.beans.VetoableChangeListener;
+import java.text.DecimalFormat;
 
 /**
  * Approves or rejects compensation changes. Listens for
@@ -31,7 +32,7 @@ public class CompensationManager implements PropertyChangeListener, VetoableChan
      */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        log.info("Pay rate with raise was updated successfully.");
+        log.info("APPROVED pay rate change, from " + evt.getOldValue() + " to " + evt.getNewValue() + " for " + evt.getSource().toString().substring(12));
     }
 
     /**
@@ -46,21 +47,20 @@ public class CompensationManager implements PropertyChangeListener, VetoableChan
      */
     @Override
     public void vetoableChange(PropertyChangeEvent evt) throws PropertyVetoException {
-
         //This will need to do the logic to veto if the raise is over 5%.
-        //Should check that it is a pay rate change.
-        //You assumed that it was...
+        DecimalFormat df = new DecimalFormat("#.######");
 
         int oldValue = (int) evt.getOldValue();
         int newValue = (int) evt.getNewValue();
 
         double fivePercentLimit = oldValue * .05;
         double raiseValue = newValue - oldValue;
+        double percentRaise = raiseValue / oldValue;
 
         if (raiseValue > fivePercentLimit) {
-            log.info("Raise was over the 5% value limit.");
-            throw new PropertyVetoException("VETO: Over 5%.", evt);
+            log.info("(" + newValue + " - " + oldValue + ")/" + oldValue + " = " + df.format(percentRaise));
+            throw new PropertyVetoException("REJECTED pay rate change, from " + evt.getOldValue() + " to " + evt.getNewValue() + " for " + evt.getSource().toString().substring(12), evt);
         }
-        log.info("NO Veto: Raise approved.");
+        log.info("(" + newValue + " - " + oldValue + ")/" + oldValue + " = " + df.format(percentRaise));
     }
 }

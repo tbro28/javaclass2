@@ -24,20 +24,10 @@ public class StaffConsultant extends Consultant {
     private int sickLeaveHours;
     private int vacationHours;
 
-    //private EventListenerList listenerList = new EventListenerList();
     private PropertyChangeSupport pcs =
             new PropertyChangeSupport(this);
     private VetoableChangeSupport vcs =
             new VetoableChangeSupport(this);
-
-    /**
-     * Constructor.
-     *
-     * @param name to initially set when an instance is created.
-     */
-/*    public StaffConsultant(PersonalName name) {
-        super(name);
-    }*/
 
     /**
      * Constructor with initialization parameters.
@@ -53,13 +43,6 @@ public class StaffConsultant extends Consultant {
         this.sickLeaveHours = sickLeaveHours;
         this.vacationHours = vacationHours;
     }
-
-
-    /**
-     * Register, de-register, and fire events?
-     *
-     */
-
 
     /**
      * Adds a payRate property change listener.
@@ -108,7 +91,6 @@ public class StaffConsultant extends Consultant {
         vcs.addVetoableChangeListener(l);
     }
 
-
     /**
      * Removes a payRate property change listener.
      * This will only de-register the change listener for the payRate property of the bean.
@@ -155,11 +137,10 @@ public class StaffConsultant extends Consultant {
         vcs.removeVetoableChangeListener(l);
     }
 
-
     /**
      * Return the current pay rate.
      *
-     * @return
+     * @return the pay rate.
      */
     public int getPayRate() {
         return payRate;
@@ -178,14 +159,10 @@ public class StaffConsultant extends Consultant {
         And in a multi-threaded environment this could
         cause incorrect values to be used in the event
         that a veto does happen.
-        You don't want to actually change the objects payRate
-        until after firing the the veto event.
         */
-        int oldPayRate =this.payRate;
+        int oldPayRate = this.payRate;
 
-        /* Used by veto listeners, in this case they will check
-        to see if the rate is over 5%.
-         */
+        // Fire vetoable check to see if the rate is over 5%.
         vcs.fireVetoableChange(PAY_RATE_PROPERTY_NAME,
                 this.payRate, payRate);
 
@@ -196,11 +173,10 @@ public class StaffConsultant extends Consultant {
                 oldPayRate, payRate);
     }
 
-
     /**
      * Returns the sick leave hours and fire the related event.
      *
-     * @return
+     * @return the sick leave hours.
      */
     public int getSickLeaveHours() {
         return sickLeaveHours;
@@ -209,31 +185,19 @@ public class StaffConsultant extends Consultant {
     /**
      * Set the sick leave hours.
      *
-     *
      * @param sickLeaveHours
      */
     public void setSickLeaveHours(int sickLeaveHours) {
-        /* Store the old value to avoid multi-threading issues?
-        Even if it can't be vetoed?
-        After re-watching explanation:
-        For veto, you are notifying that you INTEND on doing something.
-        For property change, you are notifying that something HAS happened.
-        Therefore, this isn't right:
-            pcs.firePropertyChange(SICK_LEAVE_HOURS_PROPERTY_NAME,
-                    this.sickLeaveHours, sickLeaveHours);
-            this.sickLeaveHours = sickLeaveHours;
-         */
         int oldSickLeaveHours = this.sickLeaveHours;
         this.sickLeaveHours = sickLeaveHours;
         pcs.firePropertyChange(SICK_LEAVE_HOURS_PROPERTY_NAME,
                 oldSickLeaveHours, sickLeaveHours);
     }
 
-
     /**
      * Return the vacation hours.
      *
-     * @return
+     * @return the vacation hours.
      */
     public int getVacationHours() {
         return vacationHours;
@@ -250,10 +214,6 @@ public class StaffConsultant extends Consultant {
         pcs.firePropertyChange(VACATION_HOURS_PROPERTY_NAME,
                 oldVacationHours, vacationHours);
     }
-
-
-
-
 
     /**
      * Compare names for equivalence.

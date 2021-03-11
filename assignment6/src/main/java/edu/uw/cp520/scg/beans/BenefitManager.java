@@ -7,7 +7,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 /**
- * Tracks changes in employee benifits. Listens for any PropertyChangeEvent
+ * Tracks changes in employee benefits. Listens for any PropertyChangeEvent
  * and simply logs them. Additionally, Listens for any BenefitEvent and logs
  * those as well. No other actions are taken in response to any event.
  *
@@ -16,51 +16,44 @@ public class BenefitManager implements BenefitListener, PropertyChangeListener {
 
     private static Logger log = LoggerFactory.getLogger(BenefitManager.class);
 
-/*
-    public BenefitManager() {
-    }
-*/
-
-
     /**
-     *     Invoked when a consultant is cancels dental.
+     * Invoked when a consultant is cancels dental.
      *
      * @param evnt
      */
     public void dentalCancellation(BenefitEvent evnt) {
-        log.info("Dental cancellation: " + evnt.getConsultant());
+        log.info(evnt.getConsultant().toString().substring(12) + " cancelled dental, " + evnt.getEffectiveDate());
     }
 
     /**
-     *     Invoked when a consultant is enrolls in dental.
+     * Invoked when a consultant is enrolls in dental.
      *
      * @param evnt
      */
     public void dentalEnrollment(BenefitEvent evnt) {
-        log.info("Dental enrollment: " + evnt.getConsultant());
+        log.info(evnt.getConsultant().toString().substring(12) + " enrolled in dental, " + evnt.getEffectiveDate());
     }
 
-
     /**
-     *     Invoked when a consultant is cancels medical.
+     * Invoked when a consultant is cancels medical.
      *
      * @param evnt
      */
     public void medicalCancellation(BenefitEvent evnt) {
-        log.info("Medical cancellation: " + evnt.getConsultant());
+        log.info(evnt.getConsultant().toString().substring(12) + " cancelled medical, " + evnt.getEffectiveDate());
     }
 
     /**
-     *     Invoked when a consultant is enrolls in medical.
+     * Invoked when a consultant is enrolls in medical.
      *
      * @param evnt
      */
     public void medicalEnrollment(BenefitEvent evnt) {
-        log.info("Medical enrollment: " + evnt.getConsultant());
+        log.info(evnt.getConsultant().toString().substring(12) + " enrolled in medical, " + evnt.getEffectiveDate());
     }
 
     /**
-     *     Logs the change.
+     * Logs the change.
      *
      * Specified by:
      * propertyChange in interface PropertyChangeListener
@@ -71,9 +64,8 @@ public class BenefitManager implements BenefitListener, PropertyChangeListener {
      * @param evt
      */
     public void propertyChange(PropertyChangeEvent evt) {
-        log.info("Benefit Manager: " + evt.getPropertyName());
-        log.info("Benefit Manager toString: " + evt.toString());
+        log.info(evt.getPropertyName() + " changed from "
+                + evt.getOldValue() + " to " + evt.getNewValue()
+                + " for " + evt.getSource().toString().substring(12));
     }
-
-
 }

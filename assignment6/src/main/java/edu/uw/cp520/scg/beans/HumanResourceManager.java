@@ -21,7 +21,6 @@ public class HumanResourceManager {
 
     private EventListenerList listenerList = new EventListenerList();
 
-
     /**
      *     Adds a benefit listener.
      *
@@ -39,7 +38,6 @@ public class HumanResourceManager {
     public void addTerminationListener(TerminationListener l) {
         listenerList.add(TerminationListener.class, l);
     }
-
 
     /**
      *     Removes a benefit listener.
@@ -59,7 +57,6 @@ public class HumanResourceManager {
         listenerList.remove(TerminationListener.class, l);
     }
 
-
     /**
      *     Accepts the resignation of a consultant and fires a
      *     voluntary termination event for the consultant.
@@ -74,7 +71,6 @@ public class HumanResourceManager {
                 terminationListener.voluntaryTermination(terminationEvent);
         }
     }
-
 
     /**
      *     Fires an involuntary termination event
@@ -91,7 +87,6 @@ public class HumanResourceManager {
         }
     }
 
-
     /**
      *     Sets the pay rate for a staff consultant and logs
      *     whether the pay rate change was approved or rejected (vetoed).
@@ -100,16 +95,14 @@ public class HumanResourceManager {
      * @param newPayRate
      */
     public void adjustPayRate(StaffConsultant c, int newPayRate) {
-
         try {
             c.setPayRate(newPayRate);
-            log.info("Pay rate adjusted for: " + c.getName().toString());
+            log.info("Approved pay adjustment for " + c.getName().toString().substring(12));
         } catch (PropertyVetoException e) {
-            log.info("Pay rate DENIED for: " + c.getName().toString());
+            log.info(e.getMessage());
+            log.info("Denied pay adjustment for " + c.getName().toString().substring(12));
         }
-
     }
-
 
     /**
      *     Sets the sick leave hours for a staff consultant.
@@ -121,7 +114,6 @@ public class HumanResourceManager {
         c.setSickLeaveHours(newSickLeaveHours);
     }
 
-
     /**
      *     Sets the vacation hours for a staff consultant.
      *
@@ -132,7 +124,6 @@ public class HumanResourceManager {
         c.setVacationHours(newVacationHours);
     }
 
-
     /**
      *     Cancel a consultant's enrollment in dental,
      *     and fires a dental cancellation event.
@@ -140,15 +131,12 @@ public class HumanResourceManager {
      * @param c
      */
     public void cancelDental(Consultant c) {
-        //cancelDental(Object source, Consultant consultant, LocalDate effectiveDate)
-        //BenefitEvent benefitEvent = new BenefitEvent(this, c, LocalDate.now());
         //return new BenefitEvent(source, Optional.of(false), Optional.empty(), consultant, effectiveDate);
         BenefitEvent cancelBenefitEvent = BenefitEvent.cancelDental(this, c, LocalDate.now());
 
         for (BenefitListener benefitListener : listenerList.getListeners(BenefitListener.class)) {
             if(!cancelBenefitEvent.getDentalStatus().get())
                 benefitListener.dentalCancellation(cancelBenefitEvent);
-                //benefitListener.dentalCancellation(BenefitEvent.cancelDental(this, c, LocalDate.now()));
         }
     }
 
@@ -182,7 +170,6 @@ public class HumanResourceManager {
         }
     }
 
-
     /**
      *     Enroll a consultant in medical,
      *     and fires a medical enrollment event.
@@ -197,5 +184,4 @@ public class HumanResourceManager {
                 benefitListener.medicalEnrollment(enrollBenefitEvent);
         }
     }
-
 }

@@ -13,9 +13,8 @@ import org.slf4j.LoggerFactory;
 public class Eeoc implements TerminationListener {
 
     private static Logger log = LoggerFactory.getLogger(Eeoc.class);
-
-    private int voluntaryTermCount = 0;
-    private int forcedTermCount = 0;
+    private int voluntaryTermCount;
+    private int forcedTermCount;
 
     /**
      * Simply prints a message indicating that the consultant
@@ -27,9 +26,8 @@ public class Eeoc implements TerminationListener {
      */
     @Override
     public void forcedTermination(TerminationEvent evt) {
-
-        voluntaryTermCount++;
-        log.info("Consultant was fired: " + evt.getConsultant().toString());
+        forcedTermCount++;
+        log.info(evt.getConsultant().toString().substring(12) + " was fired.");
     }
 
     /**
@@ -41,9 +39,8 @@ public class Eeoc implements TerminationListener {
      */
     @Override
     public void voluntaryTermination(TerminationEvent evt) {
-
-        forcedTermCount++;
-        log.info("Consultant quit voluntarily: " + evt.getConsultant().toString());
+        voluntaryTermCount++;
+        log.info(evt.getConsultant().toString().substring(12) + " quit.");
     }
 
     /**
@@ -63,6 +60,5 @@ public class Eeoc implements TerminationListener {
     public int voluntaryTerminationCount() {
         return voluntaryTermCount;
     }
-
 
 }

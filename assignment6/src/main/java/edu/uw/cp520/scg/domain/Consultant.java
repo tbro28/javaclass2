@@ -94,9 +94,10 @@ public class Consultant implements Comparable<edu.uw.cp520.scg.domain.Consultant
      */
     @Override
     public String toString() {
-        return "Consultant{" +
+/*        return "Consultant{" +
                 "name=" + name +
-                '}';
+                '}';*/
+        return name.toString();
     }
 
     /**

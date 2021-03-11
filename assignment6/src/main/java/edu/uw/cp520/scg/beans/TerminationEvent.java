@@ -14,11 +14,12 @@ public class TerminationEvent extends EventObject implements Serializable {
     private Consultant consultant;
     private boolean voluntary;
 
-
     /**
      * Constructs a prototypical Event.
      *
-     * @param source the object on which the Event initially occurred
+     * @param source
+     * @param consultant
+     * @param voluntary
      * @throws IllegalArgumentException if source is null
      */
     public TerminationEvent(Object source, Consultant consultant, boolean voluntary) {
@@ -30,7 +31,7 @@ public class TerminationEvent extends EventObject implements Serializable {
     /**
      *     Gets the consultant that was terminated.
      *
-     * @return
+     * @return the consultant that was terminated.
      */
     public Consultant getConsultant() {
         return this.consultant;
@@ -39,7 +40,7 @@ public class TerminationEvent extends EventObject implements Serializable {
     /**
      *     Gets the voluntary termination status.
      *
-     * @return
+     * @return whether the termination was voluntary or not.
      */
     public boolean isVoluntary() {
         return this.voluntary;

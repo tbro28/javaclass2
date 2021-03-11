@@ -13,13 +13,13 @@ public interface TerminationListener extends EventListener {
      *
      * @param evt
      */
-    public void forcedTermination(TerminationEvent evt);
+    void forcedTermination(TerminationEvent evt);
 
     /**
      * Invoked when a consultant is voluntarily terminated.
      *
      * @param evt
      */
-    public void voluntaryTermination(TerminationEvent evt);
+    void voluntaryTermination(TerminationEvent evt);
 
 }

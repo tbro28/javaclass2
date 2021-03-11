@@ -13,25 +13,11 @@ import java.util.Optional;
  */
 public class BenefitEvent extends EventObject {
 
-
     //https://www.baeldung.com/java-optional
     private Optional<Boolean> dentalStatus;
     private Optional<Boolean> medicalStatus;
     private Consultant consultant;
     private LocalDate effectiveDate;
-
-    /**
-     * Constructs a prototypical Event.
-     *
-     * @param source the object on which the Event initially occurred
-     * @throws IllegalArgumentException if source is null
-     */
-/*
-    public BenefitEvent(Object source) {
-        super(source);
-    }
-*/
-
 
     /**
      * Constructs a prototypical Event.
@@ -58,7 +44,7 @@ public class BenefitEvent extends EventObject {
      * @param source
      * @param consultant
      * @param effectiveDate
-     * @return
+     * @return a BenefitEvent object.
      */
     public static BenefitEvent	enrollDental(Object source, Consultant consultant, LocalDate effectiveDate) {
         return new BenefitEvent(source, Optional.of(true), Optional.empty(), consultant, effectiveDate);
@@ -70,13 +56,11 @@ public class BenefitEvent extends EventObject {
      * @param source
      * @param consultant
      * @param effectiveDate
-     * @return
+     * @return a BenefitEvent object.
      */
     public static BenefitEvent	enrollMedical(Object source, Consultant consultant, LocalDate effectiveDate) {
         return new BenefitEvent(source, Optional.empty(), Optional.of(true), consultant, effectiveDate);
     }
-
-
 
     /**
      * Creates a dental cancellation event.
@@ -85,7 +69,7 @@ public class BenefitEvent extends EventObject {
      * @param source
      * @param consultant
      * @param effectiveDate
-     * @return
+     * @return a BenefitEvent object.
      */
     public static BenefitEvent	cancelDental(Object source, Consultant consultant, LocalDate effectiveDate) {
         return new BenefitEvent(source, Optional.of(false), Optional.empty(), consultant, effectiveDate);
@@ -97,44 +81,43 @@ public class BenefitEvent extends EventObject {
      * @param source
      * @param consultant
      * @param effectiveDate
-     * @return
+     * @return a BenefitEvent object.
      */
     public static BenefitEvent	cancelMedical(Object source, Consultant consultant, LocalDate effectiveDate) {
         return new BenefitEvent(source, Optional.empty(), Optional.of(false), consultant, effectiveDate);
     }
 
-
     /**
-     *     Gets the consultant that was terminated.
+     * Gets the consultant that was terminated.
      *
-     * @return
+     * @return the terminated consultant.
      */
     public Consultant getConsultant() {
         return consultant;
     }
 
     /**
-     *     Gets the dental enrollment status.
+     * Gets the dental enrollment status.
      *
-     * @return
+     * @return the dental status.
      */
     public Optional<Boolean> getDentalStatus() {
         return dentalStatus;
     }
 
     /**
-     *     Gets the effective date.
+     * Gets the effective date.
      *
-     * @return
+     * @return the effective date.
      */
     public LocalDate getEffectiveDate() {
         return effectiveDate;
     }
 
     /**
-     *     Gets the medical enrollment status.
+     * Gets the medical enrollment status.
      *
-     * @return
+     * @return the medical status.
      */
     public Optional<Boolean> getMedicalStatus() {
         return medicalStatus;
