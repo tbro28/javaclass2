@@ -1,5 +1,8 @@
 package edu.uw.cp520.scg.beans;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyVetoException;
@@ -8,13 +11,15 @@ import java.beans.VetoableChangeListener;
 /**
  * Approves or rejects compensation changes. Listens for
  * PropertyChangeEvents on the payRate property, any pay
- * rate increase in excess of will be vetoed. The rejection
- * (veto) or acceptance of each pay rate change will be logged
- * as will any successful pay rate change.
+ * rate increase in excess of will be vetoed.
+ *
+ * The rejection (veto) or acceptance of each pay rate
+ * change will be logged as will any successful pay rate change.
  *
  */
 public class CompensationManager implements PropertyChangeListener, VetoableChangeListener {
 
+    private static Logger log = LoggerFactory.getLogger(CompensationManager.class);
 
     /**
      * Processes to final pay rate change.
@@ -26,7 +31,7 @@ public class CompensationManager implements PropertyChangeListener, VetoableChan
      */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-
+        log.info("Pay rate with raise was updated successfully.");
     }
 
     /**
@@ -42,5 +47,20 @@ public class CompensationManager implements PropertyChangeListener, VetoableChan
     @Override
     public void vetoableChange(PropertyChangeEvent evt) throws PropertyVetoException {
 
+        //This will need to do the logic to veto if the raise is over 5%.
+        //Should check that it is a pay rate change.
+        //You assumed that it was...
+
+        int oldValue = (int) evt.getOldValue();
+        int newValue = (int) evt.getNewValue();
+
+        double fivePercentLimit = oldValue * .05;
+        double raiseValue = newValue - oldValue;
+
+        if (raiseValue > fivePercentLimit) {
+            log.info("Raise was over the 5% value limit.");
+            throw new PropertyVetoException("VETO: Over 5%.", evt);
+        }
+        log.info("NO Veto: Raise approved.");
     }
 }

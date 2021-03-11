@@ -48,7 +48,9 @@ public class FaceBean {
 
     public void
     setMouthWidth(int mw) throws PropertyVetoException {
+
         int oldMouthWidth = mMouthWidth;
+
         mVcs.fireVetoableChange("mouthWidth",
                 oldMouthWidth, mw);
         mMouthWidth = mw;

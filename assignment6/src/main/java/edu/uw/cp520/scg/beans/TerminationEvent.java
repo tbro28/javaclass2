@@ -23,6 +23,8 @@ public class TerminationEvent extends EventObject implements Serializable {
      */
     public TerminationEvent(Object source, Consultant consultant, boolean voluntary) {
         super(source);
+        this.consultant = consultant;
+        this.voluntary = voluntary;
     }
 
     /**

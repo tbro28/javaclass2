@@ -1,5 +1,8 @@
 package edu.uw.cp520.scg.beans;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * The EEOC monitors SCG's terminations. Listens for
  * TerminationEvents and maintains a count of each type
@@ -9,6 +12,10 @@ package edu.uw.cp520.scg.beans;
  */
 public class Eeoc implements TerminationListener {
 
+    private static Logger log = LoggerFactory.getLogger(Eeoc.class);
+
+    private int voluntaryTermCount = 0;
+    private int forcedTermCount = 0;
 
     /**
      * Simply prints a message indicating that the consultant
@@ -21,6 +28,8 @@ public class Eeoc implements TerminationListener {
     @Override
     public void forcedTermination(TerminationEvent evt) {
 
+        voluntaryTermCount++;
+        log.info("Consultant was fired: " + evt.getConsultant().toString());
     }
 
     /**
@@ -33,5 +42,27 @@ public class Eeoc implements TerminationListener {
     @Override
     public void voluntaryTermination(TerminationEvent evt) {
 
+        forcedTermCount++;
+        log.info("Consultant quit voluntarily: " + evt.getConsultant().toString());
     }
+
+    /**
+     * Gets the forced termination count.
+     *
+     * @return forced count.
+     */
+    public int forcedTerminationCount() {
+        return forcedTermCount;
+    }
+
+    /**
+     * Gets the voluntary termination count.
+     *
+     * @return voluntary count.
+     */
+    public int voluntaryTerminationCount() {
+        return voluntaryTermCount;
+    }
+
+
 }
