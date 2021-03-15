@@ -1,5 +1,8 @@
 package app;
 
+import edu.uw.cp520.scg.domain.ClientAccount;
+import persistent.DbServer;
+
 import java.sql.*;
 
 public class InitDb {
@@ -24,23 +27,22 @@ public class InitDb {
     static Connection connection;
 
     public static void main(String args[]){
+
+            DbServer dbServer = new DbServer(URL, USERNAME, PASSWORD);
+
         try {
-            connection = DriverManager.getConnection(
-                    URL, USERNAME, PASSWORD);
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(QUERY_STRING);
-
-
-            System.out.println("Query successful.");
-            while(resultSet.next())
-                System.out.println(resultSet.getObject("NAME"));
-
-
-
+            dbServer.getClients();
         } catch (SQLException throwables) {
-            //connection.close();
             throwables.printStackTrace();
         }
+
+
+        System.out.println("Query successful.");
+
+
+
+
+
     }
 
 

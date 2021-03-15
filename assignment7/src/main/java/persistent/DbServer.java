@@ -5,6 +5,7 @@ import edu.uw.cp520.scg.domain.Consultant;
 import edu.uw.cp520.scg.domain.Invoice;
 import edu.uw.cp520.scg.domain.TimeCard;
 
+import java.sql.*;
 import java.time.Month;
 import java.util.List;
 
@@ -18,11 +19,46 @@ public class DbServer {
     List<Consultant> consultantList;
 
 
+    private static String url;
+    private static String userName;
+    private static String password;
+    private static String QUERY_STRING = "SELECT * from skills";
+    Connection connection;
+    Statement statement;
+    ResultSet resultSet;
+
     public DbServer(String dbUrl, String username, String password) {
+        this.url = dbUrl;
+        this.userName = username;
+        this.password = password;
+
+
+
+
+        try {
+            connection = DriverManager.getConnection(
+                    this.url, this.userName, this.password);
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery(QUERY_STRING);
+
+
+            System.out.println("Query successful.");
+            while(resultSet.next())
+                System.out.println(resultSet.getObject("NAME"));
+
+
+
+        } catch (SQLException throwables) {
+            //connection.close();
+            throwables.printStackTrace();
+        }
+
 
     }
 
-    public void addClient(ClientAccount client) {
+    public void addClient(ClientAccount client) throws SQLException {
+
+
 
     }
 
@@ -58,7 +94,10 @@ public class DbServer {
 
 
 
-    public List<ClientAccount> getClients() {
+    public List<ClientAccount> getClients() throws SQLException {
+
+        while(resultSet.next())
+            System.out.println(resultSet.getObject("NAME"));
 
         return clientAccountList;
     }
