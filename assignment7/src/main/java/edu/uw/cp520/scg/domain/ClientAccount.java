@@ -81,6 +81,15 @@ public class ClientAccount implements Account, Comparable<ClientAccount>, Serial
         this.personalName = contact;
     }
 
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
     /**
      * The natural ordering of ClientAccount is ascending order by
      * name,
