@@ -65,8 +65,6 @@ public enum NonBillableAccount implements Account {
      */
     @Override
     public String toString() {
-        return "NonBillableAccount{" +
-                "name='" + name + '\'' +
-                '}';
+        return "name=" + name;
     }
 }

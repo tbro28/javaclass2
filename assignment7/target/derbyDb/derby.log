@@ -1,7 +1,7 @@
-Mon Mar 15 00:14:43 PDT 2021 : Apache Derby Network Server - 10.15.2.0 - (1873585) started and ready to accept connections on port 1527
+Wed Mar 17 16:56:00 PDT 2021 : Apache Derby Network Server - 10.15.2.0 - (1873585) started and ready to accept connections on port 1527
 ----------------------------------------------------------------
-Mon Mar 15 00:14:44 PDT 2021:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.15.2.0 - (1873585): instance a816c00e-0178-34bc-adea-00004ee9df7b 
+Wed Mar 17 16:56:00 PDT 2021:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.15.2.0 - (1873585): instance a816c00e-0178-429e-17d8-00004ee9df7b 
 on database directory memory:C:\Users\Tim\java\uwclass\class2\assignment7\target\derbyDb\scgDb with class loader java.net.URLClassLoader@459cfcca 
 Loaded from file:/C:/Users/Tim/.m2/repository/org/apache/derby/derby/10.15.2.0/derby-10.15.2.0.jar
 java.vendor=Oracle Corporation
@@ -12,4 +12,4 @@ os.arch=amd64
 os.version=10.0
 derby.system.home=target/derbyDb
 Database Class Loader started - derby.database.classpath=''
-Mon Mar 15 02:08:28 PDT 2021 : Apache Derby Network Server - 10.15.2.0 - (1873585) shutdown
+Wed Mar 17 16:56:19 PDT 2021 : Apache Derby Network Server - 10.15.2.0 - (1873585) shutdown

@@ -25,6 +25,6 @@ class NonBillableAccountTest {
 
     @Test
     void testToString() {
-        assertEquals("NonBillableAccount{name='Business development'}", NonBillableAccount.BUSINESS_DEVELOPMENT.toString());
+        assertEquals("name=Business development", NonBillableAccount.BUSINESS_DEVELOPMENT.toString());
     }
 }
