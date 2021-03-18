@@ -19,11 +19,6 @@ import java.util.List;
  *
  */
 public class DbServer {
-
-    List<ClientAccount> clientAccountList;
-    List<Consultant> consultantList;
-
-
     private static String url;
     private static String userName;
     private static String password;
@@ -31,10 +26,6 @@ public class DbServer {
     Connection connection;
     Statement statement;
     ResultSet resultSet;
-    //PreparedStatement ps;
-
-    DataSource ds;
-    InitialContext ctx;
 
 
     /**
@@ -48,7 +39,6 @@ public class DbServer {
         this.url = dbUrl;
         this.userName = username;
         this.password = password;
-
         try {
             connection = DriverManager.getConnection(
                     this.url, this.userName, this.password);
@@ -66,8 +56,7 @@ public class DbServer {
      * @param client
      */
     public void addClient(ClientAccount client) throws SQLException {
-
-                /*
+        /*
         INSERT INTO clients (name, street, city, state, postal_code,
                 contact_last_name, contact_first_name, contact_middle_name)
         VALUES ('Acme Industries', '1616 Index Ct.', 'Redmond', 'WA', '98055',
@@ -93,9 +82,6 @@ public class DbServer {
                     .append("'', ").insert(sb.indexOf("'',")+1, client.getContact().getLastName())
                     .append("'', ").insert(sb.indexOf("'',")+1, client.getContact().getFirstName())
                     .append("'')").insert(sb.indexOf("')"), client.getContact().getMiddleName());
-
-            System.out.println(sb.toString());
-
             statement.executeUpdate(sb.toString());
         }
     }
@@ -111,16 +97,12 @@ public class DbServer {
         /*
         INSERT INTO consultants (last_name, first_name, middle_name)
         VALUES ('Architect', 'Ann', 'S.');*/
-
         StringBuilder sb = new StringBuilder();
         sb.append("INSERT INTO consultants (last_name, first_name, middle_name) ")
                 .append("VALUES (")
                 .append("'" + consultant.getName().getLastName() + "', ")
                 .append("'" + consultant.getName().getFirstName() + "', ")
                 .append("'" + consultant.getName().getMiddleName() + "')");
-
-        System.out.println(sb);
-
         try {
             statement.executeUpdate(sb.toString());
         } catch (SQLException throwables) {
@@ -142,7 +124,6 @@ public class DbServer {
      * @param timecard
      */
     public void addTimeCard(TimeCard timecard) {
-
         int consultantId = -1;
         int timeCardId = -1;
 
@@ -173,13 +154,8 @@ public class DbServer {
                 WHERE name = 'Acme Industries'),
                 3, '2005/03/12', 'Software Engineer', 8);*/
         String billableHours = "INSERT INTO billable_hours (client_id, timecard_id, date, skill, hours) VALUES (?, ?, ?, ?, ?)";
-
         String clientId = "SELECT DISTINCT id FROM clients WHERE name = ?";
-
         int clientIntId = -1;
-
-
-//                System.out.println(consultantQuery);
 
         try(
                 Connection connection = DriverManager.getConnection(this.url, this.userName, this.password);
@@ -188,7 +164,6 @@ public class DbServer {
                 PreparedStatement psNonebillable = connection.prepareStatement(nonbillableHours);
                 PreparedStatement psBillable = connection.prepareStatement(billableHours);
                 PreparedStatement psClientId = connection.prepareStatement(clientId);
-
                 ) {
 
             //Getting the consultant ID.
@@ -199,13 +174,9 @@ public class DbServer {
             psConsultant.setString(2, firstName);
             psConsultant.setString(3, middleName);
 
-            System.out.println(psConsultant.toString());
-
             ResultSet rs = psConsultant.executeQuery();
             if(rs.next())
                 consultantId = Integer.parseInt(rs.getObject("ID").toString());
-
-            System.out.println(consultantId);
 
             //Insert a timecard record providing the consultant id and start date.
             psTimecard.setInt(1, consultantId);
@@ -216,19 +187,11 @@ public class DbServer {
             rs = psTimecard.getGeneratedKeys();
             if(rs.next())
                 timeCardId = rs.getInt(1);
-            System.out.println(timeCardId);
 
             /*Insert billable and non-billable hours record for the just created timecard,
             using the timecard id to identify the timecard the hours are associated with*/
             for(ConsultantTime consultantTime : timecard.getConsultingHours()) {
                 if (!consultantTime.isBillable()) {
-                    System.out.println(nonbillableHours);
-                    System.out.println("Nonbillable---------------------------------");
-                    System.out.println(consultantTime.getAccount().getName());
-                    System.out.println(timeCardId);
-                    System.out.println(Date.valueOf(consultantTime.getDate()));
-                    System.out.println(consultantTime.getHours());
-
                     psNonebillable.setString(1, ((NonBillableAccount)consultantTime.getAccount()).name());
                     psNonebillable.setInt(2, timeCardId);
                     psNonebillable.setDate(3, Date.valueOf(consultantTime.getDate()));
@@ -242,13 +205,6 @@ public class DbServer {
                     ResultSet rsCid = psClientId.executeQuery();
                     if(rsCid.next())
                         clientIntId = rsCid.getInt(1);
-
-                    System.out.println("Billable---------------------------------");
-                    System.out.println(clientIntId);
-                    System.out.println(timeCardId);
-                    System.out.println(Date.valueOf(consultantTime.getDate()));
-                    System.out.println(consultantTime.getSkill().name());
-                    System.out.println(consultantTime.getHours());
 
                     psBillable.setInt(1, clientIntId);
                     psBillable.setInt(2, timeCardId);
@@ -307,8 +263,6 @@ public class DbServer {
                                     resultSet.getObject("postal_code").toString())
                             )
             );
-/*            System.out.println("HERE!!!" + resultSet.getObject("NAME"));
-            System.out.println("clientAccountList size: " + clientAccountList.size());*/
         }
         return clientAccountList;
     }
@@ -331,8 +285,6 @@ public class DbServer {
                                     resultSet.getObject("FIRST_NAME").toString(),
                                     resultSet.getObject("MIDDLE_NAME").toString()))
             );
-/*            System.out.println("HERE!!!" + resultSet.getObject("LAST_NAME"));
-            System.out.println("consultantList size: " + consultantList.size());*/
         }
         return consultantList;
     }
@@ -347,7 +299,6 @@ public class DbServer {
      * @return
      */
     public Invoice getInvoice(ClientAccount client, int month, int year) throws SQLException {
-
         /*
         Select invoice items
         SELECT b.date, c.last_name, c.first_name, c.middle_name,
@@ -386,14 +337,9 @@ public class DbServer {
             LocalDate startDate = LocalDate.of(year, month, 1);
             LocalDate endDate = LocalDate.of(year, monthObj, 1).minusDays(1);
 
-/*
-            System.out.println(clientIntId + " - " + startDate + " - " + endDate);
-*/
-
             psInvoice.setDate(1, Date.valueOf(startDate));
             psInvoice.setDate(2,Date.valueOf(endDate));
             psInvoice.setInt(3, clientIntId);
-
 
             //Create the invoice by adding the line items
             /*   public InvoiceLineItem(LocalDate date, Consultant consultant, Skill skill, int hours) {
@@ -406,43 +352,13 @@ public class DbServer {
                 while(rs.next()) {
                     Date date = Date.valueOf(rs.getObject(1).toString());
                     LocalDate localDate = date.toLocalDate();
-
                     PersonalName personalName = new PersonalName(rs.getObject(2).toString(), rs.getObject(3).toString(), rs.getObject(4).toString());
                     Consultant consultant = new Consultant(personalName);
-
-/*
-                    System.out.println("VALUEEEEEEE " + Skill.valueOf(rs.getObject(5).toString()));
-*/
 
                     InvoiceLineItem invoiceLineItem = new InvoiceLineItem(localDate, consultant,
                             Skill.valueOf(rs.getObject(5).toString()),
                             Integer.parseInt(rs.getObject(7).toString()));
-
                     invoice.addLineItem(invoiceLineItem);
-
-/*
-                    System.out.println(rs.getObject(1));
-                    System.out.println(rs.getObject(2));
-                    System.out.println(rs.getObject(3));
-                    System.out.println(rs.getObject(4));
-                    System.out.println(rs.getObject(5));
-                    System.out.println(rs.getObject(6));
-                    System.out.println(rs.getObject(7));
-
-                    System.out.println(invoiceLineItem.getSkill());
-                    System.out.println(Skill.PROJECT_MANAGER);
-*/
-
-                                                            /*
-                                        *
-                    2021-01-15
-                    Brown
-                    Tom
-                    Jack
-                    PROJECT_MANAGER
-                    250
-                    50
-                                        * */
                 }
             }
         }

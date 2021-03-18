@@ -6,12 +6,10 @@ import edu.uw.cp520.scg.domain.Invoice;
 import edu.uw.cp520.scg.persistent.DbServer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.sql.SQLException;
 import java.util.List;
 
 public class Assignment07 {
-
     /** This class' logger. */
     private static final Logger log = LoggerFactory.getLogger(InitDb.class);
 
@@ -40,7 +38,5 @@ public class Assignment07 {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-
-
     }
 }
