@@ -75,23 +75,22 @@ public class InitDb {
 
         try {
 
-
-
- /*
             dbServer.addConsultant(consultant);
             dbServer.getConsultants();
 
             dbServer.addClient(clientAccount);
             dbServer.addClient(clientAccount2);
             dbServer.getClients();
-           */
 
-            dbServer.addConsultant(consultant);
+
+            /*dbServer.addConsultant(consultant);
             dbServer.addClient(clientAccount);
             dbServer.addClient(clientAccount2);
+*/
 
             dbServer.addTimeCard(timeCard);
 
+            dbServer.getInvoice(clientAccount, 1, 2021);
 
             //SQLException throwables
         } catch (Exception e) {

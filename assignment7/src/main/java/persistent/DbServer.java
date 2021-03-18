@@ -9,6 +9,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 import java.sql.*;
+import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.Formatter;
@@ -198,6 +199,7 @@ public class DbServer {
         String billableHours = "INSERT INTO billable_hours (client_id, timecard_id, date, skill, hours) VALUES (?, ?, ?, ?, ?)";
 
         String clientId = "SELECT DISTINCT id FROM clients WHERE name = ?";
+
         int clientIntId = -1;
 
 
@@ -383,7 +385,7 @@ public class DbServer {
      * @param year
      * @return
      */
-    public Invoice getInvoice(ClientAccount client, int month, int year) {
+    public Invoice getInvoice(ClientAccount client, int month, int year) throws SQLException {
 
         /*
         Select invoice items
@@ -398,7 +400,74 @@ public class DbServer {
         AND b.timecard_id = t.id
         AND c.id = t.consultant_id;
         */
+        String invoiceQuery = "SELECT b.date, c.last_name, c.first_name, c.middle_name, b.skill, " +
+                "s.rate, b.hours FROM billable_hours b, consultants c, skills s, timecards t " +
+                "WHERE b.date between ? AND ? " +
+                "AND b.client_id = ? AND b.skill = s.name " +
+                "AND b.timecard_id = t.id AND c.id = t.consultant_id";
 
+        String clientId = "SELECT DISTINCT id FROM clients WHERE name = ?";
+
+        int clientIntId = -1;
+
+        Invoice invoice = new Invoice(client, Month.of(month), year);
+
+
+        try (
+                Connection connection = DriverManager.getConnection(this.url, this.userName, this.password);
+                PreparedStatement psClientId = connection.prepareStatement(clientId);
+                PreparedStatement psInvoice = connection.prepareStatement(invoiceQuery);
+
+                ) {
+
+            //Get the client Id.
+            psClientId.setString(1, client.getName());
+            ResultSet rsCid = psClientId.executeQuery();
+            if(rsCid.next())
+                clientIntId = rsCid.getInt(1);
+
+            //Get the dates
+            Month monthObj = Month.of(month).plus(1);
+            LocalDate startDate = LocalDate.of(year, month, 1);
+            LocalDate endDate = LocalDate.of(year, monthObj, 1).minusDays(1);
+
+            System.out.println(clientIntId + " - " + startDate + " - " + endDate);
+
+            psInvoice.setDate(1, Date.valueOf(startDate));
+            psInvoice.setDate(2,Date.valueOf(endDate));
+            psInvoice.setInt(3, clientIntId);
+
+
+            //Create the invoice by adding the line items
+
+            /*   public InvoiceLineItem(LocalDate date, Consultant consultant, Skill skill, int hours) {
+                    this.date = date;
+                    this.consultant = consultant;
+                    this.skill = skill;
+                    this.hours = hours;
+            }*/
+
+            try ( ResultSet rs = psInvoice.executeQuery()) {
+
+                while(rs.next()) {
+
+                    System.out.println(rs.getObject(1));
+                    System.out.println(rs.getObject(2));
+                    System.out.println(rs.getObject(3));
+                    System.out.println(rs.getObject(4));
+                    System.out.println(rs.getObject(5));
+                    System.out.println(rs.getObject(6));
+                    System.out.println(rs.getObject(7));
+
+                }
+
+
+            }
+
+
+
+
+        }
 
 
 
