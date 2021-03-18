@@ -13,6 +13,13 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * The initialize/populate the database, creates the client, consultant
+ * and time card lists using ListFactory.populateLists and then populates
+ * the database with the data in these lists.
+ *
+ */
 public class InitDb {
 
         /*

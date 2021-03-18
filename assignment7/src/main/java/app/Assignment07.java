@@ -9,6 +9,10 @@ import org.slf4j.LoggerFactory;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * Creates and prints an invoice from the data in the database.
+ *
+ */
 public class Assignment07 {
     /** This class' logger. */
     private static final Logger log = LoggerFactory.getLogger(InitDb.class);

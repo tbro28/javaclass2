@@ -4,9 +4,6 @@ import edu.uw.cp520.scg.domain.*;
 import edu.uw.cp520.scg.util.Address;
 import edu.uw.cp520.scg.util.PersonalName;
 import edu.uw.cp520.scg.util.StateCode;
-
-import javax.naming.InitialContext;
-import javax.sql.DataSource;
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.Month;
@@ -61,12 +58,6 @@ public class DbServer {
                 contact_last_name, contact_first_name, contact_middle_name)
         VALUES ('Acme Industries', '1616 Index Ct.', 'Redmond', 'WA', '98055',
                 'Coyote', 'Wiley', 'E');*/
-        List<String> clientInfo = new ArrayList<>();
-
-        for(String i : clientInfo) {
-            System.out.println(i);
-        }
-
         try (
                 Connection connection = DriverManager.getConnection(this.url, this.userName, this.password);
                 Statement statement = connection.createStatement();
@@ -226,7 +217,7 @@ public class DbServer {
      * enum in StateCode.
      *
      * @param strState
-     * @return
+     * @return the state code if found.
      */
     public static StateCode validState(String strState) {
         StateCode states[] = StateCode.values();
@@ -241,7 +232,7 @@ public class DbServer {
     /**
      * Get all of the clients in the database, selects all rows from the clients table.
      *
-     * @return
+     * @return a list of clients from the DB.
      * @throws SQLException
      */
     public List<ClientAccount> getClients() throws SQLException {
@@ -272,7 +263,7 @@ public class DbServer {
      * Get all of the consultant in the database,
      * selects all rows from the consultants table.
      *
-     * @return
+     * @return a list of consultants from the DB.
      */
     public List<Consultant> getConsultants() throws SQLException {
         List<Consultant> consultantList = new ArrayList<>();
@@ -296,7 +287,7 @@ public class DbServer {
      * @param client
      * @param month
      * @param year
-     * @return
+     * @return an invoice.
      */
     public Invoice getInvoice(ClientAccount client, int month, int year) throws SQLException {
         /*
@@ -341,18 +332,13 @@ public class DbServer {
             psInvoice.setDate(2,Date.valueOf(endDate));
             psInvoice.setInt(3, clientIntId);
 
-            //Create the invoice by adding the line items
-            /*   public InvoiceLineItem(LocalDate date, Consultant consultant, Skill skill, int hours) {
-                    this.date = date;
-                    this.consultant = consultant;
-                    this.skill = skill;
-                    this.hours = hours;
-            }*/
+            //Create the invoice by adding the line items.
             try ( ResultSet rs = psInvoice.executeQuery()) {
                 while(rs.next()) {
                     Date date = Date.valueOf(rs.getObject(1).toString());
                     LocalDate localDate = date.toLocalDate();
-                    PersonalName personalName = new PersonalName(rs.getObject(2).toString(), rs.getObject(3).toString(), rs.getObject(4).toString());
+                    PersonalName personalName = new PersonalName(rs.getObject(2).toString(),
+                            rs.getObject(3).toString(), rs.getObject(4).toString());
                     Consultant consultant = new Consultant(personalName);
 
                     InvoiceLineItem invoiceLineItem = new InvoiceLineItem(localDate, consultant,
