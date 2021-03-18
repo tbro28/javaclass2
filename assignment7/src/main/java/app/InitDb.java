@@ -23,21 +23,9 @@ public class InitDb {
     private static final String URL = "jdbc:derby://localhost:1527/memory:scgDb";
     private static final String USERNAME = "student";
     private static final String PASSWORD = "student";
-    private static final String QUERY_STRING = "SELECT * from skills";
 
 
-
-
-
-
-/*    public InitDb() throws SQLException {
-    }*/
-
-    //try with resources to auto-close connections to the DB.
-
-    static Connection connection;
-
-    public static void main(String args[]){
+    public static void main(String args[]) {
 
 
         Address address = new Address( "streetNumberDiff", "city", StateCode.WA,"postalCode");
@@ -90,7 +78,10 @@ public class InitDb {
 
             dbServer.addTimeCard(timeCard);
 
-            dbServer.getInvoice(clientAccount, 1, 2021);
+            Invoice invoice = dbServer.getInvoice(clientAccount, 1, 2021);
+
+            System.out.println(invoice.toReportString());
+
 
             //SQLException throwables
         } catch (Exception e) {

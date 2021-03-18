@@ -37,16 +37,6 @@ public class DbServer {
 
     DataSource ds;
     InitialContext ctx;
-/*
-    {
-        try {
-            ctx = new InitialContext();
-            ds = (DataSource) ctx.lookup("jdbc/"+"mySrc");
-        } catch (NamingException e) {
-            e.printStackTrace();
-        }
-    }
-*/
 
 
     /**
@@ -67,19 +57,8 @@ public class DbServer {
             statement = connection.createStatement();
 
         } catch (SQLException throwables) {
-            //connection.close();
             throwables.printStackTrace();
         }
-
-        System.out.println(this.url.substring(5));
-
-        try {
-            ctx = new InitialContext();
-            //ds = (DataSource) ctx.lookup("jdbc/"+this.url.substring(5));
-        } catch (NamingException e) {
-            e.printStackTrace();
-        }
-
     }
 
 
@@ -95,7 +74,6 @@ public class DbServer {
                 contact_last_name, contact_first_name, contact_middle_name)
         VALUES ('Acme Industries', '1616 Index Ct.', 'Redmond', 'WA', '98055',
                 'Coyote', 'Wiley', 'E');*/
-
         List<String> clientInfo = new ArrayList<>();
 
         for(String i : clientInfo) {
@@ -246,7 +224,6 @@ public class DbServer {
             using the timecard id to identify the timecard the hours are associated with*/
             for(ConsultantTime consultantTime : timecard.getConsultingHours()) {
                 if (!consultantTime.isBillable()) {
-
                     System.out.println(nonbillableHours);
                     System.out.println("Nonbillable---------------------------------");
                     System.out.println(consultantTime.getAccount().getName());
@@ -256,7 +233,6 @@ public class DbServer {
                     System.out.println(consultantTime.getHours());
 
                     psNonebillable.setString(1, ((NonBillableAccount)consultantTime.getAccount()).name());
-//                    psNonebillable.setString(1, consultantTime.getAccount().getName());
                     psNonebillable.setInt(2, timeCardId);
                     psNonebillable.setDate(3, Date.valueOf(consultantTime.getDate()));
                     psNonebillable.setInt(4, consultantTime.getHours());
@@ -264,8 +240,6 @@ public class DbServer {
                     psNonebillable.executeUpdate();
                 }
                 else {
-                    //psBillable.setString(1, consultantTime.getAccount().getName());
-
                     //Get the client Id.
                     psClientId.setString(1, consultantTime.getAccount().getName());
                     ResultSet rsCid = psClientId.executeQuery();
@@ -274,7 +248,6 @@ public class DbServer {
 
                     System.out.println("Billable---------------------------------");
                     System.out.println(clientIntId);
-                    //System.out.println(consultantTime.getAccount().getName());
                     System.out.println(timeCardId);
                     System.out.println(Date.valueOf(consultantTime.getDate()));
                     System.out.println(consultantTime.getSkill().name());
@@ -319,12 +292,10 @@ public class DbServer {
      * @throws SQLException
      */
     public List<ClientAccount> getClients() throws SQLException {
-
         List<ClientAccount> clientAccountList = new ArrayList<>();
         resultSet = statement.executeQuery("SELECT * FROM clients");
 
         while(resultSet.next()) {
-
             String stateDB = resultSet.getObject("state").toString();
             StateCode stateCode;
             stateCode = validState(stateDB);
@@ -354,12 +325,10 @@ public class DbServer {
      * @return
      */
     public List<Consultant> getConsultants() throws SQLException {
-
         List<Consultant> consultantList = new ArrayList<>();
         resultSet = statement.executeQuery("SELECT * FROM consultants");
 
         while(resultSet.next()) {
-
             consultantList.add(
                     new Consultant(
                             new PersonalName(resultSet.getObject("LAST_NAME").toString(),
@@ -369,13 +338,9 @@ public class DbServer {
             System.out.println("HERE!!!" + resultSet.getObject("LAST_NAME"));
             System.out.println("consultantList size: " + consultantList.size());
         }
-
         return consultantList;
     }
 
-
-
-//Query
 
     /**
      * Get clients monthly invoice.
@@ -439,17 +404,27 @@ public class DbServer {
 
 
             //Create the invoice by adding the line items
-
             /*   public InvoiceLineItem(LocalDate date, Consultant consultant, Skill skill, int hours) {
                     this.date = date;
                     this.consultant = consultant;
                     this.skill = skill;
                     this.hours = hours;
             }*/
-
             try ( ResultSet rs = psInvoice.executeQuery()) {
-
                 while(rs.next()) {
+                    Date date = Date.valueOf(rs.getObject(1).toString());
+                    LocalDate localDate = date.toLocalDate();
+
+                    PersonalName personalName = new PersonalName(rs.getObject(2).toString(), rs.getObject(3).toString(), rs.getObject(4).toString());
+                    Consultant consultant = new Consultant(personalName);
+
+                    System.out.println("VALUEEEEEEE " + Skill.valueOf(rs.getObject(5).toString()));
+
+                    InvoiceLineItem invoiceLineItem = new InvoiceLineItem(localDate, consultant,
+                            Skill.valueOf(rs.getObject(5).toString()),
+                            Integer.parseInt(rs.getObject(7).toString()));
+
+                    invoice.addLineItem(invoiceLineItem);
 
                     System.out.println(rs.getObject(1));
                     System.out.println(rs.getObject(2));
@@ -459,19 +434,22 @@ public class DbServer {
                     System.out.println(rs.getObject(6));
                     System.out.println(rs.getObject(7));
 
+                    System.out.println(invoiceLineItem.getSkill());
+                    System.out.println(Skill.PROJECT_MANAGER);
+
+                                                            /*
+                                        *
+                    2021-01-15
+                    Brown
+                    Tom
+                    Jack
+                    PROJECT_MANAGER
+                    250
+                    50
+                                        * */
                 }
-
-
             }
-
-
-
-
         }
-
-
-
-        return new Invoice(client, Month.of(month), year);
+        return invoice;
     }
-
 }
