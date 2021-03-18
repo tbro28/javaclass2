@@ -1,4 +1,4 @@
-package persistent;
+package edu.uw.cp520.scg.persistent;
 
 import edu.uw.cp520.scg.domain.*;
 import edu.uw.cp520.scg.util.Address;
@@ -6,15 +6,13 @@ import edu.uw.cp520.scg.util.PersonalName;
 import edu.uw.cp520.scg.util.StateCode;
 
 import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import javax.sql.DataSource;
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
-import java.util.Formatter;
 import java.util.List;
-import java.util.Locale;
+
 
 /**
  * Provides a programmatic interface to store and access objects in the database.
@@ -181,7 +179,7 @@ public class DbServer {
         int clientIntId = -1;
 
 
-                System.out.println(consultantQuery);
+//                System.out.println(consultantQuery);
 
         try(
                 Connection connection = DriverManager.getConnection(this.url, this.userName, this.password);
@@ -227,7 +225,6 @@ public class DbServer {
                     System.out.println(nonbillableHours);
                     System.out.println("Nonbillable---------------------------------");
                     System.out.println(consultantTime.getAccount().getName());
-                    System.out.println();
                     System.out.println(timeCardId);
                     System.out.println(Date.valueOf(consultantTime.getDate()));
                     System.out.println(consultantTime.getHours());
@@ -299,7 +296,6 @@ public class DbServer {
             String stateDB = resultSet.getObject("state").toString();
             StateCode stateCode;
             stateCode = validState(stateDB);
-
             clientAccountList.add(
                     new ClientAccount(
                             resultSet.getObject("NAME").toString(),
@@ -311,8 +307,8 @@ public class DbServer {
                                     resultSet.getObject("postal_code").toString())
                             )
             );
-            System.out.println("HERE!!!" + resultSet.getObject("NAME"));
-            System.out.println("clientAccountList size: " + clientAccountList.size());
+/*            System.out.println("HERE!!!" + resultSet.getObject("NAME"));
+            System.out.println("clientAccountList size: " + clientAccountList.size());*/
         }
         return clientAccountList;
     }
@@ -335,8 +331,8 @@ public class DbServer {
                                     resultSet.getObject("FIRST_NAME").toString(),
                                     resultSet.getObject("MIDDLE_NAME").toString()))
             );
-            System.out.println("HERE!!!" + resultSet.getObject("LAST_NAME"));
-            System.out.println("consultantList size: " + consultantList.size());
+/*            System.out.println("HERE!!!" + resultSet.getObject("LAST_NAME"));
+            System.out.println("consultantList size: " + consultantList.size());*/
         }
         return consultantList;
     }
@@ -370,21 +366,15 @@ public class DbServer {
                 "WHERE b.date between ? AND ? " +
                 "AND b.client_id = ? AND b.skill = s.name " +
                 "AND b.timecard_id = t.id AND c.id = t.consultant_id";
-
         String clientId = "SELECT DISTINCT id FROM clients WHERE name = ?";
-
         int clientIntId = -1;
-
         Invoice invoice = new Invoice(client, Month.of(month), year);
-
 
         try (
                 Connection connection = DriverManager.getConnection(this.url, this.userName, this.password);
                 PreparedStatement psClientId = connection.prepareStatement(clientId);
                 PreparedStatement psInvoice = connection.prepareStatement(invoiceQuery);
-
                 ) {
-
             //Get the client Id.
             psClientId.setString(1, client.getName());
             ResultSet rsCid = psClientId.executeQuery();
@@ -396,7 +386,9 @@ public class DbServer {
             LocalDate startDate = LocalDate.of(year, month, 1);
             LocalDate endDate = LocalDate.of(year, monthObj, 1).minusDays(1);
 
+/*
             System.out.println(clientIntId + " - " + startDate + " - " + endDate);
+*/
 
             psInvoice.setDate(1, Date.valueOf(startDate));
             psInvoice.setDate(2,Date.valueOf(endDate));
@@ -418,7 +410,9 @@ public class DbServer {
                     PersonalName personalName = new PersonalName(rs.getObject(2).toString(), rs.getObject(3).toString(), rs.getObject(4).toString());
                     Consultant consultant = new Consultant(personalName);
 
+/*
                     System.out.println("VALUEEEEEEE " + Skill.valueOf(rs.getObject(5).toString()));
+*/
 
                     InvoiceLineItem invoiceLineItem = new InvoiceLineItem(localDate, consultant,
                             Skill.valueOf(rs.getObject(5).toString()),
@@ -426,6 +420,7 @@ public class DbServer {
 
                     invoice.addLineItem(invoiceLineItem);
 
+/*
                     System.out.println(rs.getObject(1));
                     System.out.println(rs.getObject(2));
                     System.out.println(rs.getObject(3));
@@ -436,6 +431,7 @@ public class DbServer {
 
                     System.out.println(invoiceLineItem.getSkill());
                     System.out.println(Skill.PROJECT_MANAGER);
+*/
 
                                                             /*
                                         *
