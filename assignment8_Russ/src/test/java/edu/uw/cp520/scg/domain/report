@@ -1,0 +1,19 @@
+====================================================================
+Consultant: Brown, Tom, Jack             Week Starting: Jan 15, 2021
+
+Billable Time:
+Account                      Date        Hours  Skill
+---------------------------  ----------  -----  --------------------
+TimBiz                       2021-01-15     50  Project Manager
+TimBiz                       2021-01-15     50  Project Manager
+
+Non-billable Time:
+Account                      Date        Hours  Skill
+---------------------------  ----------  -----  --------------------
+Business development         2021-01-15     50  Project Manager
+
+Summary:
+Total Billable:                            100
+Total Non-Billable:                         50
+Total Hours:                               150
+====================================================================
