@@ -20,6 +20,7 @@ import java.util.List;
 
 /**
  * Creates and prints an invoice from the data in the database.
+ * Working Russ Version for Assignment 8.
  *
  */
 public class Assignment08Server {
@@ -31,65 +32,14 @@ public class Assignment08Server {
      * @param args
      */
     public static void main(String args[]) {
-
-
-
         // Create lists to be populated by factory
         final List<ClientAccount> accounts = new ArrayList<>();
         final List<Consultant> consultants = new ArrayList<>();
         final List<TimeCard> timeCards = new ArrayList<>();
         ListFactory.populateLists(accounts, consultants, timeCards);
 
-        // Print them
-        //ListFactory.printTimeCards(timeCards);
-
-        //ObjectOutputStream
-
-        //(int port, List<ClientAccount> clientList,
-        //                   List<Consultant> consultantList, String outputDirectoryName)
-        InvoiceServer server = new InvoiceServer(10888, accounts, consultants, "");
+        InvoiceServer server = new InvoiceServer(10888, accounts, consultants, "target/server");
 
         server.run();
-
-
-/*        //InvoiceClient(String host, int port, List<TimeCard> timeCardList)
-        try {
-            InvoiceClient invoiceClient = new InvoiceClient("127.0.0.1", 10888, timeCards);
-
-            //invoiceClient.
-
-
-            InetAddress inetAddress = null;
-            Socket socket = null;
-
-            try {
-                inetAddress = InetAddress.getLocalHost();
-                socket = new Socket();// ("127.0.0.1", 10888);
-                //socket = new Socket(inetAddress, 10888);
-            } catch (UnknownHostException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-
-
-            CommandProcessor commandProcessor = new CommandProcessor(socket, accounts, consultants, server);
-
-
-            AddClientCommand addClientCommand;
-
-            for(ClientAccount clientAccount : accounts)
-                addClientCommand = new AddClientCommand(clientAccount);
-
-            //invoiceClient.sendClients();
-
-
-
-        } catch (UnknownHostException e) {
-            e.printStackTrace();
-        }*/
-
-
     }
 }

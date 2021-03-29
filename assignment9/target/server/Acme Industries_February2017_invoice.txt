@@ -1,0 +1,25 @@
+The Small Consulting Group
+1616 Index Ct.
+Renton, WA 98058
+
+Invoice for: 
+Acme Industries
+1616 Index Ct.
+Redmond, WA 98055
+Coyote, Wiley
+
+Invoice For Month Of: February 2017
+Invoice Date: March 28, 2021
+
+Date        Consultant                   Skill               Hours  Charge    
+----------  ---------------------------  ------------------  -----  ----------
+02/27/2017  Coder, Carl                  Software Engineer       8    1,200.00
+02/28/2017  Coder, Carl                  Software Engineer       8    1,200.00
+
+Total:                                                          16    2,400.00
+
+
+The Small Consulting Group                                          Page:    1
+==============================================================================
+
+

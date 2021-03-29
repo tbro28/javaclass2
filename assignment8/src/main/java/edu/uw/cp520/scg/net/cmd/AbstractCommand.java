@@ -8,10 +8,10 @@ import edu.uw.cp520.scg.net.server.CommandProcessor;
  *
  * @param <T>
  */
-public class AbstractCommand<T>  implements Command<T>{
+public abstract class AbstractCommand<T>  implements Command<T> {
 
     private T target;
-    private CommandProcessor commandProcessor;
+    private CommandProcessor receiver;
 
 
     public AbstractCommand() {
@@ -22,13 +22,12 @@ public class AbstractCommand<T>  implements Command<T>{
     }
 
 
-    /**
+/*    *//**
      * The method called by the receiver.
-     */
+     *//*
     @Override
     public void execute() {
-
-    }
+    }*/
 
     /**
      * Gets the CommandProcessor receiver for this Command.
@@ -37,11 +36,8 @@ public class AbstractCommand<T>  implements Command<T>{
      */
     @Override
     public CommandProcessor getReceiver() {
-
         System.out.println("getReceiver");
-
-        return commandProcessor;
-
+        return receiver;
     }
 
     /**
@@ -61,7 +57,7 @@ public class AbstractCommand<T>  implements Command<T>{
      */
     @Override
     public void setReceiver(CommandProcessor receiver) {
-
+        this.receiver = receiver;
     }
 
     /**
@@ -71,7 +67,7 @@ public class AbstractCommand<T>  implements Command<T>{
     public String toString() {
         return "AbstractCommand{" +
                 "target=" + target +
-                ", commandProcessor=" + commandProcessor +
+                ", receiver=" + receiver +
                 '}';
     }
 }
