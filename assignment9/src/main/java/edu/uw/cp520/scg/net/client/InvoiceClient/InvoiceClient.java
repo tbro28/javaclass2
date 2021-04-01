@@ -25,7 +25,7 @@ import java.util.List;
  * to add clients, consultants and time cards and then has
  * the server create an invoice.
  */
-public class InvoiceClient {
+public class InvoiceClient implements Runnable {
 
     /** This class' logger. */
     private static final Logger log = LoggerFactory.getLogger(InvoiceClient.class);
@@ -55,9 +55,8 @@ public class InvoiceClient {
      * then sending the command to create invoices for a specified month.
      *
      */
+    @Override
     public void run() {
-        InetAddress inetAddress = null;
-        //Socket socket = null;
         ObjectOutputStream out = null;
 
         try (
@@ -71,26 +70,17 @@ public class InvoiceClient {
             sendClients(out);
             sendConsultants(out);
             out.writeObject("NOT_A_COMMAND");
+
             sendTimeCards(out);
             createInvoices(out, Month.of(2), 2017);
             sendDisconnect(out, server);
+
         } catch (UnknownHostException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        //CommandProcessor commandProcessor = new CommandProcessor(socket, accounts, consultants, server);
-/*        AddClientCommand addClientCommand;
-
-        for(ClientAccount clientAccount : accounts) {
-            System.out.println(clientAccount.getName());
-            addClientCommand = new AddClientCommand(clientAccount);
-            addClientCommand.execute();
-        }*/
-        //invoiceClient.sendClients();
     }
-
 
 
     /**
@@ -107,19 +97,6 @@ public class InvoiceClient {
         PersonalName personalName = new PersonalName("Brown", "Tom", "Jack");
         PersonalName personalName2 = new PersonalName("ZBro2", "Tim", "Middle");
 
-/*
-        //Serialize
-        Consultant consultant1 = new Consultant(personalName);
-        Consultant consultant2 = new Consultant(personalName2);
-
-        LocalDate localDate = LocalDate.of(2020, 1, 20);
-        LocalDate localDate2 = LocalDate.of(2020, 1, 15);
-
-        //Serialize
-        TimeCard timeCard1 = new TimeCard(consultant1, localDate);
-        TimeCard timeCard2 = new TimeCard(consultant2, localDate2);
-*/
-
         Address address = new Address("TimsStreetNumber", "TimsCity", StateCode.WA, "TimsPostalCode");
 
         //Serialize
@@ -130,12 +107,6 @@ public class InvoiceClient {
         sendCommand(out, command);
         command = new AddClientCommand(clientAccount2);
         sendCommand(out, command);
-
- /*
-
-        ClientAccount clientAccount = new ClientAccount("Gotbucks Technologies")
- */
-
     }
 
 

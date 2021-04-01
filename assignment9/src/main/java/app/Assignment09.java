@@ -24,7 +24,7 @@ public class Assignment09 {
      *
      * @param args
      */
-    public static void main(String args[]) {
+    public static void main(String args[]) throws InterruptedException {
 
         // Create lists to be populated by factory
         final List<ClientAccount> accounts = new ArrayList<>();
@@ -32,8 +32,24 @@ public class Assignment09 {
         final List<TimeCard> timeCards = new ArrayList<>();
         ListFactory.populateLists(accounts, consultants, timeCards);
 
-        InvoiceClient invoiceClient = new InvoiceClient("127.0.0.1", 10888, timeCards);
-        invoiceClient.run();
+        InvoiceClient invoiceClient1 = new InvoiceClient("127.0.0.1", 10888, timeCards);
+        InvoiceClient invoiceClient2 = new InvoiceClient("127.0.0.1", 10888, timeCards);
+        InvoiceClient invoiceClient3 = new InvoiceClient("127.0.0.1", 10888, timeCards);
+
+        Thread thread1 = new Thread(invoiceClient1);
+        Thread thread2 = new Thread(invoiceClient2);
+        Thread thread3 = new Thread(invoiceClient3);
+
+        thread1.start();
+        thread2.start();
+        thread3.start();
+
+        thread1.join();
+        thread1.join();
+        thread1.join();
+
+//        invoiceClient.run();
         InvoiceClient.sendShutdown("127.0.0.1", 10888);
+
     }
 }

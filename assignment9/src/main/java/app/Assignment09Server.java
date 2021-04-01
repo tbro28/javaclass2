@@ -28,11 +28,14 @@ public class Assignment09Server {
         // Create lists to be populated by factory
         final List<ClientAccount> accounts = new ArrayList<>();
         final List<Consultant> consultants = new ArrayList<>();
+
+        //Needs to be an exclusive list for a thread.
         final List<TimeCard> timeCards = new ArrayList<>();
+
         ListFactory.populateLists(accounts, consultants, timeCards);
 
         InvoiceServer server = new InvoiceServer(10888, accounts, consultants, "target/server");
 
-        server.run();
+        server.startServer();
     }
 }

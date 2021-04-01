@@ -64,6 +64,9 @@ public final class EchoServer implements Runnable {
 }
 
 
+
+
+
 /**
  * Processes individual responses.
  */
@@ -102,6 +105,7 @@ final class EchoProcessor implements Runnable {
                 }
 
                 char ch = (char) x;
+                System.out.print("YEAHHHHHHHHHHHHHHHHHHHHHH");
                 System.out.print(ch);
                 wrtr.print(ch);
             }
